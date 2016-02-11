@@ -1,0 +1,25 @@
+<!-- quote.html -->
+
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div id="form-container">
+            <div class="page-header text-center">
+                <h2>Sales Quote Generator</h2>
+
+                <!-- The links to our nested states using relative paths -->
+                <!-- Add the active class if the state matches ui-sref -->
+                <div id="status-buttons" class="text-center">
+                    <a ui-sref-active="active" ui-sref=".login"><span>1</span>LOGIN</a>
+                    <a ui-sref-active="active" ui-sref=".home"><span>2</span>CHOOSE</a>
+                    <a ui-sref-active="active" ui-sref=".form1"><span>3</span>FORM</a>
+                </div>
+            </div>
+
+            <!-- Use ng-submit to catch the form submission and use our Angular function -->
+            <form id="signup-form" ng-submit="processForm()">
+                <!-- Our nested state views will be injected here -->
+                <div id="form-views" ui-view></div>
+            </form>
+        </div>
+    </div>
+</div>
