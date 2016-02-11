@@ -1,0 +1,30 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sales Quote</title>
+        <meta charset="UTF-8">
+
+        <!-- Link stylesheets -->
+        <!-- These are not my stylesheets, so I am unfamiliar with them. We can find possibly find documentation for
+        the second one, use some of the CSS from the first, find different stylesheets, or make our own. -->
+        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/darkly/bootstrap.min.css">
+
+        <!-- Load in Global Dependencies -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.min.js"></script>
+
+        <!-- Load in main application -->
+        <script src="app.js"></script>
+    </head>
+
+    <body ng-app="quoteApp">
+        <div class="container">
+            <!-- Views will be injected here -->
+            <div ui-view></div>
+        </div>
+    </body>
+</html>
