@@ -6,33 +6,31 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
     // Route configuration
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            // Route to show basic form (/quote)
+            // Initial state
+            .state("login", {
+                url: "/login",
+                templateUrl: "view/quote-login.html"
+            })
+            // State to select "Generate New Quote" or "View Existing Quotes"
+            .state("home", {
+                url: "/home",
+                templateUrl: "view/quote-home.html"
+            })
+            // Wizard Base State
             .state("quote", {
                 url: "/quote",
                 templateUrl: "view/quote.html",
                 controller: "quoteController"
             })
-            // Nested states
-            // Each of these sections will have their own view
-            // URL will be nested (/quote/login)
-            .state("quote.login", {
-                url: "/login",
-                templateUrl: "view/quote-login.html"
-            })
-            // URL will be /quote/home
-            .state("quote.home", {
-                url: "/home",
-                templateUrl: "view/quote-home.html"
-            })
-
-            // URL will be /quote/form1
+            // Wizard Step 2 State
             .state("quote.form1", {
                 url: "/form1",
                 templateUrl: "view/quote-form1.html"
             });
+
         //// Catch all route
-        //// Send users to the form page
-        $urlRouterProvider.otherwise("quote/login");
+        //// Send users to the initial state
+        $urlRouterProvider.otherwise("login");
     })
 
     // Form controller
