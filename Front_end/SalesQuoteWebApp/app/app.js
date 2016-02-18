@@ -6,7 +6,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
     // Route configuration
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            // Initial state
+        // Initial state
             .state("login", {
                 url: "/login",
                 templateUrl: "view/quote-login.html"
@@ -26,7 +26,22 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             .state("quote.form1", {
                 url: "/form1",
                 templateUrl: "view/quote-form1.html"
-            });
+            })
+
+            .state("quote.form2", {
+                url: "/form2",
+                templateUrl: "view/quote-form2.html"
+            })
+
+            .state("quote.form3", {
+                url: "/form3",
+                templateUrl: "view/quote-form3.html"
+            })
+
+            .state("quote.form4",{
+                url:"/form4",
+                templateUrl:"view/quote-form4.html"
+    });
 
         //// Catch all route
         //// Send users to the initial state

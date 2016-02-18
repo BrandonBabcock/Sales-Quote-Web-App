@@ -1,0 +1,104 @@
+<style>
+    .form-group{
+        -webkit-column-count: 2;
+        -webkit-font-size:small;
+    }
+</style>
+<label>Solution Specifics</label>
+<div class="form-group">
+    <label>Number of Initiation Points</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.initiationPoints">
+
+    <label>Number of Password Management Targets</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.passTargets">
+    </div>
+<div class="form-group">
+    <label>Number of Admin Provisioning Targets</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.adminTargets">
+    <label>Number of Workflows Per Targer</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.workflowTargets">
+</div>
+
+<div class="form-group">
+
+    <label>Number of Automated Provisioning Target</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.automatedTargets">
+
+    <label>Number of Automated Workflows Per Target</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.automatedWorkflows">
+
+</div>
+
+<div class="form-group">
+    <label>Number of HPAM Account Types</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.hpamTypes">
+
+    <label>Unique Connected System Definitions(Total)</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.uniqueDefinitions">
+</div>
+<div class="form-group">
+    <label>Approval Configurations</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.approvalConfiguration">
+    <label>Selectable Resources</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.selectableResource">
+</div>
+
+<div class="form-group">
+
+    <label>Resource Group Configurations</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.groupConfigs">
+    <label>Policies</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.policies">
+
+</div>
+
+<div class="form-group">
+    <label>Organizations</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.organizations">
+    <label>IdP on Premise or IaaS</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.IdpORIaas">
+
+    </div>
+<div class="form-group">
+    <label>Number of IdPs</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.numofIDPS">
+    <label>Shibboleth SPs to Shibbolize Apps</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.shibbolize">
+</div>
+
+<div class="form-group">
+
+    <label>Discovery Services</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.discoveryServ">
+    <label>SAML enabled Federation Targets</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.fedTargets">
+
+</div>
+
+<div class="form-group">
+    <label>Verified SFL FT</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.verSFL">
+    <label>Non Verified SFL</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.nonverSFL">
+
+    </div>
+<div class="form-group">
+    <label>Attribute Management Processes</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.manageProc">
+    <label>On-Going Attribute Management Processes</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.onManageProc">
+</div>
+
+<div class="form-group">
+
+    <label>Post Implementation Services</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.postServ">
+    <label>User Account Load</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.userLoad">
+
+</div>
+
+<br>
+<a ui-sref="quote.form3" class="btn btn-block btn-primary">
+    NEXT <span class="glyphicon glyphicon-circle-arrow-right"></span>
+</a>
