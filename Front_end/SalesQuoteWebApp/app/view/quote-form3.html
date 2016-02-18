@@ -1,0 +1,45 @@
+<!--Form 3-->
+<style>
+    .form-group{
+        -webkit-column-count: 2;
+    }
+</style>
+
+<label>TRAINING</label>
+<div class="form-group">
+    <label>Basic Training</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.basic">
+    <label>Advanced Training</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.advanced">
+    </div>
+
+<div class="form-group">
+    <label>Kiosk UI Training</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.kiosk">
+    <label>Pin Reset UI Training</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.pinReset">
+
+
+</div>
+<div class="form-group">
+
+    <label>Help Desk UI Training</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.helpDesk">
+    <label>Self Service Access Management UI Training</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.selfService">
+</div>
+<div class="form-group">
+    <label>HPAM UI Training </label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.uiTraining">
+    <label>Federation Configuration Testing</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.fedConfig">
+    </div>
+
+
+    <label>Percentage of Solution Requirements Unknown</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.completionDae">
+
+<br>
+<a ui-sref="quote.form2" class="btn btn-block btn-primary">
+    SUBMIT <span class="glyphicon glyphicon-circle-arrow-right"></span>
+</a>

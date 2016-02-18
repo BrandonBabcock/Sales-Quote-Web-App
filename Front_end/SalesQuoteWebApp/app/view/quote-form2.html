@@ -1,0 +1,48 @@
+<!--quote-form2.html-->
+<style>
+    .form-group{
+        -webkit-column-count: 2;
+        -webkit-font-size:small;
+    }
+</style>
+<label>Solution Requirements</label>
+<div class="form-group">
+
+
+
+    <label>Number of Environments</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.environments">
+    <label>Additional HA Servers</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.HaServers">
+    </div>
+<div class="form-group">
+    <label>Number of <i>Global Identity Gateways</i></label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.gateways">
+    <label>Number of MS Password Filters</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.passwordFilters">
+    </div>
+  <div class="form-group">
+    <label>Provisioning</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.provisioning">
+    <label>HPAM</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.Hpam">
+  </div>
+<div class="form-group">
+    <label>Federation</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.federation">
+    <label>Password Management Workshop</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.passManage">
+    </div>
+<div class="form-group">
+    <label>Provisioning Workshop</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.provisionWorkshop">
+    <label>Federation Workshop</label>
+    <input type="text" class="form-control" name="completed" ng-model="formData.federationWorkshop">
+
+
+</div>
+
+<br>
+<a ui-sref="quote.form4" class="btn btn-block btn-primary">
+    NEXT <span class="glyphicon glyphicon-circle-arrow-right"></span>
+</a>
