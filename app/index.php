@@ -1,3 +1,11 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Desktop
+ * Date: 2/28/2016
+ * Time: 3:20 PM
+ */
+echo '
 <!-- index.html -->
 
 <!DOCTYPE html>
@@ -8,7 +16,7 @@
 
         <!-- Link stylesheets -->
         <!-- Documentation for second style sheet: https://bootswatch.com/darkly/ -->
-        <link rel="stylesheet" href="../assets/css/style.css">
+	<link rel="stylesheet" href="../assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
 
         <!-- Load in Global Dependencies -->
@@ -28,4 +36,5 @@
 
 
     </body>
-</html>
+</html>'
+?>
