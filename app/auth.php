@@ -3,7 +3,7 @@ ob_start();
 $params = json_decode(file_get_contents('php://input'),true);
 var_dump($GLOBALS);
 echo json_last_error();
-$host     = "107.191.33.172"; // Host name
+$host     = "localhost"; // Host name
 $username = "admin_salesform"; // Mysql username
 $password = "mqJoPHm9LEz"; // Mysql password
 $db_name  = "admin_salesform"; // Database name
