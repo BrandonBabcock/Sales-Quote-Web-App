@@ -1,15 +1,16 @@
 <?php
+session_start();
 ob_start();
-$params = json_decode(file_get_contents('php://input'),true);
-var_dump($GLOBALS);
-echo json_last_error();
+$data = array();
+parse_str(file_get_contents('php://input'), $data);
+$_POST = array_merge($data, $_POST); // merge parsed login data with _POST session values
 $host     = "localhost"; // Host name
 $username = "admin_salesform"; // Mysql username
 $password = "mqJoPHm9LEz"; // Mysql password
 $db_name  = "admin_salesform"; // Database name
 $tbl_name = "users"; // Table name
-exit(1);
-// Connect to server and select databse.
+
+// Connect to server and select database.
 $mysqli = new mysqli( $host, $username, $password, $db_name );
 
 // Define $myusername and $mypassword
@@ -24,11 +25,8 @@ $result     = $mysqli->query( "SELECT * FROM $tbl_name WHERE username='$myuserna
 $row        = mysqli_fetch_assoc( $result );
 // Mysql_num_row is counting table row
 $count = mysqli_num_rows( $result );
-
 // If result matched $myusername and $mypassword, table row must be 1 row
 if ( $count == 1 ) {
-	session_start();
-
 // Register $myusername, $mypassword and redirect to file "main.php"
 	$_SESSION['username'] = $myusername;
 	$_SESSION['admin'] = $row['admin']; // store admin status, will be 'true' if user is admin

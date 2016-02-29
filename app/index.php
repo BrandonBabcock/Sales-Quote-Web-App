@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php
 echo '
 <!-- index.html -->
@@ -30,5 +31,5 @@ echo '
 
 
     </body>
-</html>'
+</html>';
 ?>
