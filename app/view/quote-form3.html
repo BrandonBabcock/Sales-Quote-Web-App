@@ -1,45 +1,99 @@
 <!--Form 3-->
+
 <style>
     .form-group{
         -webkit-column-count: 2;
     }
-</style>
 
+    select {
+
+        border: 1px solid #111;
+        color: black;
+        width: 338px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        height: 40px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-128.png) 96% / 5% no-repeat #eee;
+    }
+</style>
+<form name="quote3">
 <label>TRAINING</label>
+    <br>
+    <select name="trainingDropDown" ng-model="trainingDropDown" onchange=findSelected3(this)>
+        <option value="1">YES</option>
+        <option value="2">NO</option>
+    </select>
+    <br>
 <div class="form-group">
     <label>Basic Training</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.basic">
+    <br>
+    <select name="basicDropDown">
+        <option value="option1" selected>YES</option>
+        <option value="option2">NO</option>
+    </select>
     <label>Advanced Training</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.advanced">
+    <br>
+    <select name="advanced" ng-model="advancedDropDown">
+        <option value="option1" selected>YES</option>
+        <option value="option2">NO</option>
+    </select>
     </div>
 
 <div class="form-group">
     <label>Kiosk UI Training</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.kiosk">
+    <br>
+    <select name="kiosk" ng-model="KioskDropDown">
+        <option value="option1" selected>YES</option>
+        <option value="option2">NO</option>
+    </select>
     <label>Pin Reset UI Training</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.pinReset">
+
+    <br>
+    <select name="pin" ng-model="pinDropDown">
+        <option value="option1" selected>YES</option>
+        <option value="option2">NO</option>
+    </select>
 
 
 </div>
 <div class="form-group">
 
     <label>Help Desk UI Training</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.helpDesk">
+    <br>
+    <select name="help" ng-model="helpDropDown">
+        <option value="option1" selected>YES</option>
+        <option value="option2">NO</option>
+    </select>
     <label>Self Service Access Management UI Training</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.selfService">
+    <br>
+    <select ng-model="selfDropDown">
+        <option value="option1" selected>YES</option>
+        <option value="option2">NO</option>
+    </select>
 </div>
 <div class="form-group">
     <label>HPAM UI Training </label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.uiTraining">
+    <br>
+    <select ng-model="hpamtrainingDropDown">
+        <option value="option1" selected>YES</option>
+        <option value="option2">NO</option>
+    </select>
     <label>Federation Configuration Testing</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.fedConfig">
-    </div>
-
+    <br>
+    <select ng-model="federationTestingDropDown">
+        <option value="option1" selected>YES</option>
+        <option value="option2">NO</option>
+    </select>
+</div>
 
     <label>Percentage of Solution Requirements Unknown</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.completionDae">
+    <input type="text" class="form-control" name="percentage" ng-model="formData.completionDae">
 
 <br>
-<a ui-sref="quote.form2" class="btn btn-block btn-primary">
-    SUBMIT <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    
+    <a ui-sref="quote.form2" class="btn btn-block btn-primary">
+        SUBMIT<span class="glyphicon glyphicon-circle-arrow-right"></span>
 </a>
+</form>

@@ -3,6 +3,7 @@
 echo '
 <!-- index.html -->
 
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,6 +22,7 @@ echo '
 
         <!-- Load in main application -->
         <script src="app.js"></script>
+        <script src="controller/test-controller.js"></script>
     </head>
 
     <body ng-app="quoteApp">
@@ -28,7 +30,6 @@ echo '
             <!-- Views will be injected here -->
             <div ui-view></div>
         </div>
-
 
     </body>
 </html>';
