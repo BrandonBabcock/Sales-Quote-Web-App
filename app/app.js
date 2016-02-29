@@ -3,6 +3,7 @@
 // Create angular app and inject ngAnimate and ui-router
 angular.module("quoteApp", ["ngAnimate", "ui.router"])
 
+
     // Route configuration
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -58,3 +59,4 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             alert("Your sales quote has been generated.");
         };
     });
+

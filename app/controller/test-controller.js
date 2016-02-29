@@ -9,4 +9,7 @@
     function testController() {
         var vm = this;
     }
-})();
+})
+
+
+();

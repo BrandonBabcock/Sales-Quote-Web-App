@@ -3,52 +3,66 @@
         -webkit-column-count: 2;
         -webkit-font-size:small;
     }
+
+    select {
+
+        border: 1px solid #111;
+        color: black;
+        width: 338px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        height: 40px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-128.png) 96% / 5% no-repeat #eee;
+    }
 </style>
+<form name="quote4">
 <label>Solution Specifics</label>
 <div class="form-group">
     <label>Number of Initiation Points</label>
     <input type="text" class="form-control" name="completed" ng-model="formData.initiationPoints">
 
     <label>Number of Password Management Targets</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.passTargets">
+    <input type="text" class="form-control" name="numberOfPass" ng-model="formData.passTargets">
     </div>
 <div class="form-group">
     <label>Number of Admin Provisioning Targets</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.adminTargets">
+    <input type="text" class="form-control" name="adminProv" ng-model="formData.adminTargets">
     <label>Number of Workflows Per Targer</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.workflowTargets">
+    <input type="text" class="form-control" name="adminWorkflows" ng-model="formData.workflowTargets">
 </div>
 
 <div class="form-group">
 
     <label>Number of Automated Provisioning Target</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.automatedTargets">
+    <input type="text" class="form-control" name="automatedProv" ng-model="formData.automatedTargets">
 
     <label>Number of Automated Workflows Per Target</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.automatedWorkflows">
+    <input type="text" class="form-control" name="automatedWorkflow" ng-model="formData.automatedWorkflows">
 
 </div>
 
 <div class="form-group">
     <label>Number of HPAM Account Types</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.hpamTypes">
+    <input type="text" class="form-control" name="hpamAccounts" ng-model="formData.hpamTypes">
 
     <label>Unique Connected System Definitions(Total)</label>
     <input type="text" class="form-control" name="completed" ng-model="formData.uniqueDefinitions">
 </div>
 <div class="form-group">
     <label>Approval Configurations</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.approvalConfiguration">
+    <input type="text" class="form-control" name="approvConfig" ng-model="formData.approvalConfiguration">
     <label>Selectable Resources</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.selectableResource">
+    <input type="text" class="form-control" name="selectResource" ng-model="formData.selectableResource">
 </div>
 
 <div class="form-group">
 
     <label>Resource Group Configurations</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.groupConfigs">
+    <input type="text" class="form-control" name="resourceGroup" ng-model="formData.groupConfigs">
     <label>Policies</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.policies">
+    <input type="text" class="form-control" name="policies" ng-model="formData.policies">
 
 </div>
 
@@ -56,45 +70,54 @@
     <label>Organizations</label>
     <input type="text" class="form-control" name="completed" ng-model="formData.organizations">
     <label>IdP on Premise or IaaS</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.IdpORIaas">
+    <input type="text" class="form-control" name="idp" ng-model="formData.IdpORIaas">
 
     </div>
 <div class="form-group">
     <label>Number of IdPs</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.numofIDPS">
+    <input type="text" class="form-control" name="numberIdp" ng-model="formData.numofIDPS">
     <label>Shibboleth SPs to Shibbolize Apps</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.shibbolize">
+    <input type="text" class="form-control" name="shibboleth" ng-model="formData.shibbolize">
 </div>
 
 <div class="form-group">
 
     <label>Discovery Services</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.discoveryServ">
+    <input type="text" class="form-control" name="discovery" ng-model="formData.discoveryServ">
     <label>SAML enabled Federation Targets</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.fedTargets">
+    <input type="text" class="form-control" name="SAML" ng-model="formData.fedTargets">
 
 </div>
 
 <div class="form-group">
     <label>Verified SFL FT</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.verSFL">
+    <input type="text" class="form-control" name="verSFL" ng-model="formData.verSFL">
     <label>Non Verified SFL</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.nonverSFL">
+    <input type="text" class="form-control" name="nonverSFL" ng-model="formData.nonverSFL">
 
     </div>
 <div class="form-group">
     <label>Attribute Management Processes</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.manageProc">
+    <input type="text" class="form-control" name="attributeManage" ng-model="formData.manageProc">
     <label>On-Going Attribute Management Processes</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.onManageProc">
+    <input type="text" class="form-control" name="ongoingManage" ng-model="formData.onManageProc">
 </div>
 
 <div class="form-group">
 
     <label>Post Implementation Services</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.postServ">
+    <br>
+    <select ng-model="postDropDown">
+        <option value="option1" selected>YES</option>
+        <option value="option2">NO</option>
+    </select>
+    <br>
     <label>User Account Load</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.userLoad">
+    <br>
+    <select ng-model="userDropDown">
+        <option value="option1" selected>CUSTOM</option>
+        <option value="option2">SIMPLE</option>
+    </select>
 
 </div>
 
@@ -102,3 +125,4 @@
 <a ui-sref="quote.form3" class="btn btn-block btn-primary">
     NEXT <span class="glyphicon glyphicon-circle-arrow-right"></span>
 </a>
+</form>
