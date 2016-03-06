@@ -3,7 +3,6 @@
 echo '
 <!-- index.html -->
 
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +11,7 @@ echo '
 
         <!-- Link stylesheets -->
         <!-- Documentation for second style sheet: https://bootswatch.com/darkly/ -->
-	<link rel="stylesheet" href="../assets/css/style.css">
+	    <link rel="stylesheet" href="../assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
 
         <!-- Load in Global Dependencies -->
@@ -22,15 +21,13 @@ echo '
 
         <!-- Load in main application -->
         <script src="app.js"></script>
-        <script src="controller/test-controller.js"></script>
     </head>
 
     <body ng-app="quoteApp">
-        <div class="container">
+        <div class="container" ng-cloak="">
             <!-- Views will be injected here -->
             <div ui-view></div>
         </div>
-
     </body>
 </html>';
 ?>

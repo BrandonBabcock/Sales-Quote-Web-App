@@ -1,7 +1,38 @@
 /* style.css */
+
 /* BASIC STYLINGS
 ============================================================================= */
-/*body                            { padding-top:20px; }*/
+/* ng-cloak is used to avoid the HTML markup from displaying before Angular is loaded */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+/* select button styling */
+.select-box {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-128.png) 96% / 5% no-repeat #eee;
+    display: block;
+    width: 100%;
+    height: 45px;
+    padding: 10px 15px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #464545;
+    background-color: #ffffff;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+/* Larger label */
+.large-label {
+    font-size: 20px;
+}
 
 /* form styling */
 #form-container                { background:#2f2f2f; margin-bottom:20px;
@@ -24,7 +55,7 @@
 /* style.css */
 /* ANIMATION STYLINGS
 ============================================================================= */
-#signup-form            { position:relative; min-height:300px; overflow:hidden; padding:30px; }
+#signup-form            { position:relative; min-height:1000px; overflow:hidden; padding:30px; }
 #form-views             { width:auto; }
 
 /* basic styling for entering and leaving */
