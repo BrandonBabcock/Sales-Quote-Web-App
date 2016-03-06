@@ -52,7 +52,33 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
     // Form controller
     .controller("quoteController", function($scope) {
         // All form data is stored in this object (used for testing)
-        $scope.formData = {};
+        $scope.formData = {
+            federationWorkshop: "IaaS",
+            additionalEnvironment: "NO",
+            passwordManagement: "YES",
+            provisioning: "YES",
+            hpam: "YES",
+            federation: "YES",
+            passwordManagementWorkshop: "YES",
+            provWorkshop: "YES",
+            hpamWorkshop: "YES",
+            federationWorkshop: "YES",
+            postImpServices: "YES",
+            userAccountLoad: "NONE",
+            training: "NO",
+            basicTraining: "NO",
+            advancedTraining: "NO",
+            kioskTraining: "NO",
+            pinTraining: "NO",
+            helpDeskTraining: "NO",
+            selectServiceTraining: "NO",
+            hpamTraining: "NO",
+            federationConfigTraining: "NO"
+        };
+
+        $scope.setDisables = function() {
+
+        };
 
         // Function to process the form (used for testing)
         $scope.processForm = function() {

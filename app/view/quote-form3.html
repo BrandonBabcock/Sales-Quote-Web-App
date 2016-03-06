@@ -1,99 +1,108 @@
-<!--Form 3-->
+<!-- quote-form3.html -->
 
 <style>
     .form-group{
         -webkit-column-count: 2;
-    }
-
-    select {
-
-        border: 1px solid #111;
-        color: black;
-        width: 338px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        height: 40px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-128.png) 96% / 5% no-repeat #eee;
+        -webkit-font-size:small;
     }
 </style>
-<form name="quote3">
-<label>TRAINING</label>
-    <br>
-    <select name="trainingDropDown" ng-model="trainingDropDown" onchange=findSelected3(this)>
-        <option value="1">YES</option>
-        <option value="2">NO</option>
-    </select>
-    <br>
-<div class="form-group">
-    <label>Basic Training</label>
-    <br>
-    <select name="basicDropDown">
-        <option value="option1" selected>YES</option>
-        <option value="option2">NO</option>
-    </select>
-    <label>Advanced Training</label>
-    <br>
-    <select name="advanced" ng-model="advancedDropDown">
-        <option value="option1" selected>YES</option>
-        <option value="option2">NO</option>
-    </select>
+
+<label class="large-label">Solution Specifics</label>
+<br /> <br />
+
+<form name="quoteForm3">
+    <div class="form-group">
+        <label>Number of Initiation Points</label>
+        <input type="text" class="form-control" name="initiationPoints" ng-model="formData.initiationPoints">
+        <label>Number of Password Management Targets</label>
+        <input type="text" class="form-control" name="passTargets" ng-model="formData.passTargets">
     </div>
 
-<div class="form-group">
-    <label>Kiosk UI Training</label>
-    <br>
-    <select name="kiosk" ng-model="KioskDropDown">
-        <option value="option1" selected>YES</option>
-        <option value="option2">NO</option>
-    </select>
-    <label>Pin Reset UI Training</label>
+    <div class="form-group">
+        <label>Number of Admin Provisioning Targets</label>
+        <input type="text" class="form-control" name="adminTargets" ng-model="formData.adminTargets">
+        <label>Number of Workflows Per Targer</label>
+        <input type="text" class="form-control" name="workflowTargets" ng-model="formData.workflowTargets">
+    </div>
 
-    <br>
-    <select name="pin" ng-model="pinDropDown">
-        <option value="option1" selected>YES</option>
-        <option value="option2">NO</option>
-    </select>
+    <div class="form-group">
+        <label>Number of Automated Provisioning Target</label>
+        <input type="text" class="form-control" name="automatedTargets" ng-model="formData.automatedTargets">
+        <label>Number of Automated Workflows Per Target</label>
+        <input type="text" class="form-control" name="automatedWorkflows" ng-model="formData.automatedWorkflows">
+    </div>
 
+    <div class="form-group">
+        <label>Number of HPAM Account Types</label>
+        <input type="text" class="form-control" name="hpamAccountTypes" ng-model="formData.hpamAccountTypes">
+        <label>Unique Connected System Definitions(Total)</label>
+        <input type="text" class="form-control" name="uniqueDefinitions" ng-model="formData.uniqueDefinitions">
+    </div>
 
-</div>
-<div class="form-group">
+    <div class="form-group">
+        <label>Approval Configurations</label>
+        <input type="text" class="form-control" name="approvalConfiguration" ng-model="formData.approvalConfiguration">
+        <label>Selectable Resources</label>
+        <input type="text" class="form-control" name="selectableResource" ng-model="formData.selectableResource">
+    </div>
 
-    <label>Help Desk UI Training</label>
-    <br>
-    <select name="help" ng-model="helpDropDown">
-        <option value="option1" selected>YES</option>
-        <option value="option2">NO</option>
-    </select>
-    <label>Self Service Access Management UI Training</label>
-    <br>
-    <select ng-model="selfDropDown">
-        <option value="option1" selected>YES</option>
-        <option value="option2">NO</option>
-    </select>
-</div>
-<div class="form-group">
-    <label>HPAM UI Training </label>
-    <br>
-    <select ng-model="hpamtrainingDropDown">
-        <option value="option1" selected>YES</option>
-        <option value="option2">NO</option>
-    </select>
-    <label>Federation Configuration Testing</label>
-    <br>
-    <select ng-model="federationTestingDropDown">
-        <option value="option1" selected>YES</option>
-        <option value="option2">NO</option>
-    </select>
-</div>
+    <div class="form-group">
+        <label>Resource Group Configurations</label>
+        <input type="text" class="form-control" name="resourceGroupConfigs" ng-model="formData.resourceGroupConfigs">
+        <label>Policies</label>
+        <input type="text" class="form-control" name="policies" ng-model="formData.policies">
+    </div>
 
-    <label>Percentage of Solution Requirements Unknown</label>
-    <input type="text" class="form-control" name="percentage" ng-model="formData.completionDae">
+    <div class="form-group">
+        <label>Organizations</label>
+        <input type="text" class="form-control" name="organizations" ng-model="formData.organizations">
+        <label>IdP on Premise or IaaS</label>
+        <input type="text" class="form-control" name="idpOrIaas" ng-model="formData.idpOrIaas">
+    </div>
 
-<br>
-    
-    <a ui-sref="quote.form2" class="btn btn-block btn-primary">
-        SUBMIT<span class="glyphicon glyphicon-circle-arrow-right"></span>
-</a>
+    <div class="form-group">
+        <label>Number of IdPs</label>
+        <input type="text" class="form-control" name="numOfIdp" ng-model="formData.numOfIdp">
+        <label>Shibboleth SPs to Shibbolize Apps</label>
+        <input type="text" class="form-control" name="shibboleth" ng-model="formData.shibboleth">
+    </div>
+
+    <div class="form-group">
+        <label>Discovery Services</label>
+        <input type="text" class="form-control" name="discoveryServ" ng-model="formData.discoveryServ">
+        <label>SAML enabled Federation Targets</label>
+        <input type="text" class="form-control" name="fedTargets" ng-model="formData.fedTargets">
+    </div>
+
+    <div class="form-group">
+        <label>Verified SFL FT</label>
+        <input type="text" class="form-control" name="verifiedSfl" ng-model="formData.verifiedSfl">
+        <label>Non Verified SFL</label>
+        <input type="text" class="form-control" name="nonVerifiedSfl" ng-model="formData.nonVerifiedSfl">
+    </div>
+
+    <div class="form-group">
+        <label>Attribute Management Processes</label>
+        <input type="text" class="form-control" name="attManProccess" ng-model="formData.attManProccess">
+        <label>On-Going Attribute Management Processes</label>
+        <input type="text" class="form-control" name="onGoingAttManProccess" ng-model="formData.onGoingAttManProccess">
+    </div>
+
+    <div class="form-group">
+        <label>Post Implementation Services</label>
+        <select name="postImpServices" ng-model="formData.postImpServices" class="select-box">
+            <option>YES</option>
+            <option>NO</option>
+        </select>
+        <label>User Account Load</label>
+        <select name="userAccountLoad" ng-model="formData.userAccountLoad" class="select-box">
+            <option>NONE</option>
+            <option>CUSTOM</option>
+            <option>SIMPLE</option>
+        </select>
+    </div>
 </form>
+
+<a ui-sref="quote.form4" class="btn btn-block btn-primary">
+    NEXT <span class="glyphicon glyphicon-circle-arrow-right"></span>
+</a>

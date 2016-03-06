@@ -1,48 +1,41 @@
 <!-- quote-form1.html -->
+
 <style>
-     .form-group{
+     .form-group {
        -webkit-column-count: 2;
      }
-
-     select {
-
-         border: 1px solid #111;
-         color: black;
-         width: 338px;
-         font-size: 16px;
-         border: 1px solid #ccc;
-         height: 40px;
-         -webkit-appearance: none;
-         -moz-appearance: none;
-         background: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-128.png) 96% / 5% no-repeat #eee;
-     }
-
 </style>
 
-<label>Discovery</label>
-<div class="form-group">
-   <label>Name</label>
-    <input type="text" class="form-control" name="name" ng-model="formData.name">
-    <label>Desired Start Date</label>
-    <input type="text" class="form-control" name="start" ng-model="formData.startDate">
- </div>
-<div class="form-group">
-    <label>Spreadsheet Completion Date</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.completionDate">
-    <label>Model</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.model">
-</div>
+<label class="large-label">Discovery</label>
+<br /> <br />
+
+<form name="quoteForm1">
+    <div class="form-group">
+       <label>Name</label>
+        <input type="text" class="form-control" name="name" ng-model="formData.name">
+        <label>Desired Start Date</label>
+        <input type="text" class="form-control" name="startDate" ng-model="formData.startDate">
+     </div>
+    <div class="form-group">
+        <label>Quote Completion Date</label>
+        <input type="text" class="form-control" name="completionDate" ng-model="formData.completionDate">
+        <label>Model</label><br>
+        <select name="model" ng-model="formData.model" class="select-box">
+            <option>IaaS</option>
+            <option>On-Premise</option>
+        </select>
+    </div>
     <label>Additional Development Environment</label>
-<br>
-<select ng-model="environDropDown">
-    <option value="option1" selected>YES</option>
-    <option value="option2">NO</option>
-</select>
+    <br>
+    <select name="additionalEnvironment" ng-model="formData.additionalEnvironment" class="select-box">
+        <option>YES</option>
+        <option>NO</option>
+    </select>
+</form>
 
-<br>
-<br>
+<br />
+<br />
 
-
- <a ui-sref="quote.form2" class="btn btn-block btn-primary">
+<a ui-sref="quote.form2" class="btn btn-block btn-primary">
     NEXT <span class="glyphicon glyphicon-circle-arrow-right"></span>
 </a>

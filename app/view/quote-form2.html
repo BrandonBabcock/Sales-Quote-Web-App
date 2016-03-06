@@ -1,209 +1,181 @@
 <!--quote-form2.html-->
 
-<script src="quote-form4.html"></script>
-<script src="quote-form3.html"></script>
 <!--Functions for drip down input fields-->
-<script type="text/javascript">
+<!--<script type="text/javascript">-->
 
-    function findSelected(obj) {
-        var selected = document.quoteForm2.provDropDown.options[obj.selectedIndex].value;
-        if (selected == "option2") {
-            document.quoteForm2.provWorkshop.disabled = true;
-            document.quote4.adminProv.disabled = true;
-            document.quote4.adminWorkflows.disabled = true;
-            document.quote4.automatedProv.disabled = true;
-            document.quote4.adminWorkflows.disabled = true;
-            document.quote4.approvConfig.disabled = true;
-            document.quote4.selectResource.disabled = true;
-            document.quote4.resourceGroup.disabled = true;
-            document.quote4.policies.disabled = true;
-            document.quote3.kiosk.disabled = true;
-            document.quote3.pin.disabled = true;
-        }
-        else {
-            document.quoteForm2.provWorkshop.disabled = false;
-            document.quote4.adminProv.disabled = false;
-            document.quote4.adminWorkflows.disabled = false;
-            document.quote4.automatedProv.disabled = false;
-            document.quote4.adminWorkflows.disabled = false;
-            document.quote4.approvConfig.disabled = false;
-            document.quote4.selectResource.disabled = false;
-            document.quote4.resourceGroup.disabled = false;
-            document.quote4.policies.disabled = false;
-            document.quote3.kiosk.disabled = false;
-            document.quote3.pin.disabled = false;
-        }
-    }
-    <!--HPAM Drop Down-->
-    function findSelected1(obj) {
-        var selected1 = document.quoteForm2.hpamDropDown.options[obj.selectedIndex].value;
-        if (selected1 == "option2") {
-            document.quoteForm2.hpamWorkshopDropDown.disabled = true;
-            document.quote4.hpamAccounts.disabled = true;
-            document.quote3.help.disabled = true;
-        } else {
-            document.quoteForm2.hpamWorkshopDropDown.disabled = false;
-            document.quote4.hpamAccounts.disabled = false;
-            document.quote3.help.disabled = false;
-        }
-    }
-    <!--Federation Drop Down-->
-    function findSelected2(obj) {
-        var selected2 = document.quoteForm2.federationDropDown.options[obj.selectedIndex].value;
-        if (selected2 == "option2") {
-            document.quoteForm2.federationWorkshop.disabled = true;
-            document.quote4.idp.disabled = true;
-            document.quote4.numberIdp.disabled = true;
-            document.quote4.shibboleth.disabled = true;
-            document.quote4.discovery.disabled = true;
-            document.quote4.SAML.disabled = true;
-            document.quote4.verSFL.disabled = true;
-            document.quote4.nonverSFL.disabled = true;
-            document.quote4.attributeManage.disabled = true;
-            document.quote4.ongoingManage.disabled = true;
-        } else {
-            document.quoteForm2.federationWorkshop.disabled = true;
-            document.quote4.idp.disabled = false;
-            document.quote4.numberIdp.disabled = false;
-            document.quote4.shibboleth.disabled = false;
-            document.quote4.discovery.disabled = false;
-            document.quote4.SAML.disabled = false;
-            document.quote4.verSFL.disabled = false;
-            document.quote4.nonverSFL.disabled = false;
-            document.quote4.attributeManage.disabled = false;
-            document.quote4.ongoingManage.disabled = false;
-        }
-    }
+    <!--function findSelected(obj) {-->
+        <!--var selected = document.quoteForm2.provDropDown.options[obj.selectedIndex].value;-->
+        <!--if (selected == "option2") {-->
+            <!--document.quoteForm2.provWorkshop.disabled = true;-->
+            <!--document.quote4.adminProv.disabled = true;-->
+            <!--document.quote4.adminWorkflows.disabled = true;-->
+            <!--document.quote4.automatedProv.disabled = true;-->
+            <!--document.quote4.adminWorkflows.disabled = true;-->
+            <!--document.quote4.approvConfig.disabled = true;-->
+            <!--document.quote4.selectResource.disabled = true;-->
+            <!--document.quote4.resourceGroup.disabled = true;-->
+            <!--document.quote4.policies.disabled = true;-->
+            <!--document.quote3.kiosk.disabled = true;-->
+            <!--document.quote3.pin.disabled = true;-->
+        <!--}-->
+        <!--else {-->
+            <!--document.quoteForm2.provWorkshop.disabled = false;-->
+            <!--document.quote4.adminProv.disabled = false;-->
+            <!--document.quote4.adminWorkflows.disabled = false;-->
+            <!--document.quote4.automatedProv.disabled = false;-->
+            <!--document.quote4.adminWorkflows.disabled = false;-->
+            <!--document.quote4.approvConfig.disabled = false;-->
+            <!--document.quote4.selectResource.disabled = false;-->
+            <!--document.quote4.resourceGroup.disabled = false;-->
+            <!--document.quote4.policies.disabled = false;-->
+            <!--document.quote3.kiosk.disabled = false;-->
+            <!--document.quote3.pin.disabled = false;-->
+        <!--}-->
+    <!--}-->
+    <!--&lt;!&ndash;HPAM Drop Down&ndash;&gt;-->
+    <!--function findSelected1(obj) {-->
+        <!--var selected1 = document.quoteForm2.hpamDropDown.options[obj.selectedIndex].value;-->
+        <!--if (selected1 == "option2") {-->
+            <!--document.quoteForm2.hpamWorkshopDropDown.disabled = true;-->
+            <!--document.quote4.hpamAccounts.disabled = true;-->
+            <!--document.quote3.help.disabled = true;-->
+        <!--} else {-->
+            <!--document.quoteForm2.hpamWorkshopDropDown.disabled = false;-->
+            <!--document.quote4.hpamAccounts.disabled = false;-->
+            <!--document.quote3.help.disabled = false;-->
+        <!--}-->
+    <!--}-->
+    <!--&lt;!&ndash;Federation Drop Down&ndash;&gt;-->
+    <!--function findSelected2(obj) {-->
+        <!--var selected2 = document.quoteForm2.federationDropDown.options[obj.selectedIndex].value;-->
+        <!--if (selected2 == "option2") {-->
+            <!--document.quoteForm2.federationWorkshop.disabled = true;-->
+            <!--document.quote4.idp.disabled = true;-->
+            <!--document.quote4.numberIdp.disabled = true;-->
+            <!--document.quote4.shibboleth.disabled = true;-->
+            <!--document.quote4.discovery.disabled = true;-->
+            <!--document.quote4.SAML.disabled = true;-->
+            <!--document.quote4.verSFL.disabled = true;-->
+            <!--document.quote4.nonverSFL.disabled = true;-->
+            <!--document.quote4.attributeManage.disabled = true;-->
+            <!--document.quote4.ongoingManage.disabled = true;-->
+        <!--} else {-->
+            <!--document.quoteForm2.federationWorkshop.disabled = true;-->
+            <!--document.quote4.idp.disabled = false;-->
+            <!--document.quote4.numberIdp.disabled = false;-->
+            <!--document.quote4.shibboleth.disabled = false;-->
+            <!--document.quote4.discovery.disabled = false;-->
+            <!--document.quote4.SAML.disabled = false;-->
+            <!--document.quote4.verSFL.disabled = false;-->
+            <!--document.quote4.nonverSFL.disabled = false;-->
+            <!--document.quote4.attributeManage.disabled = false;-->
+            <!--document.quote4.ongoingManage.disabled = false;-->
+        <!--}-->
+    <!--}-->
 
-    <!--Password Drop Down-->
-    function findSelected3(obj) {
-        var selected3 = document.quoteForm2.passDropDown.options[obj.selectedIndex].value;
-        if (selected3 == "option2") {
-            document.quoteForm2.passwordDropDown.disabled = true;
-            document.quote4.numberOfPass.disabled = true;
-            document.quote3.basicDropDown.disabled = true;
-            document.quote3.advanced.disabled = true;
-            document.quote3.help.disabled = true;
-            document.quote3.kiosk.disabled = true;
-            document.quote3.pin.disabled = true;
-        } else {
-            document.quoteForm2.passwordDropDown.disabled = false;
-            document.quote4.numberOfPass.disabled = false;
-            document.quote3.basicDropDown.disabled = false;
-            document.quote3.advanced.disabled = false;
-            document.quote3.help.disabled = false;
-            document.quote3.kiosk.disabled = false;
-            document.quote3.pin.disabled = false;
-        }
-    }</script>
-
+    <!--&lt;!&ndash;Password Drop Down&ndash;&gt;-->
+    <!--function findSelected3(obj) {-->
+        <!--var selected3 = document.quoteForm2.passDropDown.options[obj.selectedIndex].value;-->
+        <!--if (selected3 == "option2") {-->
+            <!--document.quoteForm2.passwordDropDown.disabled = true;-->
+            <!--document.quote4.numberOfPass.disabled = true;-->
+            <!--document.quote3.basicDropDown.disabled = true;-->
+            <!--document.quote3.advanced.disabled = true;-->
+            <!--document.quote3.help.disabled = true;-->
+            <!--document.quote3.kiosk.disabled = true;-->
+            <!--document.quote3.pin.disabled = true;-->
+        <!--} else {-->
+            <!--document.quoteForm2.passwordDropDown.disabled = false;-->
+            <!--document.quote4.numberOfPass.disabled = false;-->
+            <!--document.quote3.basicDropDown.disabled = false;-->
+            <!--document.quote3.advanced.disabled = false;-->
+            <!--document.quote3.help.disabled = false;-->
+            <!--document.quote3.kiosk.disabled = false;-->
+            <!--document.quote3.pin.disabled = false;-->
+        <!--}-->
+    <!--}</script>-->
 
 <style>
     .form-group{
         -webkit-column-count: 2;
         -webkit-font-size:small;
     }
-
-    select {
-
-        border: 1px solid #111;
-        color: black;
-        width: 338px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        height: 40px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background: url(https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-128.png) 96% / 5% no-repeat #eee;
-    }
 </style>
 
+<label class="large-label">Solution Requirements</label>
+<br /> <br />
+
 <form name="quoteForm2">
-<label>Solution Requirements</label>
-<div class="form-group">
-
-    <label>Number of Environments</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.environments">
-    <label>Additional HA Servers</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.HaServers">
+    <div class="form-group">
+        <label>Number of Environments</label>
+        <input type="text" class="form-control" name="environments" ng-model="formData.environments">
+        <label>Additional HA Servers</label>
+        <input type="text" class="form-control" name="haServers" ng-model="formData.haServers">
     </div>
-<div class="form-group">
-    <label>Number of <i>Global Identity Gateways</i></label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.gateways">
-    <label>Number of MS Password Filters</label>
-    <input type="text" class="form-control" name="completed" ng-model="formData.passwordFilters">
-    </div>
-  <div class="form-group">
-      <label>Password Management</label>
-      <br>
-      <select name="passDropDown" ng-model="passDropDown" onchange="findSelected3(this)">
-          <option value="option1" selected>YES</option>
-          <option value="option2">NO</option>
-      </select>
-
-      <br>
-    <label>Provisioning</label>
-      <br>
-      <select name="provDropDown" ng-model="provDropDown" onchange="findSelected(this)">
-          <option value="option1" selected>YES</option>
-          <option value="option2">NO</option>
-      </select>
-  </div>
 
     <div class="form-group">
+        <label>Number of Global Identity Gateways</label>
+        <input type="text" class="form-control" name="gateways" ng-model="formData.gateways">
+        <label>Number of MS Password Filters</label>
+        <input type="text" class="form-control" name="passwordFilters" ng-model="formData.passwordFilters">
+    </div>
 
-        <label>HPAM</label>
+    <div class="form-group">
+        <label>Password Management</label>
         <br>
-        <select name="hpamDropDown" ng-model="hpamDropDown" onchange="findSelected1(this)">
-            <option value="option1" selected>YES</option>
-            <option value="option2">NO</option>
+        <select name="passwordManagement" ng-model="formData.passwordManagement" class="select-box">
+              <option>YES</option>
+              <option>NO</option>
+        </select>
+        <label>Provisioning</label>
+        <select name="provisioning" ng-model="formData.provisioning" class="select-box">
+            <option>YES</option>
+            <option>NO</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>HPAM</label>
+        <select name="hpam" ng-model="formData.hpam" class="select-box">
+            <option>YES</option>
+            <option>NO</option>
         </select>
         <label>Federation</label>
-        <br>
-        <select name="federationDropDown" ng-model="federationDropDown" onchange="findSelected2(this)">
-            <option value="option1" selected>YES</option>
-            <option value="option2">NO</option>
+        <select name="federation" ng-model="formData.federation" class="select-box">
+            <option>YES</option>
+            <option>NO</option>
         </select>
-
     </div>
 
-
     <div class="form-group">
-
         <label>Password Management Workshop</label>
-        <br>
-        <select name="passwordDropDown" ng-model="passwordDropDown">
-            <option value="option1" selected>YES</option>
-            <option value="option2">NO</option>
+        <select name="passwordManagementWorkshop" ng-model="formData.passwordManagementWorkshop" class="select-box">
+            <option>YES</option>
+            <option>NO</option>
         </select>
         <label>Provisioning Workshop</label>
         <br>
-        <select name="provWorkshop" ng-model="workshopdropDown">
-            <option value="option1" selected>YES</option>
-            <option value="option2">NO</option>
+        <select name="provWorkshop" ng-model="formData.provWorkshop" class="select-box">
+            <option>YES</option>
+            <option>NO</option>
         </select>
-
     </div>
-<div class="form-group">
 
-    <label>HPAM Workshop</label>
-    <br>
-    <select name="hpamWorkshopDropDown" ng-model="hpamWorkshopDropDown">
-        <option value="option1" selected>YES</option>
-        <option value="option2">NO</option>
-    </select>
-    <label>Federation Workshop</label>
-    <br>
-    <select name="federationWorkshop" ng-model="federationWorkshop">
-        <option value="option1" selected>YES</option>
-        <option value="option2">No</option>
-    </select>
+    <div class="form-group">
+        <label>HPAM Workshop</label>
+        <br>
+        <select name="hpamWorkshop" ng-model="formData.hpamWorkshop" class="select-box">
+            <option>YES</option>
+            <option>NO</option>
+        </select>
+        <label>Federation Workshop</label>
+        <select name="federationWorkshop" ng-model="formData.federationWorkshop" class="select-box">
+            <option>YES</option>
+            <option>No</option>
+        </select>
+    </div>
+</form>
 
-</div>
-
-
-<br>
-    <br>
-<a ui-sref="quote.form4" class="btn btn-block btn-primary">
+<a ui-sref="quote.form3" class="btn btn-block btn-primary">
     NEXT <span class="glyphicon glyphicon-circle-arrow-right"></span>
-</a></form>
+</a>
