@@ -1,134 +1,32 @@
 <!--quote-form2.html-->
 
-<!--Functions for drip down input fields-->
-<!--<script type="text/javascript">-->
-
-    <!--function findSelected(obj) {-->
-        <!--var selected = document.quoteForm2.provDropDown.options[obj.selectedIndex].value;-->
-        <!--if (selected == "option2") {-->
-            <!--document.quoteForm2.provWorkshop.disabled = true;-->
-            <!--document.quote4.adminProv.disabled = true;-->
-            <!--document.quote4.adminWorkflows.disabled = true;-->
-            <!--document.quote4.automatedProv.disabled = true;-->
-            <!--document.quote4.adminWorkflows.disabled = true;-->
-            <!--document.quote4.approvConfig.disabled = true;-->
-            <!--document.quote4.selectResource.disabled = true;-->
-            <!--document.quote4.resourceGroup.disabled = true;-->
-            <!--document.quote4.policies.disabled = true;-->
-            <!--document.quote3.kiosk.disabled = true;-->
-            <!--document.quote3.pin.disabled = true;-->
-        <!--}-->
-        <!--else {-->
-            <!--document.quoteForm2.provWorkshop.disabled = false;-->
-            <!--document.quote4.adminProv.disabled = false;-->
-            <!--document.quote4.adminWorkflows.disabled = false;-->
-            <!--document.quote4.automatedProv.disabled = false;-->
-            <!--document.quote4.adminWorkflows.disabled = false;-->
-            <!--document.quote4.approvConfig.disabled = false;-->
-            <!--document.quote4.selectResource.disabled = false;-->
-            <!--document.quote4.resourceGroup.disabled = false;-->
-            <!--document.quote4.policies.disabled = false;-->
-            <!--document.quote3.kiosk.disabled = false;-->
-            <!--document.quote3.pin.disabled = false;-->
-        <!--}-->
-    <!--}-->
-    <!--&lt;!&ndash;HPAM Drop Down&ndash;&gt;-->
-    <!--function findSelected1(obj) {-->
-        <!--var selected1 = document.quoteForm2.hpamDropDown.options[obj.selectedIndex].value;-->
-        <!--if (selected1 == "option2") {-->
-            <!--document.quoteForm2.hpamWorkshopDropDown.disabled = true;-->
-            <!--document.quote4.hpamAccounts.disabled = true;-->
-            <!--document.quote3.help.disabled = true;-->
-        <!--} else {-->
-            <!--document.quoteForm2.hpamWorkshopDropDown.disabled = false;-->
-            <!--document.quote4.hpamAccounts.disabled = false;-->
-            <!--document.quote3.help.disabled = false;-->
-        <!--}-->
-    <!--}-->
-    <!--&lt;!&ndash;Federation Drop Down&ndash;&gt;-->
-    <!--function findSelected2(obj) {-->
-        <!--var selected2 = document.quoteForm2.federationDropDown.options[obj.selectedIndex].value;-->
-        <!--if (selected2 == "option2") {-->
-            <!--document.quoteForm2.federationWorkshop.disabled = true;-->
-            <!--document.quote4.idp.disabled = true;-->
-            <!--document.quote4.numberIdp.disabled = true;-->
-            <!--document.quote4.shibboleth.disabled = true;-->
-            <!--document.quote4.discovery.disabled = true;-->
-            <!--document.quote4.SAML.disabled = true;-->
-            <!--document.quote4.verSFL.disabled = true;-->
-            <!--document.quote4.nonverSFL.disabled = true;-->
-            <!--document.quote4.attributeManage.disabled = true;-->
-            <!--document.quote4.ongoingManage.disabled = true;-->
-        <!--} else {-->
-            <!--document.quoteForm2.federationWorkshop.disabled = true;-->
-            <!--document.quote4.idp.disabled = false;-->
-            <!--document.quote4.numberIdp.disabled = false;-->
-            <!--document.quote4.shibboleth.disabled = false;-->
-            <!--document.quote4.discovery.disabled = false;-->
-            <!--document.quote4.SAML.disabled = false;-->
-            <!--document.quote4.verSFL.disabled = false;-->
-            <!--document.quote4.nonverSFL.disabled = false;-->
-            <!--document.quote4.attributeManage.disabled = false;-->
-            <!--document.quote4.ongoingManage.disabled = false;-->
-        <!--}-->
-    <!--}-->
-
-    <!--&lt;!&ndash;Password Drop Down&ndash;&gt;-->
-    <!--function findSelected3(obj) {-->
-        <!--var selected3 = document.quoteForm2.passDropDown.options[obj.selectedIndex].value;-->
-        <!--if (selected3 == "option2") {-->
-            <!--document.quoteForm2.passwordDropDown.disabled = true;-->
-            <!--document.quote4.numberOfPass.disabled = true;-->
-            <!--document.quote3.basicDropDown.disabled = true;-->
-            <!--document.quote3.advanced.disabled = true;-->
-            <!--document.quote3.help.disabled = true;-->
-            <!--document.quote3.kiosk.disabled = true;-->
-            <!--document.quote3.pin.disabled = true;-->
-        <!--} else {-->
-            <!--document.quoteForm2.passwordDropDown.disabled = false;-->
-            <!--document.quote4.numberOfPass.disabled = false;-->
-            <!--document.quote3.basicDropDown.disabled = false;-->
-            <!--document.quote3.advanced.disabled = false;-->
-            <!--document.quote3.help.disabled = false;-->
-            <!--document.quote3.kiosk.disabled = false;-->
-            <!--document.quote3.pin.disabled = false;-->
-        <!--}-->
-    <!--}</script>-->
-
-<style>
-    .form-group{
-        -webkit-column-count: 2;
-        -webkit-font-size:small;
-    }
-</style>
-
 <label class="large-label">Solution Requirements</label>
 <br /> <br />
 
 <form name="quoteForm2">
     <div class="form-group">
         <label>Number of Environments</label>
-        <input type="text" class="form-control" name="environments" ng-model="formData.environments">
+        <input type="text" class="form-control" name="environments" ng-model="formData.environments" ng-disabled="true" title="Auto populated based on Model & Additional Development Environment entered on Step 1">
         <label>Additional HA Servers</label>
-        <input type="text" class="form-control" name="haServers" ng-model="formData.haServers">
+        <input type="text" class="form-control" name="haServers" ng-model="formData.haServers" title="How many additional HA Servers are required? 0 if IaaS">
     </div>
 
     <div class="form-group">
         <label>Number of Global Identity Gateways</label>
-        <input type="text" class="form-control" name="gateways" ng-model="formData.gateways">
+        <input type="text" class="form-control" name="gateways" ng-model="formData.gateways" title="Required if IaaS. Recommend minimum of 2 (1 for test, 1 for production)">
         <label>Number of MS Password Filters</label>
-        <input type="text" class="form-control" name="passwordFilters" ng-model="formData.passwordFilters">
+        <input type="text" class="form-control" name="passwordFilters" ng-model="formData.passwordFilters" title="MS Password Filter per AD Domain Controller. Enter the number of domain controllers the password will be reset on">
     </div>
 
     <div class="form-group">
         <label>Password Management</label>
         <br>
-        <select name="passwordManagement" ng-model="formData.passwordManagement" class="select-box">
+        <select name="passwordManagement" ng-model="formData.passwordManagement" class="select-box" title="" ng-change="passwordManagementChange(formData.passwordManagement)">
               <option>YES</option>
               <option>NO</option>
         </select>
         <label>Provisioning</label>
-        <select name="provisioning" ng-model="formData.provisioning" class="select-box">
+        <select name="provisioning" ng-model="formData.provisioning" class="select-box" title="" ng-change="provisioningChange(formData.provisioning)">
             <option>YES</option>
             <option>NO</option>
         </select>
@@ -136,12 +34,12 @@
 
     <div class="form-group">
         <label>HPAM</label>
-        <select name="hpam" ng-model="formData.hpam" class="select-box">
+        <select name="hpam" ng-model="formData.hpam" class="select-box" title="" ng-change="hpamChange(formData.hpam)">
             <option>YES</option>
             <option>NO</option>
         </select>
         <label>Federation</label>
-        <select name="federation" ng-model="formData.federation" class="select-box">
+        <select name="federation" ng-model="formData.federation" class="select-box" title="" ng-change="federationChange(formData.federation)">
             <option>YES</option>
             <option>NO</option>
         </select>
@@ -149,13 +47,13 @@
 
     <div class="form-group">
         <label>Password Management Workshop</label>
-        <select name="passwordManagementWorkshop" ng-model="formData.passwordManagementWorkshop" class="select-box">
+        <select name="passwordManagementWorkshop" ng-model="formData.passwordManagementWorkshop" class="select-box" title="" ng-disabled="formData.passwordManagement == 'NO'">
             <option>YES</option>
             <option>NO</option>
         </select>
         <label>Provisioning Workshop</label>
         <br>
-        <select name="provWorkshop" ng-model="formData.provWorkshop" class="select-box">
+        <select name="provWorkshop" ng-model="formData.provWorkshop" class="select-box" title="" ng-disabled="formData.provisioning == 'NO'">
             <option>YES</option>
             <option>NO</option>
         </select>
@@ -164,14 +62,14 @@
     <div class="form-group">
         <label>HPAM Workshop</label>
         <br>
-        <select name="hpamWorkshop" ng-model="formData.hpamWorkshop" class="select-box">
+        <select name="hpamWorkshop" ng-model="formData.hpamWorkshop" class="select-box" title="" ng-disabled="formData.hpam == 'NO'">
             <option>YES</option>
             <option>NO</option>
         </select>
         <label>Federation Workshop</label>
-        <select name="federationWorkshop" ng-model="formData.federationWorkshop" class="select-box">
+        <select name="federationWorkshop" ng-model="formData.federationWorkshop" class="select-box" title="" ng-disabled="formData.federation == 'NO'">
             <option>YES</option>
-            <option>No</option>
+            <option>NO</option>
         </select>
     </div>
 </form>
