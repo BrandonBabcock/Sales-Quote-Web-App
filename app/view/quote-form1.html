@@ -1,39 +1,32 @@
 <!-- quote-form1.html -->
 
-<style>
-     .form-group {
-       -webkit-column-count: 2;
-     }
-</style>
-
 <label class="large-label">Discovery</label>
 <br /> <br />
 
 <form name="quoteForm1">
     <div class="form-group">
        <label>Name</label>
-        <input type="text" class="form-control" name="name" ng-model="formData.name">
+        <input type="text" class="form-control" name="name" ng-model="formData.name" placeholder="Client Name" title="Enter Client Name">
         <label>Desired Start Date</label>
-        <input type="text" class="form-control" name="startDate" ng-model="formData.startDate">
+        <input type="text" class="form-control" name="startDate" ng-model="formData.startDate" placeholder="Desired Start Date: MM/DD/YYY" title="Enter Start Date">
      </div>
     <div class="form-group">
         <label>Quote Completion Date</label>
-        <input type="text" class="form-control" name="completionDate" ng-model="formData.completionDate">
+        <input type="text" class="form-control" name="completionDate" ng-model="formData.completionDate" title="Today's Date" ng-disabled="true">
         <label>Model</label><br>
-        <select name="model" ng-model="formData.model" class="select-box">
+        <select name="model" ng-model="formData.model" class="select-box" title="Enter IaaS / On-Premise" ng-change="changeNumOfEnvironAndHA()">
             <option>IaaS</option>
             <option>On-Premise</option>
         </select>
     </div>
     <label>Additional Development Environment</label>
     <br>
-    <select name="additionalEnvironment" ng-model="formData.additionalEnvironment" class="select-box">
+    <select name="additionalEnvironment" ng-model="formData.additionalEnvironment" class="select-box" title="Enter Yes / No" ng-change="changeNumOfEnvironAndHA()">
         <option>YES</option>
         <option>NO</option>
     </select>
 </form>
 
-<br />
 <br />
 
 <a ui-sref="quote.form2" class="btn btn-block btn-primary">

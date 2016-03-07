@@ -21,6 +21,7 @@ echo '
 
         <!-- Load in main application -->
         <script src="app.js"></script>
+
     </head>
 
     <body ng-app="quoteApp">
