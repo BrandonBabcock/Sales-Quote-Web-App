@@ -21,11 +21,10 @@ echo '
 
         <!-- Load in main application -->
         <script src="app.js"></script>
-
     </head>
 
     <body ng-app="quoteApp">
-        <div class="container" ng-cloak="">
+        <div ng-cloak="">
             <!-- Views will be injected here -->
             <div ui-view></div>
         </div>

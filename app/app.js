@@ -47,7 +47,15 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             .state("quote.form4",{
                 url:"/form4",
                 templateUrl:"view/quote-form4.html"
-    });
+            })
+
+            // Final Quote
+            .state("final-quote",{
+                url:"/final-quote",
+                templateUrl:"view/final-quote.html"
+        });
+
+
 
         // Catch all route; sends users to the initial state
         $urlRouterProvider.otherwise("login");
@@ -82,6 +90,9 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             completionDate: $scope.getCurrentDate(),
             model: "IaaS",
             additionalEnvironment: "NO",
+            discountHourly: "Price from Database here",
+            salesDiscount: "",
+            servicesHourlyRate: "",
 
             // Step 2
             environments: 0,
@@ -122,6 +133,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             onGoingAttManProccess: 0,
             postImpServices: "YES",
             userAccountLoad: "Custom",
+            percentage: "10.00%",
 
             // Step 4
             training: "NO",
@@ -132,8 +144,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             helpDeskTraining: "NO",
             selectServiceTraining: "NO",
             hpamTraining: "NO",
-            federationConfigTraining: "NO",
-            percentage: "10.00%"
+            federationConfigTraining: "NO"
         };
 
         // Sets proper field values when Password Management is changed

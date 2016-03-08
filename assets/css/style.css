@@ -38,8 +38,29 @@
     font-size: 20px;
 }
 
-.form-group{
+/* 2 column form group */
+.form-group {
     -webkit-column-count: 2;
+}
+
+/* 1 column form group */
+.form-group-single {
+    -webkit-column-count: 1;
+}
+
+.final-div {
+    min-width: 1000px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+/* Table design */
+.table {
+    width: 100%;
+}
+
+td {
+    background-color: #3d3d3d;
 }
 
 /* form styling */
