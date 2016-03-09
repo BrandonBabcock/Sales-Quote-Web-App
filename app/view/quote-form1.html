@@ -6,13 +6,13 @@
 <form name="quoteForm1">
     <div class="form-group">
        <label>Name</label>
-        <input type="text" class="form-control" name="name" ng-model="formData.name" placeholder="Client Name" title="Enter Client Name">
+        <input type="text" class="form-control" name="name" ng-model="formData.name" id="clientName" placeholder="Client Name" title="Enter Client Name">
         <label>Desired Start Date</label>
-        <input type="text" class="form-control" name="startDate" ng-model="formData.startDate" placeholder="Desired Start Date: MM/DD/YYY" title="Enter Start Date">
+        <input type="text" class="form-control" name="startDate" ng-model="formData.startDate" id="desiredStartDate" placeholder="Desired Start Date: MM/DD/YYY" title="Enter Start Date">
      </div>
     <div class="form-group">
         <label>Quote Completion Date</label>
-        <input type="text" class="form-control" name="completionDate" ng-model="formData.completionDate" title="Today's Date" ng-disabled="true">
+        <input type="text" class="form-control" name="completionDate" ng-model="formData.completionDate" id="todayDate" title="Today's Date" ng-disabled="true">
         <label>Model</label><br>
         <select name="model" ng-model="formData.model" class="select-box" title="Enter IaaS / On-Premise" ng-change="changeNumOfEnvironAndHA()">
             <option>IaaS</option>
@@ -21,18 +21,18 @@
     </div>
     <div class="form-group">
         <label>Additional Development Environment</label>
-        <select name="additionalEnvironment" ng-model="formData.additionalEnvironment" class="select-box" title="Enter Yes / No" ng-change="changeNumOfEnvironAndHA()">
+        <select name="additionalEnvironment" ng-model="formData.additionalEnvironment" class="select-box" id="additionalEnvironment" title="Enter Yes / No" ng-change="changeNumOfEnvironAndHA()">
             <option>YES</option>
             <option>NO</option>
         </select>
         <label>Discounted Hourly Rate</label>
-        <input type="text" class="form-control" name="discountHourly" ng-model="formData.discountHourly" title="Auto calculated" ng-disabled="true">
+        <input type="text" class="form-control" name="discountHourly" ng-model="formData.discountHourly" id="discountedHourly" title="Auto calculated" ng-disabled="true">
     </div>
     <div class="form-group">
         <label>Sales Discount</label>
-        <input type="text" class="form-control" name="salesDiscount" ng-model="formData.salesDiscount" placeholder="Sales Discount" title="Enter Sales Discount">
+        <input type="text" class="form-control" name="salesDiscount" ng-model="formData.salesDiscount" id="salesDiscount" placeholder="Sales Discount" title="Enter Sales Discount">
         <label>Services Hourly Rate</label>
-        <input type="text" class="form-control" name="servicesHourlyRate" ng-model="formData.servicesHourlyRate" placeholder="Services Hourly Rate" title="Enter Hourly Services Rate">
+        <input type="text" class="form-control" name="servicesHourlyRate" ng-model="formData.servicesHourlyRate" id="servicesHourlyRate" placeholder="Services Hourly Rate" title="Enter Hourly Services Rate">
     </div>
 </form>
 

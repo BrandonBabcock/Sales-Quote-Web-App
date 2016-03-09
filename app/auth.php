@@ -1,28 +1,28 @@
 <?php
+require('db.php');
 session_start();
 ob_start();
 $data = array();
 parse_str(file_get_contents('php://input'), $data);
 $_POST = array_merge($data, $_POST); // merge parsed login data with _POST session values
-$host     = "localhost"; // Host name
-$username = "admin_salesform"; // Mysql username
-$password = "mqJoPHm9LEz"; // Mysql password
-$db_name  = "admin_salesform"; // Database name
-$tbl_name = "users"; // Table name
-
-// Connect to server and select database.
-$mysqli = new mysqli( $host, $username, $password, $db_name );
-
+$tbl_name = 'users';
 // Define $myusername and $mypassword
 $myusername = $_POST['inputUsername'];
 $mypassword = $_POST['inputPassword'];
 
 $myusername = stripslashes( $myusername ); // Stripslashes function prevents SQL injections
 $mypassword = stripslashes( $mypassword );
+
 $myusername = mysqli_real_escape_string( $mysqli, $myusername );
 $mypassword = mysqli_real_escape_string( $mysqli, $mypassword );
 $result     = $mysqli->query( "SELECT * FROM $tbl_name WHERE username='$myusername' and pass='$mypassword'" );
+
+if ($mysqli->connect_errno) { // exit on connection failure
+	printf("Connect failed: %s\n", $mysqli->connect_error);
+	exit();
+}
 $row        = mysqli_fetch_assoc( $result );
+
 // Mysql_num_row is counting table row
 $count = mysqli_num_rows( $result );
 // If result matched $myusername and $mypassword, table row must be 1 row

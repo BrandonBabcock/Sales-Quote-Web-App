@@ -1,6 +1,11 @@
-<div ng-app="quoteApp" ng-controller="quoteController" class="final-div">
-
-    <h4>Client Name: Client Name Auto Inputs Here {{formData.name}}</h4>
+<?php
+session_start();
+$data = array();
+parse_str(file_get_contents('php://input'), $data);
+$_POST = array_merge($data, $_POST); // merge parsed form data with _POST session values
+var_dump($GLOBALS);
+echo
+'<div><h4>Client Name: Client Name Auto Inputs Here {{formData.name}}</h4>
     <h4>{{formData.completionDate}}</h4>
     <table class="table table-bordered table-hover">
 
@@ -570,6 +575,5 @@
 
     </table>
 
-</div>
-
-
+</div>';
+?>

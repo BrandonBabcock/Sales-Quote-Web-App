@@ -62,7 +62,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
     })
 
     // Form controller
-    .controller("quoteController", function($scope) {
+    .controller("quoteController", function($scope, $http, $window) {
         // Returns the current date in the MM/DD/YYYY format (used for Quote Completion Date)
         $scope.getCurrentDate = function() {
             var currentDate = new Date();
@@ -277,7 +277,17 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
 
         // Function to process the form (used for testing)
         $scope.processForm = function() {
-            alert("Your sales quote has been generated.");
+            alert("invoked");
+            $http({
+                method: 'POST',
+                url: 'process.php',
+                data: $scope.formData
+              //  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(
+                function(result){
+                    console.log(result);
+                    $window.location.href = "quote.php"},
+                function(error){console.log(error)});
+      //      $http.post('quote.php', "HELLO!");
         };
     });
-
