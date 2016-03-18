@@ -97,7 +97,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             // Step 2
             environments: 0,
             haServers: 0,
-            gateways: 2,
+            globalIdentityGateways: 2,
             passwordFilters: 0,
             passwordManagement: "NO",
             provisioning: "NO",
@@ -133,7 +133,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             onGoingAttManProccess: 0,
             postImpServices: "YES",
             userAccountLoad: "Custom",
-            percentage: "10.00%",
+            unknownPercentage: "10.00%",
 
             // Step 4
             training: "NO",

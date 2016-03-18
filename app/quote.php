@@ -4,14 +4,21 @@ session_start();
 $data = array();
 parse_str(file_get_contents('php://input'), $data);
 $_POST = array_merge($data, $_POST); // merge parsed form data with _POST session values
+if (is_string($_SESSION['form'])) { // don't run if form data has already been parsed
+    $_SESSION['form'] = json_decode($_SESSION['form'], true); // decodes JSON data sent by angularJS frontend and converts to PHP associative array
+}
 var_dump($GLOBALS);
-// {"name":"Test","startDate":"05/20/2016","completionDate":"03/16/2016","model":"IaaS","additionalEnvironment":"NO","discountHourly":"Price from Database here","salesDiscount":"","servicesHourlyRate":"","environments":0,"haServers":"1","gateways":2,"passwordFilters":"2","passwordManagement":"NO","provisioning":"NO","hpam":"NO","federation":"YES","passwordManagementWorkshop":"NO","provWorkshop":"NO","hpamWorkshop":"NO","federationWorkshop":"YES","initiationPoints":"2","passTargets":0,"adminTargets":0,"workflowTargets":0,"automatedTargets":0,"automatedWorkflows":0,"hpamAccountTypes":0,"uniqueDefinitions":0,"approvalConfiguration":0,"selectableResource":0,"resourceGroupConfigs":0,"policies":0,"organizations":1,"idpOrIaas":"IaaS","numOfIdp":0,"shibboleth":1,"discoveryServ":1,"fedTargets":1,"verifiedSfl":1,"nonVerifiedSfl":1,"attManProccess":1,"onGoingAttManProccess":0,"postImpServices":"YES","userAccountLoad":"Simple","percentage":"10.00%","training":"NO","basicTraining":"NO","advancedTraining":"NO","kioskTraining":"NO","pinTraining":"NO","helpDeskTraining":"NO","selectServiceTraining":"NO","hpamTraining":"NO","federationConfigTraining":"NO"}"
- $sql = "INSERT INTO Quotes (name, completionDate, model, additionalEnvironment, discountHourly, salesDiscount, servicesHourlyRate, environments, haServers, gateways, passwordFilters, passwordManagement, provisioning, hpam, federation, passwordManagementWorkshop, provWorkshop, hpamWorkshop, federationWorkshop, initiationPoints, passTargets, adminTargets, workflowTargets, automatedTargets, automatedWorkflows, hpamAccountTypes, uniqueDefinitions, approvalConfiguration, selectableResource, resourceGroupConfigs, policies, organizations, idpOrIaas, numOfIdp, shibboleth, discoveryServ, fedTargets, verifiedSfl, nonVerifiedSfl, attManProccess, onGoingAttManProccess, postImpServices, userAccountLoad, percentage, training, basicTraining, advancedTraining, kioskTraining, pinTraining, helpDeskTraining, selectServiceTraining, hpamTraining, federationConfigTraining )
- VALUES ({$_SESSION['form']['name']}, {$_SESSION['form']['completionDate']}, {$_SESSION['form']['model']}, {$_SESSION['form']['additionalEnvironment']}, {$_SESSION['form']['discountHourly']}, {$_SESSION['form']['salesDiscount']}, {$_SESSION['form']['servicesHourlyRate']}, {$_SESSION['form']['environments']}, {$_SESSION['form']['haServers']}, {$_SESSION['form']['gateways']}, {$_SESSION['form']['passwordFilters']}, {$_SESSION['form']['passwordManagement']}, {$_SESSION['form']['provWorkshop']}, {$_SESSION['form']['hpamWorkshop']}, {$_SESSION['form']['federationWorkshop']}, {$_SESSION['form']['initiationPoints']}, {$_SESSION['form']['passTargets']}, {$_SESSION['form']['adminTargets']}, {$_SESSION['form']['workflowTargets']}, {$_SESSION['form']['automatedTargets']}, {$_SESSION['form']['automatedWorkflows']}, {$_SESSION['form']['hpamAccountTypes']}, {$_SESSION['form']['uniqueDefinitions']}, {$_SESSION['form']['approvalConfiguration']}, {$_SESSION['form']['selectableResource']}, {$_SESSION['form']['resourceGroupConfigs']}, {$_SESSION['form']['policies']}, {$_SESSION['form']['organizations']}, {$_SESSION['form']['idpOrIaas']}, {$_SESSION['form']['numOfIdp']}, {$_SESSION['form']['shibboleth']}, {$_SESSION['form']['discoveryServ']}, {$_SESSION['form']['fedTargets']}, {$_SESSION['form']['verifiedSfl']}, {$_SESSION['form']['nonVerifiedSfl']}, {$_SESSION['form']['attManProccess']}, {$_SESSION['form']['onGoingAttManProccess']}, {$_SESSION['form']['postImpServices']}, {$_SESSION['form']['userAccountLoad']}, {$_SESSION['form']['percentage']}, {$_SESSION['form']['training']}, {$_SESSION['form']['basicTraining']}, {$_SESSION['form']['advancedTraining']}, {$_SESSION['form']['kioskTraining']}, {$_SESSION['form']['pinTraining']}, {$_SESSION['form']['helpDeskTraining']}, {$_SESSION['form']['selectServiceTraining']}, {$_SESSION['form']['hpamTraining']}, {$_SESSION['form']['federationConfigTraining']} )";
-
-echo
-'<div><h4>Client Name: Client Name Auto Inputs Here {{formData.name}}</h4>
-    <h4>{{formData.completionDate}}</h4>
+$sql = "INSERT INTO Quotes (name, completionDate, model, additionalEnvironment, discountHourly, salesDiscount, servicesHourlyRate, environments, haServers, globalIdentityGateways, passwordFilters, passwordManagement, provisioning, hpam, federation, passwordManagementWorkshop, provWorkshop, hpamWorkshop, federationWorkshop, initiationPoints, passTargets, adminTargets, workflowTargets, automatedTargets, automatedWorkflows, hpamAccountTypes, uniqueDefinitions, approvalConfiguration, selectableResource, resourceGroupConfigs, policies, organizations, idpOrIaas, numOfIdp, shibboleth, discoveryServ, fedTargets, verifiedSfl, nonVerifiedSfl, attManProccess, onGoingAttManProccess, postImpServices, userAccountLoad, unknownPercentage, training, basicTraining, advancedTraining, kioskTraining, pinTraining, helpDeskTraining, selectServiceTraining, hpamTraining, federationConfigTraining )
+ VALUES ({$_SESSION['form']['name']}, {$_SESSION['form']['completionDate']}, {$_SESSION['form']['model']}, {$_SESSION['form']['additionalEnvironment']}, {$_SESSION['form']['discountHourly']}, {$_SESSION['form']['salesDiscount']}, {$_SESSION['form']['servicesHourlyRate']}, {$_SESSION['form']['environments']}, {$_SESSION['form']['haServers']}, {$_SESSION['form']['globalIdentityGateways']}, {$_SESSION['form']['passwordFilters']}, {$_SESSION['form']['passwordManagement']}, {$_SESSION['form']['provWorkshop']}, {$_SESSION['form']['hpamWorkshop']}, {$_SESSION['form']['federationWorkshop']}, {$_SESSION['form']['initiationPoints']}, {$_SESSION['form']['passTargets']}, {$_SESSION['form']['adminTargets']}, {$_SESSION['form']['workflowTargets']}, {$_SESSION['form']['automatedTargets']}, {$_SESSION['form']['automatedWorkflows']}, {$_SESSION['form']['hpamAccountTypes']}, {$_SESSION['form']['uniqueDefinitions']}, {$_SESSION['form']['approvalConfiguration']}, {$_SESSION['form']['selectableResource']}, {$_SESSION['form']['resourceGroupConfigs']}, {$_SESSION['form']['policies']}, {$_SESSION['form']['organizations']}, {$_SESSION['form']['idpOrIaas']}, {$_SESSION['form']['numOfIdp']}, {$_SESSION['form']['shibboleth']}, {$_SESSION['form']['discoveryServ']}, {$_SESSION['form']['fedTargets']}, {$_SESSION['form']['verifiedSfl']}, {$_SESSION['form']['nonVerifiedSfl']}, {$_SESSION['form']['attManProccess']}, {$_SESSION['form']['onGoingAttManProccess']}, {$_SESSION['form']['postImpServices']}, {$_SESSION['form']['userAccountLoad']}, {$_SESSION['form']['unknownPercentage']}, {$_SESSION['form']['training']}, {$_SESSION['form']['basicTraining']}, {$_SESSION['form']['advancedTraining']}, {$_SESSION['form']['kioskTraining']}, {$_SESSION['form']['pinTraining']}, {$_SESSION['form']['helpDeskTraining']}, {$_SESSION['form']['selectServiceTraining']}, {$_SESSION['form']['hpamTraining']}, {$_SESSION['form']['federationConfigTraining']} )";
+$unknownRequirements = $_SESSION['form']['unknownPercentage']/100; // Metrics.B64
+$platformInstallHours = (($_SESSION['form']['environments'] * 2) * $_SESSION['form']['unknownPercentage']) + ($_SESSION['form']['environments'] * 2); // =((+$Metrics.B15*2)*$Metrics.B64)+(+$Metrics.B15*2)
+$haServerHours = ($_SESSION['form']['haServers'] * $unknownRequirements) + $_SESSION['form']['environments']; // =((+$Metrics.B16*1)*$Metrics.B64)+(+$Metrics.B16*1)
+$gigInstallHours = ((($_SESSION['form']['globalIdentityGateways'] * .5)* $unknownRequirements) + ($_SESSION['form']['globalIdentityGateways'] * .5));
+$msPasswordFilter = (($_SESSION['form']['passwordFilters'] * .25) * $unknownRequirements) + ($_SESSION['form']['passwordFilters'] * .25); // =((+$Metrics.B18*15)/60*+$Metrics.B64)+((+$Metrics.B18*15)/60)
+$organizationConfigurationHours = $_SESSION['form']['organizations'] * $unknownRequirements + $_SESSION['form']['organizations']; // =(+$Metrics.B42*+$Metrics.B64)+(+$Metrics.B42)
+$connectedSystemDefinitions = ($_SESSION['form']['uniqueDefinitions'] * .25 * $unknownRequirements) + ($_SESSION['form']['uniqueDefinitions'] * .25);
+echo '<div><h4>Client Name: ' . $_SESSION['form']['name'] . '</h4>
+    <h4>' . $_SESSION['form']['completionDate'] . '</h4>
     <table class="table table-bordered table-hover">
 
         <!----------ENVIRONMENT TASKS---------->
@@ -25,21 +32,21 @@ echo
         <tr>
             <td>Platform Install</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . ($platformInstallHours + $haServerHours + $haServerHours + $msPasswordFilter) . '</td>
             <td>All required infrastructure components, i.e.: GIGs, Test & Production Platforms</td>
         </tr>
 
         <tr>
             <td>Organization Configuration</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $organizationConfigurationHours . '</td>
             <td>Configure Organization specific settings, logo, page titles, etc..</td>
         </tr>
 
         <tr>
             <td>Configure Connected Systems</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>'. $connectedSystemDefinitions . '</td>
             <td>15 minutes per system</td>
         </tr>
 
@@ -560,22 +567,22 @@ echo
 
         <tr>
             <td>Password Management</td>
-            <td>{{formData.passwordManagement}}</td>
+            <td>' . $_SESSION['form']['passwordManagement'] . '</td>
         </tr>
 
         <tr>
             <td>Provisioning</td>
-            <td>{{formData.provisioning}}</td>
+            <td>' . $_SESSION['form']['provisioning'] . '</td>
         </tr>
 
         <tr>
             <td>HPAM</td>
-            <td>{{formData.hpam}}</td>
+            <td>' . $_SESSION['form']['hpam'] . '</td>
         </tr>
 
         <tr>
             <td>Federation</td>
-            <td>{{formData.federation}}</td>
+            <td>' . $_SESSION['form']['federation'] . '</td>
         </tr>
 
     </table>
