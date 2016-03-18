@@ -13,14 +13,14 @@
 
     <div class="form-group">
         <label>Number of Admin Provisioning Targets</label>
-        <input type="text" class="form-control" name="adminTargets" ng-model="formData.adminTargets" title="Enter the number of Admin Provisioning Targets" ng-disabled="formData.provisioning == 'NO'">
+        <input type="text" class="form-control" name="numberOfAdminProvisioningTargets" ng-model="formData.numberOfAdminProvisioningTargets" title="Enter the number of Admin Provisioning Targets" ng-disabled="formData.provisioning == 'NO'">
         <label>Number of Admin Prov. Workflows/Target</label>
         <input type="text" class="form-control" name="workflowTargets" ng-model="formData.workflowTargets" title="Enter the number of required Admin Provisioning workflows needed per target" ng-disabled="formData.provisioning == 'NO'">
     </div>
 
     <div class="form-group">
         <label>Number of Automated Provisioning Targets</label>
-        <input type="text" class="form-control" name="automatedTargets" ng-model="formData.automatedTargets" title="Enter the number of Auto Provisioning Targets" ng-disabled="formData.provisioning == 'NO'">
+        <input type="text" class="form-control" name="numberOfAutomatedProvisioningTargets" ng-model="formData.numberOfAutomatedProvisioningTargets" title="Enter the number of Auto Provisioning Targets" ng-disabled="formData.provisioning == 'NO'">
         <label>Number of Automated Prov. Workflows/Target</label>
         <input type="text" class="form-control" name="automatedWorkflows" ng-model="formData.automatedWorkflows" title="Enter the number of required Auto Provisioning workflows needed per target. Add, Modify, Delete, Termination, Cleanup, etc..." ng-disabled="formData.provisioning == 'NO'">
     </div>
@@ -43,7 +43,7 @@
         <label>Number of Resource Group Configurations</label>
         <input type="text" class="form-control" name="resourceGroupConfigs" ng-model="formData.resourceGroupConfigs" title="Number of different configurations necessary to meet known requirements" ng-disabled="formData.provisioning == 'NO'">
         <label>Number of Policies</label>
-        <input type="text" class="form-control" name="policies" ng-model="formData.policies" title="" ng-disabled="formData.provisioning == 'NO'">
+        <input type="text" class="form-control" name="provisioningNumberOfPolicies" ng-model="formData.provisioningNumberOfPolicies" title="" ng-disabled="formData.provisioning == 'NO'">
     </div>
 
     <div class="form-group">

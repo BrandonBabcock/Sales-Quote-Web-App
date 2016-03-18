@@ -111,16 +111,16 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             // Step 3
             initiationPoints: 1,
             passTargets: 0,
-            adminTargets: 0,
+            numberOfAdminProvisioningTargets: 0,
             workflowTargets: 0,
-            automatedTargets: 0,
+            numberOfAutomatedProvisioningTargets: 0,
             automatedWorkflows: 0,
             hpamAccountTypes: 0,
             uniqueDefinitions: 0,
             approvalConfiguration: 0,
             selectableResource: 0,
             resourceGroupConfigs: 0,
-            policies: 0,
+            provisioningNumberOfprovisioningNumberOfPolicies: 0,
             organizations: 1,
             idpOrIaas: "None",
             numOfIdp: 0,
@@ -175,14 +175,14 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
         $scope.provisioningChange = function(option) {
             if (option == "YES") {
                 $scope.formData.provWorkshop = "YES";
-                $scope.formData.adminTargets = 1;
+                $scope.formData.numberOfAdminProvisioningTargets = 1;
                 $scope.formData.workflowTargets = 1;
-                $scope.formData.automatedTargets = 1;
+                $scope.formData.numberOfAutomatedProvisioningTargets = 1;
                 $scope.formData.automatedWorkflows = 3;
                 $scope.formData.approvalConfiguration = 1;
                 $scope.formData.selectableResource = 5;
                 $scope.formData.resourceGroupConfigs = 1;
-                $scope.formData.policies = 5;
+                $scope.formData.provisioningNumberOfPolicies = 5;
 
                 // Total Number of Unique Connected System Definitions has dependent data on both Password Management
                 // and Provisioning, so the if statement is needed
@@ -193,14 +193,14 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
                 }
             } else {
                 $scope.formData.provWorkshop = "NO";
-                $scope.formData.adminTargets = 0;
+                $scope.formData.numberOfAdminProvisioningTargets = 0;
                 $scope.formData.workflowTargets = 0;
-                $scope.formData.automatedTargets = 0;
+                $scope.formData.numberOfAutomatedProvisioningTargets = 0;
                 $scope.formData.automatedWorkflows = 0;
                 $scope.formData.approvalConfiguration = 0;
                 $scope.formData.selectableResource = 0;
                 $scope.formData.resourceGroupConfigs = 0;
-                $scope.formData.policies = 0;
+                $scope.formData.provisioningNumberOfPolicies = 0;
 
                 if ($scope.formData.passwordManagement == "YES") {
                     $scope.formData.uniqueDefinitions = 1;
