@@ -112,15 +112,15 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             initiationPoints: 1,
             passTargets: 0,
             numberOfAdminProvisioningTargets: 0,
-            workflowTargets: 0,
+            numberOfAdministrativeProvisionWorkflowsPerTarget: 0,
             numberOfAutomatedProvisioningTargets: 0,
-            automatedWorkflows: 0,
+            numberOfAutomatedProvisiongWorkflowsPerTarget: 0,
             hpamAccountTypes: 0,
             uniqueDefinitions: 0,
             approvalConfiguration: 0,
             selectableResource: 0,
             resourceGroupConfigs: 0,
-            provisioningNumberOfprovisioningNumberOfPolicies: 0,
+            provisioningNumberOfPolicies: 0,
             organizations: 1,
             idpOrIaas: "None",
             numOfIdp: 0,
@@ -176,9 +176,9 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             if (option == "YES") {
                 $scope.formData.provWorkshop = "YES";
                 $scope.formData.numberOfAdminProvisioningTargets = 1;
-                $scope.formData.workflowTargets = 1;
+                $scope.formData.numberOfAdministrativeProvisionWorkflowsPerTarget = 1;
                 $scope.formData.numberOfAutomatedProvisioningTargets = 1;
-                $scope.formData.automatedWorkflows = 3;
+                $scope.formData.numberOfAutomatedProvisiongWorkflowsPerTarget  = 3;
                 $scope.formData.approvalConfiguration = 1;
                 $scope.formData.selectableResource = 5;
                 $scope.formData.resourceGroupConfigs = 1;
@@ -194,9 +194,9 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             } else {
                 $scope.formData.provWorkshop = "NO";
                 $scope.formData.numberOfAdminProvisioningTargets = 0;
-                $scope.formData.workflowTargets = 0;
+                $scope.formData.numberOfAdministrativeProvisionWorkflowsPerTarget = 0;
                 $scope.formData.numberOfAutomatedProvisioningTargets = 0;
-                $scope.formData.automatedWorkflows = 0;
+                $scope.formData.numberOfAutomatedProvisiongWorkflowsPerTarget  = 0;
                 $scope.formData.approvalConfiguration = 0;
                 $scope.formData.selectableResource = 0;
                 $scope.formData.resourceGroupConfigs = 0;

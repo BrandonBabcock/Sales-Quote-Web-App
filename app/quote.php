@@ -8,8 +8,8 @@ if (is_string($_SESSION['form'])) { // don't run if form data has already been p
     $_SESSION['form'] = json_decode($_SESSION['form'], true); // decodes JSON data sent by angularJS frontend and converts to PHP associative array
 }
 var_dump($GLOBALS);
-$sql = "INSERT INTO Quotes (name, completionDate, model, additionalEnvironment, discountHourly, salesDiscount, servicesHourlyRate, numberOfEnvironments, haServers, globalIdentityGateways, passwordFilters, passwordManagement, numberOfAdminProvisioningTargets, hpam, federation, passwordManagementWorkshop, provWorkshop, hpamWorkshop, federationWorkshop, initiationPoints, passTargets, numberOfAdminProvisioningTargets, workflowTargets, numberOfAutomatedProvisioningTargets, automatedWorkflows, hpamAccountTypes, uniqueDefinitions, approvalConfiguration, selectableResource, resourceGroupConfigs, provisioningNumberOfPolicies, organizations, idpOrIaas, numOfIdp, shibboleth, discoveryServ, fedTargets, verifiedSfl, nonVerifiedSfl, attManProccess, onGoingAttManProccess, postImpServices, userAccountLoad, unknownPercentage, training, basicTraining, advancedTraining, kioskTraining, pinTraining, helpDeskTraining, selectServiceTraining, hpamTraining, federationConfigTraining )
- VALUES ({$_SESSION['form']['name']}, {$_SESSION['form']['completionDate']}, {$_SESSION['form']['model']}, {$_SESSION['form']['additionalEnvironment']}, {$_SESSION['form']['discountHourly']}, {$_SESSION['form']['salesDiscount']}, {$_SESSION['form']['servicesHourlyRate']}, {$_SESSION['form']['numberOfEnvironments']}, {$_SESSION['form']['haServers']}, {$_SESSION['form']['globalIdentityGateways']}, {$_SESSION['form']['passwordFilters']}, {$_SESSION['form']['passwordManagement']}, {$_SESSION['form']['provWorkshop']}, {$_SESSION['form']['hpamWorkshop']}, {$_SESSION['form']['federationWorkshop']}, {$_SESSION['form']['initiationPoints']}, {$_SESSION['form']['passTargets']}, {$_SESSION['form']['numberOfAdminProvisioningTargets']}, {$_SESSION['form']['workflowTargets']}, {$_SESSION['form']['numberOfAutomatedProvisioningTargets']}, {$_SESSION['form']['automatedWorkflows']}, {$_SESSION['form']['hpamAccountTypes']}, {$_SESSION['form']['uniqueDefinitions']}, {$_SESSION['form']['approvalConfiguration']}, {$_SESSION['form']['selectableResource']}, {$_SESSION['form']['resourceGroupConfigs']}, {$_SESSION['form']['provisioningNumberOfPolicies']}, {$_SESSION['form']['organizations']}, {$_SESSION['form']['idpOrIaas']}, {$_SESSION['form']['numOfIdp']}, {$_SESSION['form']['shibboleth']}, {$_SESSION['form']['discoveryServ']}, {$_SESSION['form']['fedTargets']}, {$_SESSION['form']['verifiedSfl']}, {$_SESSION['form']['nonVerifiedSfl']}, {$_SESSION['form']['attManProccess']}, {$_SESSION['form']['onGoingAttManProccess']}, {$_SESSION['form']['postImpServices']}, {$_SESSION['form']['userAccountLoad']}, {$_SESSION['form']['unknownPercentage']}, {$_SESSION['form']['training']}, {$_SESSION['form']['basicTraining']}, {$_SESSION['form']['advancedTraining']}, {$_SESSION['form']['kioskTraining']}, {$_SESSION['form']['pinTraining']}, {$_SESSION['form']['helpDeskTraining']}, {$_SESSION['form']['selectServiceTraining']}, {$_SESSION['form']['hpamTraining']}, {$_SESSION['form']['federationConfigTraining']} )";
+$sql = "INSERT INTO Quotes (name, completionDate, model, additionalEnvironment, discountHourly, salesDiscount, servicesHourlyRate, numberOfEnvironments, haServers, globalIdentityGateways, passwordFilters, passwordManagement, numberOfAdminProvisioningTargets, hpam, federation, passwordManagementWorkshop, provWorkshop, hpamWorkshop, federationWorkshop, initiationPoints, passTargets, numberOfAdministrativeProvisionWorkflowsPerTarget, numberOfAutomatedProvisioningTargets, numberOfAutomatedProvisiongWorkflowsPerTarget, hpamAccountTypes, uniqueDefinitions, approvalConfiguration, selectableResource, resourceGroupConfigs, provisioningNumberOfPolicies, organizations, idpOrIaas, numOfIdp, shibboleth, discoveryServ, fedTargets, verifiedSfl, nonVerifiedSfl, attManProccess, onGoingAttManProccess, postImpServices, userAccountLoad, unknownPercentage, training, basicTraining, advancedTraining, kioskTraining, pinTraining, helpDeskTraining, selectServiceTraining, hpamTraining, federationConfigTraining )
+ VALUES ({$_SESSION['form']['name']}, {$_SESSION['form']['completionDate']}, {$_SESSION['form']['model']}, {$_SESSION['form']['additionalEnvironment']}, {$_SESSION['form']['discountHourly']}, {$_SESSION['form']['salesDiscount']}, {$_SESSION['form']['servicesHourlyRate']}, {$_SESSION['form']['numberOfEnvironments']}, {$_SESSION['form']['haServers']}, {$_SESSION['form']['globalIdentityGateways']}, {$_SESSION['form']['passwordFilters']}, {$_SESSION['form']['passwordManagement']}, {$_SESSION['form']['provWorkshop']}, {$_SESSION['form']['hpamWorkshop']}, {$_SESSION['form']['federationWorkshop']}, {$_SESSION['form']['initiationPoints']}, {$_SESSION['form']['passTargets']}, {$_SESSION['form']['numberOfAdminProvisioningTargets']}, {$_SESSION['form']['numberOfAdministrativeProvisionWorkflowsPerTarget']}, {$_SESSION['form']['numberOfAutomatedProvisioningTargets']}, {$_SESSION['form']['numberOfAutomatedProvisiongWorkflowsPerTarget']}, {$_SESSION['form']['hpamAccountTypes']}, {$_SESSION['form']['uniqueDefinitions']}, {$_SESSION['form']['approvalConfiguration']}, {$_SESSION['form']['selectableResource']}, {$_SESSION['form']['resourceGroupConfigs']}, {$_SESSION['form']['provisioningNumberOfPolicies']}, {$_SESSION['form']['organizations']}, {$_SESSION['form']['idpOrIaas']}, {$_SESSION['form']['numOfIdp']}, {$_SESSION['form']['shibboleth']}, {$_SESSION['form']['discoveryServ']}, {$_SESSION['form']['fedTargets']}, {$_SESSION['form']['verifiedSfl']}, {$_SESSION['form']['nonVerifiedSfl']}, {$_SESSION['form']['attManProccess']}, {$_SESSION['form']['onGoingAttManProccess']}, {$_SESSION['form']['postImpServices']}, {$_SESSION['form']['userAccountLoad']}, {$_SESSION['form']['unknownPercentage']}, {$_SESSION['form']['training']}, {$_SESSION['form']['basicTraining']}, {$_SESSION['form']['advancedTraining']}, {$_SESSION['form']['kioskTraining']}, {$_SESSION['form']['pinTraining']}, {$_SESSION['form']['helpDeskTraining']}, {$_SESSION['form']['selectServiceTraining']}, {$_SESSION['form']['hpamTraining']}, {$_SESSION['form']['federationConfigTraining']} )";
 $unknownRequirements = $_SESSION['form']['unknownPercentage'] / 100; // Metrics.B64
 $platformInstallHours = (($_SESSION['form']['numberOfEnvironments'] * 2) * $_SESSION['form']['unknownPercentage']) + ($_SESSION['form']['numberOfEnvironments'] * 2); // =((+$Metrics.B15*2)*$Metrics.B64)+(+$Metrics.B15*2)
 $haServerHours = ($_SESSION['form']['haServers'] * $unknownRequirements) + $_SESSION['form']['numberOfEnvironments']; // =((+$Metrics.B16*1)*$Metrics.B64)+(+$Metrics.B16*1)
@@ -35,26 +35,34 @@ $passwordImplmentationServiceHours = $passwordSolutionDocumentationHours + $pass
 $passwordProjectManagementHours = $passwordImplmentationServiceHours * .1;
 $totalPasswordHours = $passwordProjectManagementHours + $passwordImplmentationServiceHours;
 $numberOfAutomatedProvisioningTargets = $_SESSION['form']['numberOfAutomatedProvisioningTargets'];
-$numberOfAdminTargets = $_SESSION['form']['numberOfAdminProvisioningTargets'];
-$provisioningWorkshopAndDesignDocHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminTargets * .5);
-$provisioningDesignDocumentHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminTargets * .5);
+$numberOfAutomatedProvisioningWorkflowsPerTarget = $_SESSION['form']['numberOfAutomatedProvisiongWorkflowsPerTarget'];
+$numberOfAdminProvisioningTargets = $_SESSION['form']['numberOfAdminProvisioningTargets'];
+$numberOfAdministrativeProvisioningWorkflowsPerTarget = $_SESSION['form']['numberOfAdministrativeProvisionWorkflowsPerTarget'];
+$numberOfSourceOfAuthorities = $_SESSION['form']['initiationPoints'];
+$provisioningWorkshopAndDesignDocHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminProvisioningTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminProvisioningTargets* .5);
 if ($_SESSION['form']['postImpServices'] == 'YES') {
-    $provisioningPostImplementationServicesHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminTargets * .5);
+    $provisioningPostImplementationServicesHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminProvisioningTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminProvisioningTargets* .5);
 } else {
     $provisioningPostImplementationServicesHours = 0;
 }
-$provisioningProductionMigrationHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminTargets * .5);
+$provisioningProductionMigrationHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminProvisioningTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminProvisioningTargets* .5);
 if ($_SESSION['form']['selectServiceTraining'] == 'YES') {
     $provisioningUiTrainingHours = $unknownRequirements * 2 + 2;
 } else {
     $provisioningUiTrainingHours = 0;
 }
-$provisioningSolutionDocumentationHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminTargets * .5);
+$provisioningSolutionDocumentationHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminProvisioningTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminProvisioningTargets* .5);
 $provisioningPolicyHours = ($_SESSION['form']['provisioningNumberOfPolicies'] * 10/60 * $unknownRequirements) + ($_SESSION['form']['provisioningNumberOfPolicies'] * 10/60);
 $provisioningResourcesHours = ($_SESSION['form']['selectableResource'] * 10/60 * $unknownRequirements) + ($_SESSION['form']['selectableResource'] * 10/60);
 $provisioningUSSPHours = ($_SESSION['form']['resourceGroupConfigs'] * .25 * $unknownRequirements) + ($_SESSION['form']['resourceGroupConfigs'] * .25);
 $provisioningApprovalsHours = ($_SESSION['form']['approvalConfiguration'] * .25 * $unknownRequirements) + ($_SESSION['form']['approvalConfiguration'] * .25);
-// $provisioningStudioTimeHours = $_SESSION['form']['']
+$provisioningStudioTimeHours = (($numberOfAutomatedProvisioningTargets * 4 * $numberOfAutomatedProvisioningWorkflowsPerTarget + ($numberOfSourceOfAuthorities * 4)) * $unknownRequirements)+ (($numberOfAutomatedProvisioningWorkflowsPerTarget * 4 * $numberOfAutomatedProvisioningTargets + ($numberOfSourceOfAuthorities * 4)));
+$provisioningAdministrativeProvisioningWorkflowHours = ($numberOfAdministrativeProvisioningWorkflowsPerTarget * $numberOfAdminProvisioningTargets * 2 * $unknownRequirements) + ($numberOfAdministrativeProvisioningWorkflowsPerTarget * $numberOfAdminProvisioningTargets * 2);
+$provisioningUserAccountLoadHours = 0;
+$provisioningConfiguration = $provisioningUserAccountLoadHours + $provisioningAdministrativeProvisioningWorkflowHours + $provisioningStudioTimeHours + $provisioningApprovalsHours + $provisioningUSSPHours + $provisioningResourcesHours + $provisioningPolicyHours;
+$provisioningImplementationEffortHours = $provisioningSolutionDocumentationHours + $provisioningUiTrainingHours + $provisioningProductionMigrationHours + $provisioningPostImplementationServicesHours + $provisioningDesignDocumentHours + $provisioningWorkshopAndDesignDocHours;
+$provisioningProjectManagementHours = $provisioningImplementationEffortHours * .1;
+$totalProvisioningHours = $provisioningImplementationEffortHours + $provisioningProjectManagementHours;
 echo '<div><h4>Client Name: ' . $_SESSION['form']['name'] . '</h4>
     <h4>' . $_SESSION['form']['completionDate'] . '</h4>
     <table class="table table-bordered table-hover">
@@ -225,14 +233,14 @@ echo '<div><h4>Client Name: ' . $_SESSION['form']['name'] . '</h4>
         <tr>
             <td>Project Management</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $provisioningProjectManagementHours . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
             <td>Total Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $totalProvisioningHours . '</td>
             <td></td>
         </tr>
 
