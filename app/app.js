@@ -95,7 +95,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             servicesHourlyRate: "",
 
             // Step 2
-            environments: 0,
+            numberOfEnvironments: 0,
             haServers: 0,
             globalIdentityGateways: 2,
             passwordFilters: 0,
@@ -253,15 +253,15 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
         // Changes the Number of Environments and Additional HA Servers based on Model and Additional Development Environment
         $scope.changeNumOfEnvironAndHA = function() {
             if ($scope.formData.model == "IaaS") {
-                $scope.formData.environments = 0;
+                $scope.formData.numberOfEnvironments = 0;
                 $scope.formData.haServers = 0;
                 $scope.formData.numOfIdp = 0;
             } else if ($scope.formData.model == "On-Premise" && $scope.formData.additionalEnvironment == "NO") {
-                $scope.formData.environments = 2;
+                $scope.formData.numberOfEnvironments = 2;
                 $scope.formData.haServers = 1;
                 $scope.formData.numOfIdp = 1;
             } else if ($scope.formData.model == "On-Premise" && $scope.formData.additionalEnvironment == "YES") {
-                $scope.formData.environments = 3;
+                $scope.formData.numberOfEnvironments = 3;
                 $scope.formData.haServers = 1;
                 $scope.formData.numOfIdp = 1;
             }
@@ -277,17 +277,14 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
 
         // Function to process the form (used for testing)
         $scope.processForm = function() {
-            alert("invoked");
             $http({
                 method: 'POST',
                 url: 'process.php',
                 data: $scope.formData
-              //  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(
                 function(result){
                     console.log(result);
                     $window.location.href = "quote.php"},
                 function(error){console.log(error)});
-      //      $http.post('quote.php', "HELLO!");
         };
     });
