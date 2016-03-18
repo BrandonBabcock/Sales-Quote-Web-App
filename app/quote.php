@@ -63,7 +63,9 @@ $provisioningConfiguration = $provisioningUserAccountLoadHours + $provisioningAd
 $provisioningImplementationEffortHours = $provisioningSolutionDocumentationHours + $provisioningUiTrainingHours + $provisioningProductionMigrationHours + $provisioningPostImplementationServicesHours + $provisioningDesignDocumentHours + $provisioningWorkshopAndDesignDocHours;
 $provisioningProjectManagementHours = $provisioningImplementationEffortHours * .1;
 $totalProvisioningHours = $provisioningImplementationEffortHours + $provisioningProjectManagementHours;
-echo '<div><h4>Client Name: ' . $_SESSION['form']['name'] . '</h4>
+echo '<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
+<div><h4>Client Name: ' . $_SESSION['form']['name'] . '</h4>
     <h4>' . $_SESSION['form']['completionDate'] . '</h4>
     <table class="table table-bordered table-hover">
 
