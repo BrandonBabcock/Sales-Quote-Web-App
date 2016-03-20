@@ -63,6 +63,14 @@ td {
     background-color: #3d3d3d;
 }
 
+/* Logout and Home Button Positioning */
+.rightCornerButton {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    padding-left: 10px;
+}
+
 /* form styling */
 #form-container                { background:#2f2f2f; margin-botm:20px;
     border-radius:5px; }
