@@ -58,9 +58,13 @@ $provisioningUSSPHours = ($_SESSION['form']['resourceGroupConfigs'] * .25 * $unk
 $provisioningApprovalsHours = ($_SESSION['form']['approvalConfiguration'] * .25 * $unknownRequirements) + ($_SESSION['form']['approvalConfiguration'] * .25);
 $provisioningStudioTimeHours = (($numberOfAutomatedProvisioningTargets * 4 * $numberOfAutomatedProvisioningWorkflowsPerTarget + ($numberOfSourceOfAuthorities * 4)) * $unknownRequirements)+ (($numberOfAutomatedProvisioningWorkflowsPerTarget * 4 * $numberOfAutomatedProvisioningTargets + ($numberOfSourceOfAuthorities * 4)));
 $provisioningAdministrativeProvisioningWorkflowHours = ($numberOfAdministrativeProvisioningWorkflowsPerTarget * $numberOfAdminProvisioningTargets * 2 * $unknownRequirements) + ($numberOfAdministrativeProvisioningWorkflowsPerTarget * $numberOfAdminProvisioningTargets * 2);
-$provisioningUserAccountLoadHours = 0;
+if ($_SESSION['form']['userAccountLoad'] == 'Custom') {
+    $provisioningUserAccountLoadHours = ( $_SESSION['form']['uniqueDefinitions'] * 4 * $unknownRequirements )  + ( $_SESSION['form']['uniqueDefinitions'] * 4 );
+} else {
+    $provisioningUserAccountLoadHours = 4 * $unknownRequirements + 12;
+}
 $provisioningConfiguration = $provisioningUserAccountLoadHours + $provisioningAdministrativeProvisioningWorkflowHours + $provisioningStudioTimeHours + $provisioningApprovalsHours + $provisioningUSSPHours + $provisioningResourcesHours + $provisioningPolicyHours;
-$provisioningImplementationEffortHours = $provisioningSolutionDocumentationHours + $provisioningUiTrainingHours + $provisioningProductionMigrationHours + $provisioningPostImplementationServicesHours + $provisioningDesignDocumentHours + $provisioningWorkshopAndDesignDocHours;
+$provisioningImplementationEffortHours = $provisioningSolutionDocumentationHours + $provisioningUiTrainingHours + $provisioningProductionMigrationHours + $provisioningPostImplementationServicesHours + $provisioningConfiguration + $provisioningWorkshopAndDesignDocHours;
 $provisioningProjectManagementHours = $provisioningImplementationEffortHours * .1;
 $totalProvisioningHours = $provisioningImplementationEffortHours + $provisioningProjectManagementHours;
 echo '<link rel="stylesheet" href="../assets/css/style.css">
@@ -200,7 +204,7 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
         <tr>
             <td>Configuration</td>
             <td>Cost Here</td>
-            <td>' . $provisioningDesignDocumentHours . '</td>
+            <td>' . $provisioningConfiguration . '</td>
             <td>All necessary product features will be configure to enable the required functionality.  The following provisioning process will be implemented to manage standard accounts and permissions of each provisioning target system: Add, Modify, Disable, Terminate.</td>
         </tr>
 
