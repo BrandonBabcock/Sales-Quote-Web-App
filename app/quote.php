@@ -125,12 +125,56 @@ $federationSolutionDocumentationHours = ($_SESSION['form']['numOfIdp'] + $_SESSI
 $federationImplementationEffortHours = $federationSolutionDocumentationHours + $federationConfigurationOverviewHours + $federationPostImplementationServicesHours + $federationProductionMigration + $federationConfigurationHours + $federationInstallationDSHours + $federationInstallationSPsHours + $federationInstallationidPsHours + $federationStudioTimeHours + $federationDesignDocumentHours + $federationAnalysisWorkshopHours;
 $federationProjectManagementHours = $federationImplementationEffortHours * .1;
 $totalFederationHours = $federationImplementationEffortHours + $federationProjectManagementHours;
+// Administration and Implementation Training
+if ($_SESSION['form']['basicTraining'] == 'YES') {
+	$administrationBasicTrainingHours = 40;
+} else {
+	$administrationBasicTrainingHours = 0;
+}
+if ($_SESSION['form']['advancedTraining'] == 'YES') {
+	$administrationAdvancedTrainingTrainingHours = 40;
+} else {
+	$administrationAdvancedTrainingTrainingHours = 0;
+}
+if ($_SESSION['form']['kioskTraining'] == 'YES') {
+	$administrationKioskTrainingHours = 4;
+} else {
+	$administrationKioskTrainingHours = 0;
+}
+if ($_SESSION['form']['pinTraining'] == 'YES') {
+	$administrationPinTrainingTrainingHours = 4;
+} else {
+	$administrationPinTrainingTrainingHours = 0;
+}
+if ($_SESSION['form']['helpDeskTraining'] == 'YES') {
+	$administrationHelpDeskTrainingTrainingHours = 4;
+} else {
+	$administrationHelpDeskTrainingTrainingHours = 0;
+}
+if ($_SESSION['form']['selectServiceTraining'] == 'YES') {
+	$administrationSelectServiceTrainingTrainingHours = 8;
+} else {
+	$administrationSelectServiceTrainingTrainingHours = 0;
+}
+if ($_SESSION['form']['hpamTraining'] == 'YES') {
+	$administrationHPAMTrainingTrainingHours = 4;
+} else {
+	$administrationHPAMTrainingTrainingHours = 0;
+}
+if ($_SESSION['form']['federationConfigTraining'] == 'YES') {
+	$administrationFederationConfigTrainingTrainingHours = 4;
+} else {
+	$administrationFederationConfigTrainingTrainingHours = 0;
+}
+$administrationImplementationHours = $administrationFederationConfigTrainingTrainingHours + $administrationHPAMTrainingTrainingHours + $administrationSelectServiceTrainingTrainingHours + $administrationHelpDeskTrainingTrainingHours +
+	$administrationPinTrainingTrainingHours + $administrationKioskTrainingHours + $administrationAdvancedTrainingTrainingHours + $administrationBasicTrainingHours;
+$administrationProjectManagementHours = $administrationImplementationHours * .1;
+$totalAdministrationHours = $administrationImplementationHours + $administrationProjectManagementHours;
 echo '<link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
 <div><h4>Client Name: ' . $_SESSION['form']['name'] . '</h4>
     <h4>' . $_SESSION['form']['completionDate'] . '</h4>
     <table class="table table-bordered table-hover">
-)
         <!----------ENVIRONMENT TASKS---------->
         <tr>
             <th>Environment Tasks</th>
@@ -454,14 +498,14 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
         <tr>
             <td>Basic Overview</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $administrationBasicTrainingHours . '</td>
             <td>Overview of the basic components and product functionality.</td>
         </tr>
 
         <tr>
             <td>Advanced Features and Concepts</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $administrationAdvancedTrainingTrainingHours . '</td>
             <td>Overview of the advanced features of the product suite, IE: Account Matching, HPAM, Workflow Design and Best Practices, etc..  Will be modified to meet the specific features that are utilized during the implementation of the above solution.</td>
         </tr>
 
@@ -475,35 +519,35 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
         <tr>
             <td>Kiosk UI Training (Train the Trainer)</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $administrationKioskTrainingHours . '</td>
             <td></td>
         </tr>
 
         <tr>
             <td>Pin Reset UI Training (Train the Trainer)</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $administrationPinTrainingTrainingHours . '</td>
             <td></td>
         </tr>
 
         <tr>
             <td>Help Desk UI Training (Train the Trainer)</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $administrationHelpDeskTrainingTrainingHours . '</td>
             <td></td>
         </tr>
 
         <tr>
             <td>Self Service Access Management UI Training (Train the Trainer)</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $administrationSelectServiceTrainingTrainingHours . '</td>
             <td></td>
         </tr>
 
         <tr>
             <td>HPAM UI Training (Train the Trainer)</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $administrationHPAMTrainingTrainingHours . '</td>
             <td></td>
         </tr>
 
@@ -517,7 +561,7 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
         <tr>
             <td>Federation Configuration Training</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $administrationFederationConfigTrainingTrainingHours . '</td>
             <td></td>
         </tr>
 
@@ -531,14 +575,14 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
         <tr>
             <td>Project Management</td>
             <td>Cost Here</td>
-            <td>Hours Here</td>
+            <td>' . $administrationProjectManagementHours . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
             <td>Total Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $totalAdministrationHours . '</td>
             <td></td>
         </tr>
 
