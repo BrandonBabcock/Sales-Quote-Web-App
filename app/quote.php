@@ -170,6 +170,7 @@ $administrationImplementationHours = $administrationFederationConfigTrainingTrai
 	$administrationPinTrainingTrainingHours + $administrationKioskTrainingHours + $administrationAdvancedTrainingTrainingHours + $administrationBasicTrainingHours;
 $administrationProjectManagementHours = $administrationImplementationHours * .1;
 $totalAdministrationHours = $administrationImplementationHours + $administrationProjectManagementHours;
+$totalAllHours = $totalAdministrationHours + $totalPasswordHours + $totalEnvironmentHours + $totalFederationHours + $totalHPAMHours + $totalProvisioningHours;
 echo '<link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
 <div><h4>Client Name: ' . $_SESSION['form']['name'] . '</h4>
@@ -589,7 +590,7 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
         <tr>
             <th><b>* Total Estimated Effort</b></th>
             <th>Total Cost</th>
-            <th>Total Hours</th>
+            <th>' . $totalAllHours . '</th>
             <th></th>
         </tr>
 
