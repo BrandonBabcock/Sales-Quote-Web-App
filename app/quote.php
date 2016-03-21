@@ -105,13 +105,32 @@ if ($_SESSION['form']['hpamTraining'] == 'YES') {
 $HPAMSolutionDocumentationHours = ($_SESSION['form']['passTargets'] * $unknownRequirements * .5) + ($_SESSION['form']['passTargets']  * .5);
 $HPAMImplementationEffortHours = $HPAMSolutionDocumentationHours + $HPAMUiTrainingHours + $HPAMPostImplementationServicesHours + $HPAMProductionMigrationHours + $HPAMApprovalsHours + $HPAMOrgConfigurationHours + $HPAMDesignDocumentHours + $HPAMAnalysisWorkshopHours;
 $HPAMProjectManagementHours = $HPAMImplementationEffortHours * .1;
-$HPAMTotalEffortHours = $HPAMProjectManagementHours + $HPAMImplementationEffortHours;
+$totalHPAMHours = $HPAMProjectManagementHours + $HPAMImplementationEffortHours;
+// Federation Effort
+$federationAnalysisWorkshopHours = (($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']) * $unknownRequirements) + ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']);
+$federationDesignDocumentHours = (($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']) * $unknownRequirements) + ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']);
+$federationStudioTimeHours = ($_SESSION['form']['attManProccess'] * 8) + ($_SESSION['form']['onGoingAttManProccess'] * 4 * $unknownRequirements) +  ($_SESSION['form']['attManProccess'] * 8) + ($_SESSION['form']['onGoingAttManProccess'] * 4);
+$federationInstallationidPsHours = ($_SESSION['form']['numOfIdp'] * 4 * $unknownRequirements) + ($_SESSION['form']['numOfIdp'] * 4);
+$federationInstallationSPsHours = ($_SESSION['form']['shibboleth'] * 4 * $unknownRequirements) + ($_SESSION['form']['shibboleth'] * 4);
+$federationInstallationDSHours = ($_SESSION['form']['discoveryServ'] * 4 * $unknownRequirements) + ($_SESSION['form']['discoveryServ'] * 4);
+$federationConfigurationHours = ($_SESSION['form']['fedTargets'] * 4) + ($_SESSION['form']['verifiedSfl'] * 4) + ($_SESSION['form']['nonVerifiedSfl'] * 8) + (($_SESSION['form']['fedTargets'] * 4) + ($_SESSION['form']['verifiedSfl'] * 4) + ($_SESSION['form']['nonVerifiedSfl'] * 8) * $unknownRequirements); // formula does not match comment
+$federationProductionMigration = $federationAnalysisWorkshopHours = (($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']) * $unknownRequirements) + ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']);
+$federationPostImplementationServicesHours = ($_SESSION['form']['numOfIdp'] +  ($_SESSION['form']['fedTargets']) + ($_SESSION['form']['numOfIdp'] +  $_SESSION['form']['fedTargets']) * $unknownRequirements);
+if ($_SESSION['form']['federation'] == 'YES') {
+	$federationConfigurationOverviewHours = 2 * $unknownRequirements + 2;
+} else {
+	$federationConfigurationOverviewHours = 0;
+}
+$federationSolutionDocumentationHours = ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['attManProccess']) + (($_SESSION['form']['numOfIdp'] +  $_SESSION['form']['fedTargets'] + $_SESSION['form']['attManProccess']) * $unknownRequirements);
+$federationImplementationEffortHours = $federationSolutionDocumentationHours + $federationConfigurationOverviewHours + $federationPostImplementationServicesHours + $federationProductionMigration + $federationConfigurationHours + $federationInstallationDSHours + $federationInstallationSPsHours + $federationInstallationidPsHours + $federationStudioTimeHours + $federationDesignDocumentHours + $federationAnalysisWorkshopHours;
+$federationProjectManagementHours = $federationImplementationEffortHours * .1;
+$totalFederationHours = $federationImplementationEffortHours + $federationProjectManagementHours;
 echo '<link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
 <div><h4>Client Name: ' . $_SESSION['form']['name'] . '</h4>
     <h4>' . $_SESSION['form']['completionDate'] . '</h4>
     <table class="table table-bordered table-hover">
-
+)
         <!----------ENVIRONMENT TASKS---------->
         <tr>
             <th>Environment Tasks</th>
@@ -349,7 +368,7 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
         <tr>
             <td><b>Total</b></td>
             <td>Total Cost Here</td>
-            <td>' . $HPAMTotalEffortHours . '</td>
+            <td>' . $totalHPAMHours . '</td>
             <td></td>
         </tr>
 
@@ -364,63 +383,63 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
         <tr>
             <td>Workshop & Design Doc</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . ($federationAnalysisWorkshopHours + $federationDesignDocumentHours) . '</td>
             <td>All Federation Requirements will be defined and a design document will be generated.</td>
         </tr>
 
         <tr>
             <td>Federation Installations (IdPs, SPs & DS)</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . ($federationInstallationDSHours + $federationInstallationidPsHours + $federationInstallationSPsHours) . '</td>
             <td>Installation of Federation IdPs, Shibboleth SPs and Discovery Services</td>
         </tr>
 
         <tr>
             <td>Configuration</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . ($federationConfigurationHours + $federationStudioTimeHours) . '</td>
             <td>Configure IdP, SP Metadata and Attribute Management Processes.</td>
         </tr>
 
         <tr>
             <td>Post Implementation Services</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $federationPostImplementationServicesHours . '</td>
             <td>Review system logging facilities for the purposes of troubleshooting, ensure system health and identify potential issues.</td>
         </tr>
 
         <tr>
             <td>Prod. Migration</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $federationProductionMigration . '</td>
             <td>Migrate implemented solution into production</td>
         </tr>
 
         <tr>
             <td>Configuration Overview</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $federationConfigurationOverviewHours . '</td>
             <td>Implementation overview for the purposes of maintaining and administering solution.</td>
         </tr>
 
         <tr>
             <td>Solution Documentation</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $federationSolutionDocumentationHours . '</td>
             <td>Document Solution specific Federation configurations</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
             <td>Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $federationProjectManagementHours . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
             <td>Total Cost Here</td>
-            <td>Total Hours Here</td>
+            <td>' . $totalFederationHours . '</td>
             <td></td>
         </tr>
 
