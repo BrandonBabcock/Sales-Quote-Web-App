@@ -4,7 +4,6 @@
     <list default="true" id="f736ac22-dd5b-452a-8787-df59d9b05ad5" name="Default" comment="-Rounded percentages">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/db.php" afterPath="$PROJECT_DIR$/app/db.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/quote.php" afterPath="$PROJECT_DIR$/app/quote.php" />
     </list>
     <ignored path="Sales-Quote-Web-App.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -588,7 +587,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458763091212</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="-Rounded percentages">
+      <created>1458765809398</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1458765809398</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -667,7 +672,8 @@
     <MESSAGE value="-Added total hours formula.&#10;" />
     <MESSAGE value="-Added phase hours formulae.&#10;-Added pricing calculations" />
     <MESSAGE value="-Added Totals Formulas" />
-    <option name="LAST_COMMIT_MESSAGE" value="-Added Totals Formulas" />
+    <MESSAGE value="-Rounded percentages" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Rounded percentages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
