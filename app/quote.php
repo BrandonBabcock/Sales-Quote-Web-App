@@ -212,42 +212,42 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Platform Install</td>
-            <td>' . '$' . ($environmentTotalPlatformInstallHours * $servicesHourlyRate) . '</td>
-            <td>' . $environmentTotalPlatformInstallHours . '</td>
+            <td>' . '$' . number_format(($environmentTotalPlatformInstallHours * $servicesHourlyRate), 2) . '</td>
+            <td>' .number_format( $environmentTotalPlatformInstallHours, 2) . '</td>
             <td>All required infrastructure components, i.e.: GIGs, Test & Production Platforms</td>
         </tr>
         <tr>
             <td>Organization Configuration</td>
-            <td>' . '$' . ($environmentOrganizationConfigurationHours * $servicesHourlyRate) . '</td>
-            <td>' . $environmentOrganizationConfigurationHours . '</td>
+            <td>' . '$' . number_format(($environmentOrganizationConfigurationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($environmentOrganizationConfigurationHours, 2) . '</td>
             <td>Configure Organization specific settings, logo, page titles, etc..</td>
         </tr>
 
         <tr>
             <td>Configure Connected Systems</td>
-            <td>' . '$' . ($environmentConnectedSystemDefinitionsHours * $servicesHourlyRate)  . '</td>
-            <td>' . $environmentConnectedSystemDefinitionsHours . '</td>
+            <td>' . '$' . number_format(($environmentConnectedSystemDefinitionsHours * $servicesHourlyRate), 2)  . '</td>
+            <td>' . number_format($environmentConnectedSystemDefinitionsHours, 2) . '</td>
             <td>15 minutes per system</td>
         </tr>
 
         <tr>
             <td>Document Configurations</td>
-            <td>' . '$' . ($environmentDocumentConfigurationsHours * $servicesHourlyRate) . '</td>
-            <td>' . $environmentDocumentConfigurationsHours . '</td>
+            <td>' . '$' . number_format(($environmentDocumentConfigurationsHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($environmentDocumentConfigurationsHours, 2) . '</td>
             <td>Document all server configuration settings</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . ($environmentProjectManagementHours * $servicesHourlyRate) . '</td>
-            <td>' . $environmentProjectManagementHours . '</td>
+            <td>' . '$' . number_format(($environmentProjectManagementHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($environmentProjectManagementHours, 2) . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . ($totalEnvironmentHours * $servicesHourlyRate) . '</td>
-            <td>' . $totalEnvironmentHours . '</td>
+            <td>' . '$' . number_format(($totalEnvironmentHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($totalEnvironmentHours, 2) . '</td>
             <td></td>
         </tr>
 
@@ -261,57 +261,57 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Workshop & Design Doc</td>
-            <td>' . '$' . ($passwordWorkshopAndDesignDocHours * $servicesHourlyRate) . '</td>
-            <td>' . $passwordWorkshopAndDesignDocHours . '</td>
+            <td>' . '$' . number_format(($passwordWorkshopAndDesignDocHours * $servicesHourlyRate), 2) . '</td>
+            <td>' .number_format( $passwordWorkshopAndDesignDocHours, 2) . '</td>
             <td>All Password Management Requirements will be defined and a design document will be generated</td>
         </tr>
 
         <tr>
             <td>Configuration</td>
-            <td>' . '$' . ($passwordConfigurationHours * $servicesHourlyRate) . '</td>
-            <td>' . $passwordConfigurationHours . '</td>
+            <td>' . '$' . number_format(($passwordConfigurationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($passwordConfigurationHours, 2) . '</td>
             <td>Password Policies, Password System Groupings, Configuring Self-Registration / Self Claiming.</td>
         </tr>
 
         <tr>
             <td>Post Implementation Services</td>
-            <td>' . '$' . ($passwordPostImplementationServicesHours * $servicesHourlyRate) . '</td>
-            <td>' . $passwordPostImplementationServicesHours . '</td>
+            <td>' . '$' . number_format(($passwordPostImplementationServicesHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($passwordPostImplementationServicesHours, 2) . '</td>
             <td>Review system logging facilities for the purposes of troubleshooting, ensure system health and identify potential issues.</td>
         </tr>
 
         <tr>
             <td>Prod. Migration</td>
-            <td>' . '$' . ($passwordProductionMigrationHours * $servicesHourlyRate) . '</td>
-            <td>' . $passwordProductionMigrationHours . '</td>
+            <td>' . '$' . number_format(($passwordProductionMigrationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($passwordProductionMigrationHours, 2) . '</td>
             <td>Migrate implemented solution into production</td>
         </tr>
 
         <tr>
             <td>Training</td>
-            <td>' . '$' . ($passwordUiTrainingHours * $servicesHourlyRate) . '</td>
-            <td>' . $passwordUiTrainingHours . '</td>
+            <td>' . '$' . number_format(($passwordUiTrainingHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($passwordUiTrainingHours, 2) . '</td>
             <td>Self-Service UI training to ensure a complete understanding of UI elements and functionality.</td>
         </tr>
 
         <tr>
             <td>Solution Documentation</td>
-            <td>' . '$' . ($passwordSolutionDocumentationHours * $servicesHourlyRate) . '</td>
-            <td>' . $passwordSolutionDocumentationHours . '</td>
+            <td>' . '$' . number_format(($passwordSolutionDocumentationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($passwordSolutionDocumentationHours, 2) . '</td>
             <td>Document Solution specific password management configurations</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . ($passwordProjectManagementHours * $servicesHourlyRate) . '</td>
-            <td>' . $passwordProjectManagementHours . '</td>
+            <td>' . '$' . number_format(($passwordProjectManagementHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($passwordProjectManagementHours, 2) . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . ($totalPasswordHours * $servicesHourlyRate) . '</td>
-            <td>' . $totalPasswordHours . '</td>
+            <td>' . '$' . number_format(($totalPasswordHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($totalPasswordHours, 2) . '</td>
             <td></td>
         </tr>
 
@@ -325,57 +325,57 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Workshop & Design Doc</td>
-            <td>' . '$' . ($provisioningWorkshopAndDesignDocHours * $servicesHourlyRate) . '</td>
-            <td>' . $provisioningWorkshopAndDesignDocHours . '</td>
+            <td>' . '$' . number_format(($provisioningWorkshopAndDesignDocHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($provisioningWorkshopAndDesignDocHours, 2) . '</td>
             <td>All Provisioning Requirements will be defined and a design document will be generated.</td>
         </tr>
 
         <tr>
             <td>Configuration</td>
-            <td>' . '$' . ($provisioningConfiguration * $servicesHourlyRate) . '</td>
-            <td>' . $provisioningConfiguration . '</td>
+            <td>' . '$' . number_format(($provisioningConfiguration * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($provisioningConfiguration, 2) . '</td>
             <td>All necessary product features will be configure to enable the required functionality.  The following provisioning process will be implemented to manage standard accounts and permissions of each provisioning target system: Add, Modify, Disable, Terminate.</td>
         </tr>
 
         <tr>
             <td>Post Implementation Services</td>
-            <td>' . '$' . ($provisioningPostImplementationServicesHours * $servicesHourlyRate) . '</td>
-            <td>' . $provisioningPostImplementationServicesHours . '</td>
+            <td>' . '$' . number_format(($provisioningPostImplementationServicesHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($provisioningPostImplementationServicesHours, 2) . '</td>
             <td>Review system logging facilities for the purposes of troubleshooting, ensure system health and identify potential issues.</td>
         </tr>
 
         <tr>
             <td>Prod. Migration</td>
-            <td>' . '$' . ($provisioningProductionMigrationHours * $servicesHourlyRate) . '</td>
-            <td>' . $provisioningProductionMigrationHours . '</td>
+            <td>' . '$' . number_format(($provisioningProductionMigrationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($provisioningProductionMigrationHours, 2) . '</td>
             <td>Migrate implemented solution into production</td>
         </tr>
 
         <tr>
             <td>Training</td>
-            <td>' . '$' . ($provisioningUiTrainingHours * $servicesHourlyRate) . '</td>
-            <td>' . $provisioningUiTrainingHours . '</td>
+            <td>' . '$' . number_format(($provisioningUiTrainingHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($provisioningUiTrainingHours, 2) . '</td>
             <td>Self-Service UI training to ensure a complete understanding of UI elements and functionality.</td>
         </tr>
 
         <tr>
             <td>Solution Documentation</td>
-            <td>' . '$' . ($provisioningSolutionDocumentationHours * $servicesHourlyRate) . '</td>
-            <td>' . $provisioningSolutionDocumentationHours . '</td>
+            <td>' . '$' . number_format(($provisioningSolutionDocumentationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($provisioningSolutionDocumentationHours, 2) . '</td>
             <td>Document Solution specific provisioning configurations</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . ($provisioningProjectManagementHours * $servicesHourlyRate) . '</td>
-            <td>' . $provisioningProjectManagementHours . '</td>
+            <td>' . '$' . number_format(($provisioningProjectManagementHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($provisioningProjectManagementHours, 2) . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . ($totalProvisioningHours * $servicesHourlyRate) . '</td>
-            <td>' . $totalProvisioningHours . '</td>
+            <td>' . '$' . number_format(($totalProvisioningHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($totalProvisioningHours, 2) . '</td>
             <td></td>
         </tr>
 
@@ -389,57 +389,57 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Workshop & Design Doc</td>
-            <td>' . '$' . ($HPAMWorkshopAndDesignDocHours * $servicesHourlyRate) . '</td>
-            <td>' . $HPAMWorkshopAndDesignDocHours . '</td>
+            <td>' . '$' . number_format(($HPAMWorkshopAndDesignDocHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($HPAMWorkshopAndDesignDocHours, 2) . '</td>
             <td>All HPAM Requirements will be defined and a design document will be generated.</td>
         </tr>
 
         <tr>
             <td>Configuration</td>
-            <td>' . '$' . ($HPAMOrgConfigurationHours * $servicesHourlyRate) . '</td>
-            <td>' . $HPAMOrgConfigurationHours . '</td>
+            <td>' . '$' . number_format(($HPAMOrgConfigurationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($HPAMOrgConfigurationHours, 2) . '</td>
             <td>Configure HPAM Account Types, System Owners, HPAM Users.</td>
         </tr>
 
         <tr>
             <td>Post Implementation Services</td>
-            <td>' . '$' . ($HPAMPostImplementationServicesHours * $servicesHourlyRate) . '</td>
-            <td>' . $HPAMPostImplementationServicesHours . '</td>
+            <td>' . '$' . number_format(($HPAMPostImplementationServicesHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($HPAMPostImplementationServicesHours, 2) . '</td>
             <td>Review system logging facilities for the purposes of troubleshooting, ensure system health and identify potential issues.</td>
         </tr>
 
         <tr>
             <td>Prod. Migration</td>
-            <td>' . '$' . ($HPAMProductionMigrationHours * $servicesHourlyRate) . '</td>
-            <td>' . $HPAMProductionMigrationHours . '</td>
+            <td>' . '$' . number_format(($HPAMProductionMigrationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($HPAMProductionMigrationHours, 2) . '</td>
             <td>Migrate implemented solution into production</td>
         </tr>
 
         <tr>
             <td>Training</td>
-            <td>' . '$' . ($HPAMUiTrainingHours * $servicesHourlyRate) . '</td>
-            <td>' . $HPAMUiTrainingHours . '</td>
+            <td>' . '$' . number_format(($HPAMUiTrainingHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($HPAMUiTrainingHours, 2) . '</td>
             <td>Self-Service UI training to ensure a complete understanding of UI elements and functionality.</td>
         </tr>
 
         <tr>
             <td>Solution Documentation</td>
-            <td>' . '$' . ($HPAMSolutionDocumentationHours * $servicesHourlyRate) . '</td>
-            <td>' . $HPAMSolutionDocumentationHours . '</td>
+            <td>' . '$' . number_format(($HPAMSolutionDocumentationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($HPAMSolutionDocumentationHours, 2) . '</td>
             <td>Document Solution specific HPAM configurations</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . ($HPAMProjectManagementHours * $servicesHourlyRate) . '</td>
-            <td>' . $HPAMProjectManagementHours . '</td>
+            <td>' . '$' . number_format(($HPAMProjectManagementHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($HPAMProjectManagementHours, 2) . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . ($totalHPAMHours * $servicesHourlyRate) . '</td>
-            <td>' . $totalHPAMHours . '</td>
+            <td>' . '$' . number_format(($totalHPAMHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($totalHPAMHours, 2) . '</td>
             <td></td>
         </tr>
 
@@ -453,64 +453,64 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Workshop & Design Doc</td>
-            <td>' . '$' . ($federationWorkshopAndDesignDocHours * $servicesHourlyRate) . '</td>
-            <td>' . $federationWorkshopAndDesignDocHours . '</td>
+            <td>' . '$' . number_format(($federationWorkshopAndDesignDocHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($federationWorkshopAndDesignDocHours, 2) . '</td>
             <td>All Federation Requirements will be defined and a design document will be generated.</td>
         </tr>
 
         <tr>
             <td>Federation Installations (IdPs, SPs & DS)</td>
-            <td>' . '$' . ($federationInstallationHours * $servicesHourlyRate) . '</td>
-            <td>' . $federationInstallationHours . '</td>
+            <td>' . '$' . number_format(($federationInstallationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($federationInstallationHours, 2) . '</td>
             <td>Installation of Federation IdPs, Shibboleth SPs and Discovery Services</td>
         </tr>
 
         <tr>
             <td>Configuration</td>
-            <td>' . '$' . ($federationTotalConfigurationHours * $servicesHourlyRate) . '</td>
-            <td>' . $federationTotalConfigurationHours . '</td>
+            <td>' . '$' . number_format(($federationTotalConfigurationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($federationTotalConfigurationHours, 2) . '</td>
             <td>Configure IdP, SP Metadata and Attribute Management Processes.</td>
         </tr>
 
         <tr>
             <td>Post Implementation Services</td>
-            <td>' . '$' . ($federationPostImplementationServicesHours * $servicesHourlyRate) . '</td>
-            <td>' . $federationPostImplementationServicesHours . '</td>
+            <td>' . '$' . number_format(($federationPostImplementationServicesHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($federationPostImplementationServicesHours, 2) . '</td>
             <td>Review system logging facilities for the purposes of troubleshooting, ensure system health and identify potential issues.</td>
         </tr>
 
         <tr>
             <td>Prod. Migration</td>
-            <td>' . '$' . ($federationProductionMigration * $servicesHourlyRate) . '</td>
-            <td>' . $federationProductionMigration . '</td>
+            <td>' . '$' . number_format(($federationProductionMigration * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($federationProductionMigration, 2) . '</td>
             <td>Migrate implemented solution into production</td>
         </tr>
 
         <tr>
             <td>Configuration Overview</td>
-            <td>' . '$' . ($federationConfigurationOverviewHours * $servicesHourlyRate) . '</td>
-            <td>' . $federationConfigurationOverviewHours . '</td>
+            <td>' . '$' . number_format(($federationConfigurationOverviewHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($federationConfigurationOverviewHours, 2) . '</td>
             <td>Implementation overview for the purposes of maintaining and administering solution.</td>
         </tr>
 
         <tr>
             <td>Solution Documentation</td>
-            <td>' . '$' . $federationSolutionDocumentationHours * $servicesHourlyRate . '</td>
-            <td>' . $federationSolutionDocumentationHours . '</td>
+            <td>' . '$' . number_format($federationSolutionDocumentationHours * $servicesHourlyRate, 2) . '</td>
+            <td>' . number_format($federationSolutionDocumentationHours, 2) . '</td>
             <td>Document Solution specific Federation configurations</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . ($federationProjectManagementHours * $servicesHourlyRate) . '</td>
-            <td>' . $federationProjectManagementHours . '</td>
+            <td>' . '$' . number_format(($federationProjectManagementHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($federationProjectManagementHours, 2) . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . ($totalFederationHours * $servicesHourlyRate) . '</td>
-            <td>' . $totalFederationHours . '</td>
+            <td>' . '$' . number_format(($totalFederationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($totalFederationHours, 2) . '</td>
             <td></td>
         </tr>
 
@@ -524,15 +524,15 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Basic Overview</td>
-            <td>' . '$' . ($administrationBasicTrainingHours * $servicesHourlyRate) . '</td>
-            <td>' . $administrationBasicTrainingHours . '</td>
+            <td>' . '$' . number_format(($administrationBasicTrainingHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($administrationBasicTrainingHours, 2) . '</td>
             <td>Overview of the basic components and product functionality.</td>
         </tr>
 
         <tr>
             <td>Advanced Features and Concepts</td>
-            <td>' . '$' . ($administrationAdvancedTrainingTrainingHours * $servicesHourlyRate) . '</td>
-            <td>' . $administrationAdvancedTrainingTrainingHours . '</td>
+            <td>' . '$' . number_format(($administrationAdvancedTrainingTrainingHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($administrationAdvancedTrainingTrainingHours, 2) . '</td>
             <td>Overview of the advanced features of the product suite, IE: Account Matching, HPAM, Workflow Design and Best Practices, etc..  Will be modified to meet the specific features that are utilized during the implementation of the above solution.</td>
         </tr>
 
@@ -545,36 +545,36 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Kiosk UI Training (Train the Trainer)</td>
-            <td>' . '$' . ($administrationKioskTrainingHours * $servicesHourlyRate) . '</td>
-            <td>' . $administrationKioskTrainingHours . '</td>
+            <td>' . '$' . number_format(($administrationKioskTrainingHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($administrationKioskTrainingHours, 2) . '</td>
             <td></td>
         </tr>
 
         <tr>
             <td>Pin Reset UI Training (Train the Trainer)</td>
-            <td>' . '$' . ($administrationPinTrainingTrainingHours * $servicesHourlyRate) . '</td>
-            <td>' . $administrationPinTrainingTrainingHours . '</td>
+            <td>' . '$' . number_format(($administrationPinTrainingTrainingHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($administrationPinTrainingTrainingHours, 2) . '</td>
             <td></td>
         </tr>
 
         <tr>
             <td>Help Desk UI Training (Train the Trainer)</td>
-            <td>' . '$' . ($administrationHelpDeskTrainingTrainingHours * $servicesHourlyRate) . '</td>
-            <td>' . $administrationHelpDeskTrainingTrainingHours . '</td>
+            <td>' . '$' . number_format(($administrationHelpDeskTrainingTrainingHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($administrationHelpDeskTrainingTrainingHours, 2) . '</td>
             <td></td>
         </tr>
 
         <tr>
             <td>Self Service Access Management UI Training (Train the Trainer)</td>
-            <td>' . '$' . ($administrationSelectServiceTrainingTrainingHours * $servicesHourlyRate) . '</td>
-            <td>' . $administrationSelectServiceTrainingTrainingHours . '</td>
+            <td>' . '$' . number_format(($administrationSelectServiceTrainingTrainingHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($administrationSelectServiceTrainingTrainingHours, 2) . '</td>
             <td></td>
         </tr>
 
         <tr>
             <td>HPAM UI Training (Train the Trainer)</td>
-            <td>' . '$' . ($administrationHPAMUiTrainingHours * $servicesHourlyRate) . '</td>
-            <td>' . $administrationHPAMUiTrainingHours . '</td>
+            <td>' . '$' . number_format(($administrationHPAMUiTrainingHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($administrationHPAMUiTrainingHours, 2) . '</td>
             <td></td>
         </tr>
 
@@ -587,8 +587,8 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Federation Configuration Training</td>
-            <td>' . '$' . ($administrationFederationConfigTrainingHours * $servicesHourlyRate) . '</td>
-            <td>' . $administrationFederationConfigTrainingHours . '</td>
+            <td>' . '$' . number_format(($administrationFederationConfigTrainingHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($administrationFederationConfigTrainingHours, 2) . '</td>
             <td></td>
         </tr>
 
@@ -601,22 +601,22 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . ($administrationProjectManagementHours * $servicesHourlyRate) . '</td>
-            <td>' . $administrationProjectManagementHours . '</td>
+            <td>' . '$' . number_format(($administrationProjectManagementHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($administrationProjectManagementHours, 2) . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . ($totalAdministrationHours * $servicesHourlyRate) . '</td>
-            <td>' . $totalAdministrationHours . '</td>
+            <td>' . '$' . number_format(($totalAdministrationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($totalAdministrationHours, 2) . '</td>
             <td></td>
         </tr>
 
         <tr>
             <th><b>* Total Estimated Effort</b></th>
-            <th>' . '$' . ($totalAllHours * $servicesHourlyRate) . '</th>
-            <th>' . $totalAllHours . '</th>
+            <th>' . '$' . number_format(($totalAllHours * $servicesHourlyRate), 2) . '</th>
+            <th>' . number_format($totalAllHours, 2) . '</th>
             <th></th>
         </tr>
 
@@ -635,32 +635,32 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Assessment/Design (Workshop)</td>
-            <td>' . '$' . ($phaseAssessmentDesignHours * $servicesHourlyRate) . '</td>
-            <td>' . $phaseAssessmentDesignHours . '</td>
+            <td>' . '$' . number_format(($phaseAssessmentDesignHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($phaseAssessmentDesignHours, 2) . '</td>
         </tr>
 
         <tr>
             <td>Installation</td>
-            <td>' . '$' . ($phaseInstallationHours *$servicesHourlyRate) . '</td>
-            <td>' . $phaseInstallationHours . '</td>
+            <td>' . '$' . number_format(($phaseInstallationHours *$servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($phaseInstallationHours, 2) . '</td>
         </tr>
 
         <tr>
             <td>Implementation</td>
-            <td>' . '$' . ($phaseImplementationHours * $servicesHourlyRate) . '</td>
-            <td>' . $phaseImplementationHours . '</td>
+            <td>' . '$' . number_format(($phaseImplementationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($phaseImplementationHours, 2) . '</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . ($phaseProjectManagementHours * $servicesHourlyRate) . '</td>
-            <td>' . $phaseProjectManagementHours . '</td>
+            <td>' . '$' . number_format(($phaseProjectManagementHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($phaseProjectManagementHours, 2) . '</td>
         </tr>
 
         <tr>
             <td>Training</td>
-            <td>' . '$' . ($phaseTrainingHours * $servicesHourlyRate) . '</td>
-            <td>' . $phaseTrainingHours . '</td>
+            <td>' . '$' . number_format(($phaseTrainingHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . number_format($phaseTrainingHours, 2) . '</td>
         </tr>
 
     </table>
@@ -679,50 +679,50 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Environment</td>
-            <td>' . '$' . ($totalEnvironmentHours * $servicesHourlyRate) . '</td>
-            <td>' . (round(($totalEnvironmentHours / $totalAllHours), 4) * 100) . '%' . '</td>
+            <td>' . '$' . number_format(($totalEnvironmentHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . (number_format(($totalEnvironmentHours / $totalAllHours), 2) * 100) . '%' . '</td>
             <td>No Customization changes to Self-Service Uis.  Only configurable changes allowed.</td>
         </tr>
 
         <tr>
             <td>Password Management</td>
-            <td>' . '$' . ($totalPasswordHours * $servicesHourlyRate) . '</td>
-            <td>' . (round(($totalPasswordHours / $totalAllHours), 4) * 100) . '%' . '</td>
+            <td>' . '$' . number_format(($totalPasswordHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . (number_format(($totalPasswordHours / $totalAllHours), 2) * 100) . '%' . '</td>
             <td>All Connectors available.  Does not accommodate for any necessary development time or effort.</td>
         </tr>
 
         <tr>
             <td>Provisioning</td>
-            <td>' . '$' . ($totalProvisioningHours * $servicesHourlyRate) . '</td>
-            <td>' . (round(($totalProvisioningHours / $totalAllHours), 4) * 100) . '%' . '</td>
+            <td>' . '$' . number_format(($totalProvisioningHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . (number_format(($totalProvisioningHours / $totalAllHours), 2) * 100) . '%' . '</td>
             <td>Does not accommodate for any unforeseen issues or solution customizations not supported via the standard UIs or RDM workflows.</td>
         </tr>
 
         <tr>
             <td>HPAM</td>
-            <td>' . '$' . ($totalHPAMHours * $servicesHourlyRate) . '</td>
-            <td>' . (round(($totalHPAMHours / $totalAllHours), 4) * 100) . '%' . '</td>
+            <td>' . '$' . number_format(($totalHPAMHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . (number_format(($totalHPAMHours / $totalAllHours), 2) * 100) . '%' . '</td>
             <td>All necessary policy / roles have been defined.</td>
         </tr>
 
         <tr>
             <td>Federation</td>
-            <td>' . '$' . ($totalFederationHours * $servicesHourlyRate) . '</td>
-            <td>' . (round(($totalFederationHours / $totalAllHours), 4) * 100) . '%' . '</td>
+            <td>' . '$' . number_format(($totalFederationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . (number_format(($totalFederationHours / $totalAllHours), 2) * 100) . '%' . '</td>
             <td>Will create standard application accounts.</td>
         </tr>
 
         <tr>
             <td>Training</td>
-            <td>' . '$' . ($totalAdministrationHours * $servicesHourlyRate) . '</td>
-            <td>' . (round(($totalAdministrationHours / $totalAllHours), 4) * 100) . '%' . '</td>
+            <td>' . '$' . number_format(($totalAdministrationHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . (number_format(($totalAdministrationHours / $totalAllHours), 2) * 100) . '%' . '</td>
             <td>All Fischer Pre-Requisites have been satisfied prior to starting the implementation.</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . ($totalAllHours * $servicesHourlyRate) . '</td>
-            <td>' . (($totalAllHours / $totalAllHours) * 100) . '%' . '</td>
+            <td>' . '$' . number_format(($totalAllHours * $servicesHourlyRate), 2) . '</td>
+            <td>' . (number_format(($totalAllHours / $totalAllHours), 2) * 100) . '%' . '</td>
             <td>The effort required to load legacy account information is out of scope for this effort and will need to be estimated separately.</td>
         </tr>
 
