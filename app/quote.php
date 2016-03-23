@@ -13,6 +13,8 @@ $sql = "INSERT INTO Quotes (name, completionDate, model, additionalEnvironment, 
 $unknownRequirements = $_SESSION['form']['unknownPercentage'] / 100; // Metrics.B64
 // Must read price from DB
 $servicesHourlyRate = 125.00;
+$clientName = $_SESSION['form']['name'];
+$completionDate = $_SESSION['form']['completionDate'];
 // Environment Specifics
 $environmentPlatformInstallHours = (($_SESSION['form']['numberOfEnvironments'] * 2) * $_SESSION['form']['unknownPercentage']) + ($_SESSION['form']['numberOfEnvironments'] * 2); // =((+$Metrics.B15*2)*$Metrics.B64)+(+$Metrics.B15*2)
 $haServerHours = ($_SESSION['form']['haServers'] * $unknownRequirements) + $_SESSION['form']['numberOfEnvironments']; // =((+$Metrics.B16*1)*$Metrics.B64)+(+$Metrics.B16*1)
@@ -197,8 +199,8 @@ $modulesHPAM = $_SESSION['form']['hpam'];
 $modulesFederation = $_SESSION['form']['federation'];
 echo '<link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
-<div><h4>Client Name: ' . $_SESSION['form']['name'] . '</h4>
-    <h4>' . $_SESSION['form']['completionDate'] . '</h4>
+<div><h4>Client Name: ' . $clientName . '</h4>
+    <h4>' . $completionDate . '</h4>
     <table class="table table-bordered table-hover">
         <!----------ENVIRONMENT TASKS---------->
         <tr>
@@ -677,50 +679,50 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Environment</td>
-            <td>Cost to Client Here</td>
-            <td>Cost Percent Here</td>
+            <td>' . '$' . ($totalEnvironmentHours * $servicesHourlyRate) . '</td>
+            <td>' . (round(($totalEnvironmentHours / $totalAllHours), 4) * 100) . '%' . '</td>
             <td>No Customization changes to Self-Service Uis.  Only configurable changes allowed.</td>
         </tr>
 
         <tr>
             <td>Password Management</td>
-            <td>Cost to Client Here</td>
-            <td>Cost Percent Here</td>
+            <td>' . '$' . ($totalPasswordHours * $servicesHourlyRate) . '</td>
+            <td>' . (round(($totalPasswordHours / $totalAllHours), 4) * 100) . '%' . '</td>
             <td>All Connectors available.  Does not accommodate for any necessary development time or effort.</td>
         </tr>
 
         <tr>
             <td>Provisioning</td>
-            <td>Cost to Client Here</td>
-            <td>Cost Percent Here</td>
+            <td>' . '$' . ($totalProvisioningHours * $servicesHourlyRate) . '</td>
+            <td>' . (round(($totalProvisioningHours / $totalAllHours), 4) * 100) . '%' . '</td>
             <td>Does not accommodate for any unforeseen issues or solution customizations not supported via the standard UIs or RDM workflows.</td>
         </tr>
 
         <tr>
             <td>HPAM</td>
-            <td>Cost to Client Here</td>
-            <td>Cost Percent Here</td>
+            <td>' . '$' . ($totalHPAMHours * $servicesHourlyRate) . '</td>
+            <td>' . (round(($totalHPAMHours / $totalAllHours), 4) * 100) . '%' . '</td>
             <td>All necessary policy / roles have been defined.</td>
         </tr>
 
         <tr>
             <td>Federation</td>
-            <td>Cost to Client Here</td>
-            <td>Cost Percent Here</td>
+            <td>' . '$' . ($totalFederationHours * $servicesHourlyRate) . '</td>
+            <td>' . (round(($totalFederationHours / $totalAllHours), 4) * 100) . '%' . '</td>
             <td>Will create standard application accounts.</td>
         </tr>
 
         <tr>
             <td>Training</td>
-            <td>Cost to Client Here</td>
-            <td>Cost Percent Here</td>
+            <td>' . '$' . ($totalAdministrationHours * $servicesHourlyRate) . '</td>
+            <td>' . (round(($totalAdministrationHours / $totalAllHours), 4) * 100) . '%' . '</td>
             <td>All Fischer Pre-Requisites have been satisfied prior to starting the implementation.</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>Total Cost to Client Here</td>
-            <td>Total Cost Percent Here</td>
+            <td>' . '$' . ($totalAllHours * $servicesHourlyRate) . '</td>
+            <td>' . (($totalAllHours / $totalAllHours) * 100) . '%' . '</td>
             <td>The effort required to load legacy account information is out of scope for this effort and will need to be estimated separately.</td>
         </tr>
 
