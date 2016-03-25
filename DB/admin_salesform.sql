@@ -114,8 +114,8 @@ CREATE TABLE `admin_salesform`.`Quotes` (
   `phaseImplementationHours` DOUBLE NULL,
   `phaseProjectManagementHours` DOUBLE NULL,
   `phaseTrainingHours` DOUBLE NULL,
-  `modulesPasswordManagement` DOUBLE NULL,
-  `modulesProvisioning` DOUBLE NULL,
-  `modulesHPAM` DOUBLE NULL,
-  `modulesFederation` DOUBLE NULL,
+  `modulesPasswordManagement` VARCHAR(3) NULL,
+  `modulesProvisioning` VARCHAR(3) NULL,
+  `modulesHPAM` VARCHAR(3) NULL,
+  `modulesFederation` VARCHAR(3) NULL,
   PRIMARY KEY (`id`));

@@ -1,202 +1,226 @@
 <?php
-require('db.php');
+require( 'db.php' );
 session_start();
 $data = array();
-parse_str(file_get_contents('php://input'), $data);
-$_POST = array_merge($data, $_POST); // merge parsed form data with _POST session values
-if (is_string($_SESSION['form'])) { // don't run if form data has already been parsed
-    $_SESSION['form'] = json_decode($_SESSION['form'], true); // decodes JSON data sent by angularJS frontend and converts to PHP associative array
+parse_str( file_get_contents( 'php://input' ), $data );
+$_POST = array_merge( $data, $_POST ); // merge parsed form data with _POST session values
+$newQuote = false;
+if ( is_string( $_SESSION['form'] ) ) { // don't run if form data has already been parsed
+	$_SESSION['form'] = json_decode( $_SESSION['form'], true ); // decodes JSON data sent by angularJS frontend and converts to PHP associative array
+	$newQuote         = true;
 }
-$username = $_SESSION['form']['username'];
+$username            = $_SESSION['username'];
 $unknownRequirements = $_SESSION['form']['unknownPercentage'] / 100; // Metrics.B64
 // Must read price from DB
 $servicesHourlyRate = 125.00;
-$clientName = $_SESSION['form']['name'];
-$completionDate = $_SESSION['form']['completionDate'];
+$clientName         = $_SESSION['form']['name'];
+$startDate          = $_SESSION['form']['startDate'];
+$completionDate     = $_SESSION['form']['completionDate'];
 // Environment Specifics
-$environmentPlatformInstallHours = (($_SESSION['form']['numberOfEnvironments'] * 2) * $_SESSION['form']['unknownPercentage']) + ($_SESSION['form']['numberOfEnvironments'] * 2); // =((+$Metrics.B15*2)*$Metrics.B64)+(+$Metrics.B15*2)
-$haServerHours = ($_SESSION['form']['haServers'] * $unknownRequirements) + $_SESSION['form']['numberOfEnvironments']; // =((+$Metrics.B16*1)*$Metrics.B64)+(+$Metrics.B16*1)
-$gigInstallHours = ((($_SESSION['form']['globalIdentityGateways'] * .5) * $unknownRequirements) + ($_SESSION['form']['globalIdentityGateways'] * .5));
-$msPasswordFilterHours = (($_SESSION['form']['passwordFilters'] * .25) * $unknownRequirements) + ($_SESSION['form']['passwordFilters'] * .25); // =((+$Metrics.B18*15)/60*+$Metrics.B64)+((+$Metrics.B18*15)/60)
-$environmentOrganizationConfigurationHours = $_SESSION['form']['organizations'] * $unknownRequirements + $_SESSION['form']['organizations']; // =(+$Metrics.B42*+$Metrics.B64)+(+$Metrics.B42)
-$environmentConnectedSystemDefinitionsHours = ($_SESSION['form']['uniqueDefinitions'] * .25 * $unknownRequirements) + ($_SESSION['form']['uniqueDefinitions'] * .25);
-$environmentDocumentConfigurationsHours = ($_SESSION['form']['numberOfEnvironments'] * $unknownRequirements) + ($_SESSION['form']['numberOfEnvironments'] * .25); // =((($Metrics.B15*15)/60)*$Metrics.B64)+(($Metrics.B15*15)/60) conflict between formula and comments
-$environmentImplementationEffortHours = $environmentDocumentConfigurationsHours + $environmentConnectedSystemDefinitionsHours + $environmentOrganizationConfigurationHours + $environmentPlatformInstallHours + $haServerHours + $haServerHours + $msPasswordFilterHours;
-$environmentProjectManagementHours = $environmentImplementationEffortHours * .1;
-$environmentTotalPlatformInstallHours = $environmentPlatformInstallHours + $haServerHours + $haServerHours + $msPasswordFilterHours;
-$totalEnvironmentHours = $environmentProjectManagementHours + $environmentImplementationEffortHours;
+$environmentPlatformInstallHours            = ( ( $_SESSION['form']['numberOfEnvironments'] * 2 ) * $_SESSION['form']['unknownPercentage'] ) + ( $_SESSION['form']['numberOfEnvironments'] * 2 ); // =((+$Metrics.B15*2)*$Metrics.B64)+(+$Metrics.B15*2)
+$haServerHours                              = ( $_SESSION['form']['haServers'] * $unknownRequirements ) + $_SESSION['form']['numberOfEnvironments']; // =((+$Metrics.B16*1)*$Metrics.B64)+(+$Metrics.B16*1)
+$gigInstallHours                            = ( ( ( $_SESSION['form']['globalIdentityGateways'] * .5 ) * $unknownRequirements ) + ( $_SESSION['form']['globalIdentityGateways'] * .5 ) );
+$msPasswordFilterHours                      = ( ( $_SESSION['form']['passwordFilters'] * .25 ) * $unknownRequirements ) + ( $_SESSION['form']['passwordFilters'] * .25 ); // =((+$Metrics.B18*15)/60*+$Metrics.B64)+((+$Metrics.B18*15)/60)
+$environmentOrganizationConfigurationHours  = $_SESSION['form']['organizations'] * $unknownRequirements + $_SESSION['form']['organizations']; // =(+$Metrics.B42*+$Metrics.B64)+(+$Metrics.B42)
+$environmentConnectedSystemDefinitionsHours = ( $_SESSION['form']['uniqueDefinitions'] * .25 * $unknownRequirements ) + ( $_SESSION['form']['uniqueDefinitions'] * .25 );
+$environmentDocumentConfigurationsHours     = ( $_SESSION['form']['numberOfEnvironments'] * $unknownRequirements ) + ( $_SESSION['form']['numberOfEnvironments'] * .25 ); // =((($Metrics.B15*15)/60)*$Metrics.B64)+(($Metrics.B15*15)/60) conflict between formula and comments
+$environmentImplementationEffortHours       = $environmentDocumentConfigurationsHours + $environmentConnectedSystemDefinitionsHours + $environmentOrganizationConfigurationHours + $environmentPlatformInstallHours + $haServerHours + $haServerHours + $msPasswordFilterHours;
+$environmentProjectManagementHours          = $environmentImplementationEffortHours * .1;
+$environmentTotalPlatformInstallHours       = $environmentPlatformInstallHours + $haServerHours + $haServerHours + $msPasswordFilterHours;
+$totalEnvironmentHours                      = $environmentProjectManagementHours + $environmentImplementationEffortHours;
 // Pasword Management Effort
-$passwordWorkshopAndDesignDocHours = ($_SESSION['form']['passTargets'] * 2 * $unknownRequirements) + ($_SESSION['form']['passTargets'] * 2) * 2;
-$passwordConfigurationHours = ($_SESSION['form']['passTargets'] * 2 * $unknownRequirements) + ($_SESSION['form']['passTargets'] * 2);
-$passwordProductionMigrationHours = ($_SESSION['form']['passTargets'] * 2 * $unknownRequirements) + ($_SESSION['form']['passTargets']);
-$passwordPostImplementationServicesHours = ($_SESSION['form']['passTargets'] * 2 * $unknownRequirements) + ($_SESSION['form']['passTargets'] * 2);
-if ($_SESSION['form']['kioskTraining'] == 'yes') {
-    $passwordUiTrainingHours = 1 * $unknownRequirements + 1;
+$passwordWorkshopAndDesignDocHours       = ( $_SESSION['form']['passTargets'] * 2 * $unknownRequirements ) + ( $_SESSION['form']['passTargets'] * 2 ) * 2;
+$passwordConfigurationHours              = ( $_SESSION['form']['passTargets'] * 2 * $unknownRequirements ) + ( $_SESSION['form']['passTargets'] * 2 );
+$passwordProductionMigrationHours        = ( $_SESSION['form']['passTargets'] * 2 * $unknownRequirements ) + ( $_SESSION['form']['passTargets'] );
+$passwordPostImplementationServicesHours = ( $_SESSION['form']['passTargets'] * 2 * $unknownRequirements ) + ( $_SESSION['form']['passTargets'] * 2 );
+$passwordUiTrainingHours = 0;
+if ( $_SESSION['form']['kioskTraining'] == 'yes' ) {
+	$passwordUiTrainingHours = 1 * $unknownRequirements + 1;
 } else {
-    $passwordUiTrainingHours = 0;
+	$passwordUiTrainingHours = 0;
 }
-$passwordSolutionDocumentationHours = ($_SESSION['form']['passTargets'] * 2 * $unknownRequirements) + ($_SESSION['form']['passTargets']);
-$passwordImplmentationServiceHours = $passwordSolutionDocumentationHours + $passwordUiTrainingHours + $passwordProductionMigrationHours + $passwordPostImplementationServicesHours + $passwordConfigurationHours + $passwordWorkshopAndDesignDocHours;
-$passwordProjectManagementHours = $passwordImplmentationServiceHours * .1;
-$totalPasswordHours = $passwordProjectManagementHours + $passwordImplmentationServiceHours;
+$passwordSolutionDocumentationHours = ( $_SESSION['form']['passTargets'] * 2 * $unknownRequirements ) + ( $_SESSION['form']['passTargets'] );
+$passwordImplmentationServiceHours  = $passwordSolutionDocumentationHours + $passwordUiTrainingHours + $passwordProductionMigrationHours + $passwordPostImplementationServicesHours + $passwordConfigurationHours + $passwordWorkshopAndDesignDocHours;
+$passwordProjectManagementHours     = $passwordImplmentationServiceHours * .1;
+$totalPasswordHours                 = $passwordProjectManagementHours + $passwordImplmentationServiceHours;
 // Provisioning Effort
-$numberOfAutomatedProvisioningTargets = $_SESSION['form']['numberOfAutomatedProvisioningTargets'];
-$numberOfAutomatedProvisioningWorkflowsPerTarget = $_SESSION['form']['numberOfAutomatedProvisiongWorkflowsPerTarget'];
-$numberOfAdminProvisioningTargets = $_SESSION['form']['numberOfAdminProvisioningTargets'];
+$numberOfAutomatedProvisioningTargets                 = $_SESSION['form']['numberOfAutomatedProvisioningTargets'];
+$numberOfAutomatedProvisioningWorkflowsPerTarget      = $_SESSION['form']['numberOfAutomatedProvisiongWorkflowsPerTarget'];
+$numberOfAdminProvisioningTargets                     = $_SESSION['form']['numberOfAdminProvisioningTargets'];
 $numberOfAdministrativeProvisioningWorkflowsPerTarget = $_SESSION['form']['numberOfAdministrativeProvisionWorkflowsPerTarget'];
-$numberOfSourceOfAuthorities = $_SESSION['form']['initiationPoints'];
-$provisioningWorkshopAndDesignDocHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminProvisioningTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminProvisioningTargets* .5);
-if ($_SESSION['form']['postImpServices'] == 'YES') {
-    $provisioningPostImplementationServicesHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminProvisioningTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminProvisioningTargets* .5);
+$numberOfSourceOfAuthorities                          = $_SESSION['form']['initiationPoints'];
+$provisioningWorkshopAndDesignDocHours                = ( $numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements ) + ( $numberOfAdminProvisioningTargets * .5 * $unknownRequirements ) + ( $numberOfAutomatedProvisioningTargets * 4 ) + ( $numberOfAdminProvisioningTargets * .5 );
+$provisioningPostImplementationServicesHours = 0;
+if ( $_SESSION['form']['postImpServices'] == 'YES' ) {
+	$provisioningPostImplementationServicesHours = ( $numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements ) + ( $numberOfAdminProvisioningTargets * .5 * $unknownRequirements ) + ( $numberOfAutomatedProvisioningTargets * 4 ) + ( $numberOfAdminProvisioningTargets * .5 );
 } else {
-    $provisioningPostImplementationServicesHours = 0;
+	$provisioningPostImplementationServicesHours = 0;
 }
-$provisioningProductionMigrationHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminProvisioningTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminProvisioningTargets* .5);
-if ($_SESSION['form']['selectServiceTraining'] == 'YES') {
-    $provisioningUiTrainingHours = $unknownRequirements * 2 + 2;
+$provisioningProductionMigrationHours = ( $numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements ) + ( $numberOfAdminProvisioningTargets * .5 * $unknownRequirements ) + ( $numberOfAutomatedProvisioningTargets * 4 ) + ( $numberOfAdminProvisioningTargets * .5 );
+$provisioningUiTrainingHours = 0;
+if ( $_SESSION['form']['selectServiceTraining'] == 'YES' ) {
+	$provisioningUiTrainingHours = $unknownRequirements * 2 + 2;
 } else {
-    $provisioningUiTrainingHours = 0;
+	$provisioningUiTrainingHours = 0;
 }
-$provisioningSolutionDocumentationHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminProvisioningTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminProvisioningTargets* .5);
-$provisioningPolicyHours = ($_SESSION['form']['provisioningNumberOfPolicies'] * 10/60 * $unknownRequirements) + ($_SESSION['form']['provisioningNumberOfPolicies'] * 10/60);
-$provisioningResourcesHours = ($_SESSION['form']['selectableResource'] * 10/60 * $unknownRequirements) + ($_SESSION['form']['selectableResource'] * 10/60);
-$provisioningUSSPHours = ($_SESSION['form']['resourceGroupConfigs'] * .25 * $unknownRequirements) + ($_SESSION['form']['resourceGroupConfigs'] * .25);
-$provisioningApprovalsHours = ($_SESSION['form']['approvalConfiguration'] * .25 * $unknownRequirements) + ($_SESSION['form']['approvalConfiguration'] * .25);
-$provisioningStudioTimeHours = (($numberOfAutomatedProvisioningTargets * 4 * $numberOfAutomatedProvisioningWorkflowsPerTarget + ($numberOfSourceOfAuthorities * 4)) * $unknownRequirements)+ (($numberOfAutomatedProvisioningWorkflowsPerTarget * 4 * $numberOfAutomatedProvisioningTargets + ($numberOfSourceOfAuthorities * 4)));
-$provisioningAdministrativeProvisioningWorkflowHours = ($numberOfAdministrativeProvisioningWorkflowsPerTarget * $numberOfAdminProvisioningTargets * 2 * $unknownRequirements) + ($numberOfAdministrativeProvisioningWorkflowsPerTarget * $numberOfAdminProvisioningTargets * 2);
-if ($_SESSION['form']['userAccountLoad'] == 'Custom') {
-    $provisioningUserAccountLoadHours = ( $_SESSION['form']['uniqueDefinitions'] * 4 * $unknownRequirements )  + ( $_SESSION['form']['uniqueDefinitions'] * 4 );
+$provisioningSolutionDocumentationHours              = ( $numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements ) + ( $numberOfAdminProvisioningTargets * .5 * $unknownRequirements ) + ( $numberOfAutomatedProvisioningTargets * 4 ) + ( $numberOfAdminProvisioningTargets * .5 );
+$provisioningPolicyHours                             = ( $_SESSION['form']['provisioningNumberOfPolicies'] * 10 / 60 * $unknownRequirements ) + ( $_SESSION['form']['provisioningNumberOfPolicies'] * 10 / 60 );
+$provisioningResourcesHours                          = ( $_SESSION['form']['selectableResource'] * 10 / 60 * $unknownRequirements ) + ( $_SESSION['form']['selectableResource'] * 10 / 60 );
+$provisioningUSSPHours                               = ( $_SESSION['form']['resourceGroupConfigs'] * .25 * $unknownRequirements ) + ( $_SESSION['form']['resourceGroupConfigs'] * .25 );
+$provisioningApprovalsHours                          = ( $_SESSION['form']['approvalConfiguration'] * .25 * $unknownRequirements ) + ( $_SESSION['form']['approvalConfiguration'] * .25 );
+$provisioningStudioTimeHours                         = ( ( $numberOfAutomatedProvisioningTargets * 4 * $numberOfAutomatedProvisioningWorkflowsPerTarget + ( $numberOfSourceOfAuthorities * 4 ) ) * $unknownRequirements ) + ( ( $numberOfAutomatedProvisioningWorkflowsPerTarget * 4 * $numberOfAutomatedProvisioningTargets + ( $numberOfSourceOfAuthorities * 4 ) ) );
+$provisioningAdministrativeProvisioningWorkflowHours = ( $numberOfAdministrativeProvisioningWorkflowsPerTarget * $numberOfAdminProvisioningTargets * 2 * $unknownRequirements ) + ( $numberOfAdministrativeProvisioningWorkflowsPerTarget * $numberOfAdminProvisioningTargets * 2 );
+$provisioningUserAccountLoadHours = 0;
+if ( $_SESSION['form']['userAccountLoad'] == 'Custom' ) {
+	$provisioningUserAccountLoadHours = ( $_SESSION['form']['uniqueDefinitions'] * 4 * $unknownRequirements ) + ( $_SESSION['form']['uniqueDefinitions'] * 4 );
 } else {
-    $provisioningUserAccountLoadHours = 4 * $unknownRequirements + 12;
+	$provisioningUserAccountLoadHours = 4 * $unknownRequirements + 12;
 }
-$provisioningConfiguration = $provisioningUserAccountLoadHours + $provisioningAdministrativeProvisioningWorkflowHours + $provisioningStudioTimeHours + $provisioningApprovalsHours + $provisioningUSSPHours + $provisioningResourcesHours + $provisioningPolicyHours;
+$provisioningConfiguration             = $provisioningUserAccountLoadHours + $provisioningAdministrativeProvisioningWorkflowHours + $provisioningStudioTimeHours + $provisioningApprovalsHours + $provisioningUSSPHours + $provisioningResourcesHours + $provisioningPolicyHours;
 $provisioningImplementationEffortHours = $provisioningSolutionDocumentationHours + $provisioningUiTrainingHours + $provisioningProductionMigrationHours + $provisioningPostImplementationServicesHours + $provisioningConfiguration + $provisioningWorkshopAndDesignDocHours;
-$provisioningProjectManagementHours = $provisioningImplementationEffortHours * .1;
-$totalProvisioningHours = $provisioningImplementationEffortHours + $provisioningProjectManagementHours;
+$provisioningProjectManagementHours    = $provisioningImplementationEffortHours * .1;
+$totalProvisioningHours                = $provisioningImplementationEffortHours + $provisioningProjectManagementHours;
 // HPAM
-if ($_SESSION['form']['hpamTraining'] == 'YES') {
+$HPAMAnalysisWorkshopHours = 0;
+if ( $_SESSION['form']['hpamTraining'] == 'YES' ) {
 	$HPAMAnalysisWorkshopHours = $_SESSION['form']['hpamAccountTypes'] * $unknownRequirements + $_SESSION['form']['hpamAccountTypes'];
-	} else {
+} else {
 	$HPAMAnalysisWorkshopHours = 0;
 }
-$HPAMDesignDocumentHours = ($_SESSION['form']['hpamAccountTypes'] * $unknownRequirements * .5) + ($_SESSION['form']['hpamAccountTypes'] * .5);
-if ($_SESSION['form']['hpamAccountTypes'] != 0) {
-	$HPAMOrgConfigurationHours = ($_SESSION['form']['passTargets'] * $unknownRequirements * .25) + ($_SESSION['form']['passTargets'] * .25);
+$HPAMDesignDocumentHours = ( $_SESSION['form']['hpamAccountTypes'] * $unknownRequirements * .5 ) + ( $_SESSION['form']['hpamAccountTypes'] * .5 );
+$HPAMOrgConfigurationHours = 0;
+if ( $_SESSION['form']['hpamAccountTypes'] != 0 ) {
+	$HPAMOrgConfigurationHours = ( $_SESSION['form']['passTargets'] * $unknownRequirements * .25 ) + ( $_SESSION['form']['passTargets'] * .25 );
 } else {
 	$HPAMOrgConfigurationHours = 0;
 }
-if ($_SESSION['form']['hpamAccountTypes'] != 0) {
-	$HPAMApprovalsHours = ($_SESSION['form']['approvalConfiguration'] * $unknownRequirements * .25) + ($_SESSION['form']['approvalConfiguration'] * .25);
+$HPAMApprovalsHours = 0;
+if ( $_SESSION['form']['hpamAccountTypes'] != 0 ) {
+	$HPAMApprovalsHours = ( $_SESSION['form']['approvalConfiguration'] * $unknownRequirements * .25 ) + ( $_SESSION['form']['approvalConfiguration'] * .25 );
 } else {
 	$HPAMApprovalsHours = 0;
 }
-if ($_SESSION['form']['hpamAccountTypes'] != 0) {
+$HPAMProductionMigrationHours= 0;
+if ( $_SESSION['form']['hpamAccountTypes'] != 0 ) {
 	$HPAMProductionMigrationHours = $_SESSION['form']['passTargets'] * $unknownRequirements + $_SESSION['form']['passTargets'];
 } else {
 	$HPAMProductionMigrationHours = 0;
 }
-if ($_SESSION['form']['postImpServices'] == 'YES') {
-	$HPAMPostImplementationServicesHours =  $_SESSION['form']['passTargets'] * $unknownRequirements + $_SESSION['form']['passTargets'];
+$HPAMPostImplementationServicesHours= 0;
+if ( $_SESSION['form']['postImpServices'] == 'YES' ) {
+	$HPAMPostImplementationServicesHours = $_SESSION['form']['passTargets'] * $unknownRequirements + $_SESSION['form']['passTargets'];
 } else {
 	$HPAMPostImplementationServicesHours = 0;
 }
-if ($_SESSION['form']['hpamTraining'] == 'YES') {
+$HPAMUiTrainingHours = 0;
+if ( $_SESSION['form']['hpamTraining'] == 'YES' ) {
 	$HPAMUiTrainingHours = 1 * $unknownRequirements + 1;
 } else {
 	$HPAMUiTrainingHours = 0;
 }
-$HPAMWorkshopAndDesignDocHours = $HPAMAnalysisWorkshopHours + $HPAMDesignDocumentHours;
-$HPAMSolutionDocumentationHours = ($_SESSION['form']['passTargets'] * $unknownRequirements * .5) + ($_SESSION['form']['passTargets']  * .5);
-$HPAMImplementationEffortHours = $HPAMSolutionDocumentationHours + $HPAMUiTrainingHours + $HPAMPostImplementationServicesHours + $HPAMProductionMigrationHours + $HPAMApprovalsHours + $HPAMOrgConfigurationHours + $HPAMDesignDocumentHours + $HPAMAnalysisWorkshopHours;
-$HPAMProjectManagementHours = $HPAMImplementationEffortHours * .1;
-$totalHPAMHours = $HPAMProjectManagementHours + $HPAMImplementationEffortHours;
+$HPAMWorkshopAndDesignDocHours  = $HPAMAnalysisWorkshopHours + $HPAMDesignDocumentHours;
+$HPAMSolutionDocumentationHours = ( $_SESSION['form']['passTargets'] * $unknownRequirements * .5 ) + ( $_SESSION['form']['passTargets'] * .5 );
+$HPAMImplementationEffortHours  = $HPAMSolutionDocumentationHours + $HPAMUiTrainingHours + $HPAMPostImplementationServicesHours + $HPAMProductionMigrationHours + $HPAMApprovalsHours + $HPAMOrgConfigurationHours + $HPAMDesignDocumentHours + $HPAMAnalysisWorkshopHours;
+$HPAMProjectManagementHours     = $HPAMImplementationEffortHours * .1;
+$totalHPAMHours                 = $HPAMProjectManagementHours + $HPAMImplementationEffortHours;
 // Federation Effort
-$federationAnalysisWorkshopHours = (($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']) * $unknownRequirements) + ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']);
-$federationDesignDocumentHours = (($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']) * $unknownRequirements) + ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']);
-$federationWorkshopAndDesignDocHours = $federationAnalysisWorkshopHours + $federationDesignDocumentHours;
-$federationStudioTimeHours = ($_SESSION['form']['attManProccess'] * 8) + ($_SESSION['form']['onGoingAttManProccess'] * 4 * $unknownRequirements) +  ($_SESSION['form']['attManProccess'] * 8) + ($_SESSION['form']['onGoingAttManProccess'] * 4);
-$federationInstallationidPsHours = ($_SESSION['form']['numOfIdp'] * 4 * $unknownRequirements) + ($_SESSION['form']['numOfIdp'] * 4);
-$federationInstallationSPsHours = ($_SESSION['form']['shibboleth'] * 4 * $unknownRequirements) + ($_SESSION['form']['shibboleth'] * 4);
-$federationInstallationDSHours = ($_SESSION['form']['discoveryServ'] * 4 * $unknownRequirements) + ($_SESSION['form']['discoveryServ'] * 4);
-$federationInstallationHours = $federationInstallationDSHours + $federationInstallationidPsHours + $federationInstallationSPsHours;
-$federationConfigurationHours = ($_SESSION['form']['fedTargets'] * 4) + ($_SESSION['form']['verifiedSfl'] * 4) + ($_SESSION['form']['nonVerifiedSfl'] * 8) + (($_SESSION['form']['fedTargets'] * 4) + ($_SESSION['form']['verifiedSfl'] * 4) + ($_SESSION['form']['nonVerifiedSfl'] * 8) * $unknownRequirements); // formula does not match comment
-$federationTotalConfigurationHours = $federationConfigurationHours + $federationStudioTimeHours;
-$federationProductionMigration = $federationAnalysisWorkshopHours = (($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']) * $unknownRequirements) + ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']);
-$federationPostImplementationServicesHours = ($_SESSION['form']['numOfIdp'] +  ($_SESSION['form']['fedTargets']) + ($_SESSION['form']['numOfIdp'] +  $_SESSION['form']['fedTargets']) * $unknownRequirements);
-if ($_SESSION['form']['federation'] == 'YES') {
+$federationAnalysisWorkshopHours           = ( ( $_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ( $_SESSION['form']['nonVerifiedSfl'] * 20 ) + ( $_SESSION['form']['attManProccess'] * 2 ) + $_SESSION['form']['onGoingAttManProccess'] ) * $unknownRequirements ) + ( $_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ( $_SESSION['form']['nonVerifiedSfl'] * 20 ) + ( $_SESSION['form']['attManProccess'] * 2 ) + $_SESSION['form']['onGoingAttManProccess'] );
+$federationDesignDocumentHours             = ( ( $_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + ( $_SESSION['form']['attManProccess'] * 2 ) + $_SESSION['form']['onGoingAttManProccess'] ) * $unknownRequirements ) + ( $_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + ( $_SESSION['form']['attManProccess'] * 2 ) + $_SESSION['form']['onGoingAttManProccess'] );
+$federationWorkshopAndDesignDocHours       = $federationAnalysisWorkshopHours + $federationDesignDocumentHours;
+$federationStudioTimeHours                 = ( $_SESSION['form']['attManProccess'] * 8 ) + ( $_SESSION['form']['onGoingAttManProccess'] * 4 * $unknownRequirements ) + ( $_SESSION['form']['attManProccess'] * 8 ) + ( $_SESSION['form']['onGoingAttManProccess'] * 4 );
+$federationInstallationidPsHours           = ( $_SESSION['form']['numOfIdp'] * 4 * $unknownRequirements ) + ( $_SESSION['form']['numOfIdp'] * 4 );
+$federationInstallationSPsHours            = ( $_SESSION['form']['shibboleth'] * 4 * $unknownRequirements ) + ( $_SESSION['form']['shibboleth'] * 4 );
+$federationInstallationDSHours             = ( $_SESSION['form']['discoveryServ'] * 4 * $unknownRequirements ) + ( $_SESSION['form']['discoveryServ'] * 4 );
+$federationInstallationHours               = $federationInstallationDSHours + $federationInstallationidPsHours + $federationInstallationSPsHours;
+$federationConfigurationHours              = ( $_SESSION['form']['fedTargets'] * 4 ) + ( $_SESSION['form']['verifiedSfl'] * 4 ) + ( $_SESSION['form']['nonVerifiedSfl'] * 8 ) + ( ( $_SESSION['form']['fedTargets'] * 4 ) + ( $_SESSION['form']['verifiedSfl'] * 4 ) + ( $_SESSION['form']['nonVerifiedSfl'] * 8 ) * $unknownRequirements ); // formula does not match comment
+$federationTotalConfigurationHours         = $federationConfigurationHours + $federationStudioTimeHours;
+$federationProductionMigration             = $federationAnalysisWorkshopHours = ( ( $_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ( $_SESSION['form']['nonVerifiedSfl'] * 20 ) + ( $_SESSION['form']['attManProccess'] * 2 ) + $_SESSION['form']['onGoingAttManProccess'] ) * $unknownRequirements ) + ( $_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ( $_SESSION['form']['nonVerifiedSfl'] * 20 ) + ( $_SESSION['form']['attManProccess'] * 2 ) + $_SESSION['form']['onGoingAttManProccess'] );
+$federationPostImplementationServicesHours = ( $_SESSION['form']['numOfIdp'] + ( $_SESSION['form']['fedTargets'] ) + ( $_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] ) * $unknownRequirements );
+$federationConfigurationOverviewHours;
+if ( $_SESSION['form']['federation'] == 'YES' ) {
 	$federationConfigurationOverviewHours = 2 * $unknownRequirements + 2;
 } else {
 	$federationConfigurationOverviewHours = 0;
 }
-$federationSolutionDocumentationHours = ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['attManProccess']) + (($_SESSION['form']['numOfIdp'] +  $_SESSION['form']['fedTargets'] + $_SESSION['form']['attManProccess']) * $unknownRequirements);
-$federationWorkshopAndDesignDocHours = $federationAnalysisWorkshopHours + $federationDesignDocumentHours;
-$federationImplementationEffortHours = $federationSolutionDocumentationHours + $federationConfigurationOverviewHours + $federationPostImplementationServicesHours + $federationProductionMigration + $federationConfigurationHours + $federationInstallationDSHours + $federationInstallationSPsHours + $federationInstallationidPsHours + $federationStudioTimeHours + $federationDesignDocumentHours + $federationAnalysisWorkshopHours;
-$federationProjectManagementHours = $federationImplementationEffortHours * .1;
-$totalFederationHours = $federationImplementationEffortHours + $federationProjectManagementHours;
+$federationSolutionDocumentationHours = ( $_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['attManProccess'] ) + ( ( $_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['attManProccess'] ) * $unknownRequirements );
+$federationWorkshopAndDesignDocHours  = $federationAnalysisWorkshopHours + $federationDesignDocumentHours;
+$federationImplementationEffortHours  = $federationSolutionDocumentationHours + $federationConfigurationOverviewHours + $federationPostImplementationServicesHours + $federationProductionMigration + $federationConfigurationHours + $federationInstallationDSHours + $federationInstallationSPsHours + $federationInstallationidPsHours + $federationStudioTimeHours + $federationDesignDocumentHours + $federationAnalysisWorkshopHours;
+$federationProjectManagementHours     = $federationImplementationEffortHours * .1;
+$totalFederationHours                 = $federationImplementationEffortHours + $federationProjectManagementHours;
 // Administration and Implementation Training
-if ($_SESSION['form']['basicTraining'] == 'YES') {
+$administrationBasicTrainingHours;
+if ( $_SESSION['form']['basicTraining'] == 'YES' ) {
 	$administrationBasicTrainingHours = 40;
 } else {
 	$administrationBasicTrainingHours = 0;
 }
-if ($_SESSION['form']['advancedTraining'] == 'YES') {
+$administrationAdvancedTrainingTrainingHours;
+if ( $_SESSION['form']['advancedTraining'] == 'YES' ) {
 	$administrationAdvancedTrainingTrainingHours = 40;
 } else {
 	$administrationAdvancedTrainingTrainingHours = 0;
 }
-if ($_SESSION['form']['kioskTraining'] == 'YES') {
+$administrationKioskTrainingHours;
+if ( $_SESSION['form']['kioskTraining'] == 'YES' ) {
 	$administrationKioskTrainingHours = 4;
 } else {
 	$administrationKioskTrainingHours = 0;
 }
-if ($_SESSION['form']['pinTraining'] == 'YES') {
+$administrationPinTrainingTrainingHours;
+if ( $_SESSION['form']['pinTraining'] == 'YES' ) {
 	$administrationPinTrainingTrainingHours = 4;
 } else {
 	$administrationPinTrainingTrainingHours = 0;
 }
-if ($_SESSION['form']['helpDeskTraining'] == 'YES') {
+$administrationHelpDeskTrainingTrainingHours;
+if ( $_SESSION['form']['helpDeskTraining'] == 'YES' ) {
 	$administrationHelpDeskTrainingTrainingHours = 4;
 } else {
 	$administrationHelpDeskTrainingTrainingHours = 0;
 }
-if ($_SESSION['form']['selectServiceTraining'] == 'YES') {
+$administrationSelectServiceTrainingTrainingHours;
+if ( $_SESSION['form']['selectServiceTraining'] == 'YES' ) {
 	$administrationSelectServiceTrainingTrainingHours = 8;
 } else {
 	$administrationSelectServiceTrainingTrainingHours = 0;
 }
-if ($_SESSION['form']['hpamTraining'] == 'YES') {
+$administrationHPAMUiTrainingHours;
+if ( $_SESSION['form']['hpamTraining'] == 'YES' ) {
 	$administrationHPAMUiTrainingHours = 4;
 } else {
 	$administrationHPAMUiTrainingHours = 0;
 }
-if ($_SESSION['form']['federationConfigTraining'] == 'YES') {
+if ( $_SESSION['form']['federationConfigTraining'] == 'YES' ) {
 	$administrationFederationConfigTrainingHours = 4;
 } else {
 	$administrationFederationConfigTrainingHours = 0;
 }
-$administrationImplementationHours = $administrationFederationConfigTrainingHours + $administrationHPAMUiTrainingHours + $administrationSelectServiceTrainingTrainingHours + $administrationHelpDeskTrainingTrainingHours +
-	$administrationPinTrainingTrainingHours + $administrationKioskTrainingHours + $administrationAdvancedTrainingTrainingHours + $administrationBasicTrainingHours;
+$administrationImplementationHours    = $administrationFederationConfigTrainingHours + $administrationHPAMUiTrainingHours + $administrationSelectServiceTrainingTrainingHours + $administrationHelpDeskTrainingTrainingHours +
+                                        $administrationPinTrainingTrainingHours + $administrationKioskTrainingHours + $administrationAdvancedTrainingTrainingHours + $administrationBasicTrainingHours;
 $administrationProjectManagementHours = $administrationImplementationHours * .1;
-$totalAdministrationHours = $administrationImplementationHours + $administrationProjectManagementHours;
-$totalAllHours = $totalAdministrationHours + $totalPasswordHours + $totalEnvironmentHours + $totalFederationHours + $totalHPAMHours + $totalProvisioningHours;
+$totalAdministrationHours             = $administrationImplementationHours + $administrationProjectManagementHours;
+$totalAllHours                        = $totalAdministrationHours + $totalPasswordHours + $totalEnvironmentHours + $totalFederationHours + $totalHPAMHours + $totalProvisioningHours;
 // Phase Total Hours (per Task)
-$phaseAssessmentDesignHours = $passwordWorkshopAndDesignDocHours + $provisioningWorkshopAndDesignDocHours + $HPAMWorkshopAndDesignDocHours + $federationWorkshopAndDesignDocHours;
-$phaseInstallationHours = $environmentTotalPlatformInstallHours + $environmentOrganizationConfigurationHours + $environmentConnectedSystemDefinitionsHours + $environmentDocumentConfigurationsHours;
-$phaseImplementationHours = $passwordConfigurationHours + $passwordProductionMigrationHours + $passwordPostImplementationServicesHours + $passwordUiTrainingHours + $passwordSolutionDocumentationHours + $provisioningConfiguration +
-	$provisioningPostImplementationServicesHours + $provisioningProductionMigrationHours + $provisioningUiTrainingHours + $provisioningSolutionDocumentationHours + $HPAMOrgConfigurationHours + $HPAMPostImplementationServicesHours +
-	$HPAMPostImplementationServicesHours + $HPAMProductionMigrationHours + $HPAMUiTrainingHours + $HPAMSolutionDocumentationHours + $federationTotalConfigurationHours + $federationPostImplementationServicesHours
-	 + $federationProductionMigration + $federationConfigurationOverviewHours + $federationSolutionDocumentationHours;
+$phaseAssessmentDesignHours  = $passwordWorkshopAndDesignDocHours + $provisioningWorkshopAndDesignDocHours + $HPAMWorkshopAndDesignDocHours + $federationWorkshopAndDesignDocHours;
+$phaseInstallationHours      = $environmentTotalPlatformInstallHours + $environmentOrganizationConfigurationHours + $environmentConnectedSystemDefinitionsHours + $environmentDocumentConfigurationsHours;
+$phaseImplementationHours    = $passwordConfigurationHours + $passwordProductionMigrationHours + $passwordPostImplementationServicesHours + $passwordUiTrainingHours + $passwordSolutionDocumentationHours + $provisioningConfiguration +
+                               $provisioningPostImplementationServicesHours + $provisioningProductionMigrationHours + $provisioningUiTrainingHours + $provisioningSolutionDocumentationHours + $HPAMOrgConfigurationHours + $HPAMPostImplementationServicesHours +
+                               $HPAMPostImplementationServicesHours + $HPAMProductionMigrationHours + $HPAMUiTrainingHours + $HPAMSolutionDocumentationHours + $federationTotalConfigurationHours + $federationPostImplementationServicesHours
+                               + $federationProductionMigration + $federationConfigurationOverviewHours + $federationSolutionDocumentationHours;
 $phaseProjectManagementHours = $environmentProjectManagementHours + $passwordProjectManagementHours + $provisioningProjectManagementHours + $HPAMProjectManagementHours + $federationProjectManagementHours + $administrationProjectManagementHours;
-$phaseTrainingHours = $administrationBasicTrainingHours + $administrationAdvancedTrainingTrainingHours + $administrationKioskTrainingHours + $administrationPinTrainingTrainingHours + $administrationHelpDeskTrainingTrainingHours + $administrationSelectServiceTrainingTrainingHours +
-	$administrationHPAMUiTrainingHours + $administrationFederationConfigTrainingHours;
+$phaseTrainingHours          = $administrationBasicTrainingHours + $administrationAdvancedTrainingTrainingHours + $administrationKioskTrainingHours + $administrationPinTrainingTrainingHours + $administrationHelpDeskTrainingTrainingHours + $administrationSelectServiceTrainingTrainingHours +
+                               $administrationHPAMUiTrainingHours + $administrationFederationConfigTrainingHours;
 // Totals
 // Modules
 $modulesPasswordManagement = $_SESSION['form']['passwordManagement'];
-$modulesProvisioning = $_SESSION['form']['provisioning'];
-$modulesHPAM = $_SESSION['form']['hpam'];
-$modulesFederation = $_SESSION['form']['federation'];
-$sql = "INSERT INTO Quotes (username, clientName, completionDate, servicesHourlyRate, environmentTotalPlatformInstallHours, environmentOrganizationConfigurationHours, environmentConnectedSystemDefinitionsHours, environmentDocumentConfigurationsHours, environmentProjectManagementHours, totalEnvironmentHours, passwordWorkshopAndDesignDocHours, passwordConfigurationHours, passwordPostImplementationServicesHours, passwordProductionMigrationHours, passwordUiTrainingHours,  passwordSolutionDocumentationHours, passwordProjectManagementHours, totalPasswordHours, provisioningWorkshopAndDesignDocHours, provisioningConfiguration,  provisioningPostImplementationServicesHours, provisioningProductionMigrationHours, provisioningUiTrainingHours, provisioningSolutionDocumentationHours, provisioningProjectManagementHours, totalProvisioningHours, HPAMWorkshopAndDesignDocHours, HPAMOrgConfigurationHours, HPAMPostImplementationServicesHours, HPAMProductionMigrationHours, HPAMUiTrainingHours, HPAMSolutionDocumentationHours, HPAMProjectManagementHours, totalHPAMHours, federationWorkshopAndDesignDocHours, federationInstallationHours, federationTotalConfigurationHours, federationPostImplementationServicesHours, federationProductionMigration, federationConfigurationOverviewHours, federationSolutionDocumentationHours, federationProjectManagementHours, totalFederationHours, administrationBasicTrainingHours, administrationAdvancedTrainingTrainingHours, administrationKioskTrainingHours, administrationPinTrainingTrainingHours, administrationHelpDeskTrainingTrainingHours, administrationSelectServiceTrainingTrainingHours, administrationHPAMUiTrainingHours, administrationFederationConfigTrainingHours, administrationProjectManagementHours, totalAdministrationHours, totalAllHours, phaseAssessmentDesignHours, phaseInstallationHours, phaseImplementationHours, phaseProjectManagementHours, phaseTrainingHours, modulesPasswordManagement, modulesProvisioning, modulesHPAM, modulesFederation) 
-Values({$username}, {$clientName}, {$completionDate}, $servicesHourlyRate, $environmentTotalPlatformInstallHours, $environmentOrganizationConfigurationHours, $environmentConnectedSystemDefinitionsHours, $environmentDocumentConfigurationsHours, $environmentProjectManagementHours, $totalEnvironmentHours, $passwordWorkshopAndDesignDocHours, $passwordConfigurationHours, $passwordPostImplementationServicesHours, $passwordProductionMigrationHours, $passwordUiTrainingHours,  $passwordSolutionDocumentationHours, $passwordProjectManagementHours, $totalPasswordHours, $provisioningWorkshopAndDesignDocHours, $provisioningConfiguration,  $provisioningPostImplementationServicesHours, $provisioningProductionMigrationHours, $provisioningUiTrainingHours, $provisioningSolutionDocumentationHours, $provisioningProjectManagementHours, $totalProvisioningHours, $HPAMWorkshopAndDesignDocHours, $HPAMOrgConfigurationHours, $HPAMPostImplementationServicesHours, $HPAMProductionMigrationHours, $HPAMUiTrainingHours, $HPAMSolutionDocumentationHours, $HPAMProjectManagementHours, $totalHPAMHours, $federationWorkshopAndDesignDocHours, $federationInstallationHours, $federationTotalConfigurationHours, $federationPostImplementationServicesHours, $federationProductionMigration, $federationConfigurationOverviewHours, $federationSolutionDocumentationHours, $federationProjectManagementHours, $totalFederationHours, $administrationBasicTrainingHours, $administrationAdvancedTrainingTrainingHours, $administrationKioskTrainingHours, $administrationPinTrainingTrainingHours, $administrationHelpDeskTrainingTrainingHours, $administrationSelectServiceTrainingTrainingHours, $administrationHPAMUiTrainingHours, $administrationFederationConfigTrainingHours, $administrationProjectManagementHours, $totalAdministrationHours, $totalAllHours, $phaseAssessmentDesignHours, $phaseInstallationHours, $phaseImplementationHours, $phaseProjectManagementHours, $phaseTrainingHours, $modulesPasswordManagement, $modulesProvisioning, $modulesHPAM, $modulesFederation})";
+$modulesProvisioning       = $_SESSION['form']['provisioning'];
+$modulesHPAM               = $_SESSION['form']['hpam'];
+$modulesFederation         = $_SESSION['form']['federation'];
+if ( $newQuote == true ) { // only insert on new quote, prevents page refresh from inserting quote again
+	$sql     = "INSERT INTO Quotes (username, clientName, startDate, completionDate, servicesHourlyRate, environmentTotalPlatformInstallHours, environmentOrganizationConfigurationHours, environmentConnectedSystemDefinitionsHours, environmentDocumentConfigurationsHours, environmentProjectManagementHours, totalEnvironmentHours, passwordWorkshopAndDesignDocHours, passwordConfigurationHours, passwordPostImplementationServicesHours, passwordProductionMigrationHours, passwordUiTrainingHours,  passwordSolutionDocumentationHours, passwordProjectManagementHours, totalPasswordHours, provisioningWorkshopAndDesignDocHours, provisioningConfiguration,  provisioningPostImplementationServicesHours, provisioningProductionMigrationHours, provisioningUiTrainingHours, provisioningSolutionDocumentationHours, provisioningProjectManagementHours, totalProvisioningHours, HPAMWorkshopAndDesignDocHours, HPAMOrgConfigurationHours, HPAMPostImplementationServicesHours, HPAMProductionMigrationHours, HPAMUiTrainingHours, HPAMSolutionDocumentationHours, HPAMProjectManagementHours, totalHPAMHours, federationWorkshopAndDesignDocHours, federationInstallationHours, federationTotalConfigurationHours, federationPostImplementationServicesHours, federationProductionMigration, federationConfigurationOverviewHours, federationSolutionDocumentationHours, federationProjectManagementHours, totalFederationHours, administrationBasicTrainingHours, administrationAdvancedTrainingTrainingHours, administrationKioskTrainingHours, administrationPinTrainingTrainingHours, administrationHelpDeskTrainingTrainingHours, administrationSelectServiceTrainingTrainingHours, administrationHPAMUiTrainingHours, administrationFederationConfigTrainingHours, administrationProjectManagementHours, totalAdministrationHours, totalAllHours, phaseAssessmentDesignHours, phaseInstallationHours, phaseImplementationHours, phaseProjectManagementHours, phaseTrainingHours, modulesPasswordManagement, modulesProvisioning, modulesHPAM, modulesFederation) 
+Values('$username' , '$clientName', '$startDate', '$completionDate', $servicesHourlyRate, $environmentTotalPlatformInstallHours, $environmentOrganizationConfigurationHours, $environmentConnectedSystemDefinitionsHours, $environmentDocumentConfigurationsHours, $environmentProjectManagementHours, $totalEnvironmentHours, $passwordWorkshopAndDesignDocHours, $passwordConfigurationHours, $passwordPostImplementationServicesHours, $passwordProductionMigrationHours, $passwordUiTrainingHours,  $passwordSolutionDocumentationHours, $passwordProjectManagementHours, $totalPasswordHours, $provisioningWorkshopAndDesignDocHours, $provisioningConfiguration,  $provisioningPostImplementationServicesHours, $provisioningProductionMigrationHours, $provisioningUiTrainingHours, $provisioningSolutionDocumentationHours, $provisioningProjectManagementHours, $totalProvisioningHours, $HPAMWorkshopAndDesignDocHours, $HPAMOrgConfigurationHours, $HPAMPostImplementationServicesHours, $HPAMProductionMigrationHours, $HPAMUiTrainingHours, $HPAMSolutionDocumentationHours, $HPAMProjectManagementHours, $totalHPAMHours, $federationWorkshopAndDesignDocHours, $federationInstallationHours, $federationTotalConfigurationHours, $federationPostImplementationServicesHours, $federationProductionMigration, $federationConfigurationOverviewHours, $federationSolutionDocumentationHours, $federationProjectManagementHours, $totalFederationHours, $administrationBasicTrainingHours, $administrationAdvancedTrainingTrainingHours, $administrationKioskTrainingHours, $administrationPinTrainingTrainingHours, $administrationHelpDeskTrainingTrainingHours, $administrationSelectServiceTrainingTrainingHours, $administrationHPAMUiTrainingHours, $administrationFederationConfigTrainingHours, $administrationProjectManagementHours, $totalAdministrationHours, $totalAllHours, $phaseAssessmentDesignHours, $phaseInstallationHours, $phaseImplementationHours, $phaseProjectManagementHours, $phaseTrainingHours, '$modulesPasswordManagement', '$modulesProvisioning', '$modulesHPAM', '$modulesFederation')";
+	$mysqli->query( $sql );
+}
 echo '<link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
 <div><h4>Client Name: ' . $clientName . '</h4>
@@ -212,42 +236,42 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Platform Install</td>
-            <td>' . '$' . number_format(($environmentTotalPlatformInstallHours * $servicesHourlyRate), 2) . '</td>
-            <td>' .number_format( $environmentTotalPlatformInstallHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $environmentTotalPlatformInstallHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $environmentTotalPlatformInstallHours, 2 ) . '</td>
             <td>All required infrastructure components, i.e.: GIGs, Test & Production Platforms</td>
         </tr>
         <tr>
             <td>Organization Configuration</td>
-            <td>' . '$' . number_format(($environmentOrganizationConfigurationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($environmentOrganizationConfigurationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $environmentOrganizationConfigurationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $environmentOrganizationConfigurationHours, 2 ) . '</td>
             <td>Configure Organization specific settings, logo, page titles, etc..</td>
         </tr>
 
         <tr>
             <td>Configure Connected Systems</td>
-            <td>' . '$' . number_format(($environmentConnectedSystemDefinitionsHours * $servicesHourlyRate), 2)  . '</td>
-            <td>' . number_format($environmentConnectedSystemDefinitionsHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $environmentConnectedSystemDefinitionsHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $environmentConnectedSystemDefinitionsHours, 2 ) . '</td>
             <td>15 minutes per system</td>
         </tr>
 
         <tr>
             <td>Document Configurations</td>
-            <td>' . '$' . number_format(($environmentDocumentConfigurationsHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($environmentDocumentConfigurationsHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $environmentDocumentConfigurationsHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $environmentDocumentConfigurationsHours, 2 ) . '</td>
             <td>Document all server configuration settings</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . number_format(($environmentProjectManagementHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($environmentProjectManagementHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $environmentProjectManagementHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $environmentProjectManagementHours, 2 ) . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . number_format(($totalEnvironmentHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($totalEnvironmentHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $totalEnvironmentHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $totalEnvironmentHours, 2 ) . '</td>
             <td></td>
         </tr>
 
@@ -261,57 +285,57 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Workshop & Design Doc</td>
-            <td>' . '$' . number_format(($passwordWorkshopAndDesignDocHours * $servicesHourlyRate), 2) . '</td>
-            <td>' .number_format( $passwordWorkshopAndDesignDocHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $passwordWorkshopAndDesignDocHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $passwordWorkshopAndDesignDocHours, 2 ) . '</td>
             <td>All Password Management Requirements will be defined and a design document will be generated</td>
         </tr>
 
         <tr>
             <td>Configuration</td>
-            <td>' . '$' . number_format(($passwordConfigurationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($passwordConfigurationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $passwordConfigurationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $passwordConfigurationHours, 2 ) . '</td>
             <td>Password Policies, Password System Groupings, Configuring Self-Registration / Self Claiming.</td>
         </tr>
 
         <tr>
             <td>Post Implementation Services</td>
-            <td>' . '$' . number_format(($passwordPostImplementationServicesHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($passwordPostImplementationServicesHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $passwordPostImplementationServicesHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $passwordPostImplementationServicesHours, 2 ) . '</td>
             <td>Review system logging facilities for the purposes of troubleshooting, ensure system health and identify potential issues.</td>
         </tr>
 
         <tr>
             <td>Prod. Migration</td>
-            <td>' . '$' . number_format(($passwordProductionMigrationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($passwordProductionMigrationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $passwordProductionMigrationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $passwordProductionMigrationHours, 2 ) . '</td>
             <td>Migrate implemented solution into production</td>
         </tr>
 
         <tr>
             <td>Training</td>
-            <td>' . '$' . number_format(($passwordUiTrainingHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($passwordUiTrainingHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $passwordUiTrainingHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $passwordUiTrainingHours, 2 ) . '</td>
             <td>Self-Service UI training to ensure a complete understanding of UI elements and functionality.</td>
         </tr>
 
         <tr>
             <td>Solution Documentation</td>
-            <td>' . '$' . number_format(($passwordSolutionDocumentationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($passwordSolutionDocumentationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $passwordSolutionDocumentationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $passwordSolutionDocumentationHours, 2 ) . '</td>
             <td>Document Solution specific password management configurations</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . number_format(($passwordProjectManagementHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($passwordProjectManagementHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $passwordProjectManagementHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $passwordProjectManagementHours, 2 ) . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . number_format(($totalPasswordHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($totalPasswordHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $totalPasswordHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $totalPasswordHours, 2 ) . '</td>
             <td></td>
         </tr>
 
@@ -325,57 +349,57 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Workshop & Design Doc</td>
-            <td>' . '$' . number_format(($provisioningWorkshopAndDesignDocHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($provisioningWorkshopAndDesignDocHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $provisioningWorkshopAndDesignDocHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $provisioningWorkshopAndDesignDocHours, 2 ) . '</td>
             <td>All Provisioning Requirements will be defined and a design document will be generated.</td>
         </tr>
 
         <tr>
             <td>Configuration</td>
-            <td>' . '$' . number_format(($provisioningConfiguration * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($provisioningConfiguration, 2) . '</td>
+            <td>' . '$' . number_format( ( $provisioningConfiguration * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $provisioningConfiguration, 2 ) . '</td>
             <td>All necessary product features will be configure to enable the required functionality.  The following provisioning process will be implemented to manage standard accounts and permissions of each provisioning target system: Add, Modify, Disable, Terminate.</td>
         </tr>
 
         <tr>
             <td>Post Implementation Services</td>
-            <td>' . '$' . number_format(($provisioningPostImplementationServicesHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($provisioningPostImplementationServicesHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $provisioningPostImplementationServicesHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $provisioningPostImplementationServicesHours, 2 ) . '</td>
             <td>Review system logging facilities for the purposes of troubleshooting, ensure system health and identify potential issues.</td>
         </tr>
 
         <tr>
             <td>Prod. Migration</td>
-            <td>' . '$' . number_format(($provisioningProductionMigrationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($provisioningProductionMigrationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $provisioningProductionMigrationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $provisioningProductionMigrationHours, 2 ) . '</td>
             <td>Migrate implemented solution into production</td>
         </tr>
 
         <tr>
             <td>Training</td>
-            <td>' . '$' . number_format(($provisioningUiTrainingHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($provisioningUiTrainingHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $provisioningUiTrainingHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $provisioningUiTrainingHours, 2 ) . '</td>
             <td>Self-Service UI training to ensure a complete understanding of UI elements and functionality.</td>
         </tr>
 
         <tr>
             <td>Solution Documentation</td>
-            <td>' . '$' . number_format(($provisioningSolutionDocumentationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($provisioningSolutionDocumentationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $provisioningSolutionDocumentationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $provisioningSolutionDocumentationHours, 2 ) . '</td>
             <td>Document Solution specific provisioning configurations</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . number_format(($provisioningProjectManagementHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($provisioningProjectManagementHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $provisioningProjectManagementHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $provisioningProjectManagementHours, 2 ) . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . number_format(($totalProvisioningHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($totalProvisioningHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $totalProvisioningHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $totalProvisioningHours, 2 ) . '</td>
             <td></td>
         </tr>
 
@@ -389,57 +413,57 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Workshop & Design Doc</td>
-            <td>' . '$' . number_format(($HPAMWorkshopAndDesignDocHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($HPAMWorkshopAndDesignDocHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $HPAMWorkshopAndDesignDocHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $HPAMWorkshopAndDesignDocHours, 2 ) . '</td>
             <td>All HPAM Requirements will be defined and a design document will be generated.</td>
         </tr>
 
         <tr>
             <td>Configuration</td>
-            <td>' . '$' . number_format(($HPAMOrgConfigurationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($HPAMOrgConfigurationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $HPAMOrgConfigurationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $HPAMOrgConfigurationHours, 2 ) . '</td>
             <td>Configure HPAM Account Types, System Owners, HPAM Users.</td>
         </tr>
 
         <tr>
             <td>Post Implementation Services</td>
-            <td>' . '$' . number_format(($HPAMPostImplementationServicesHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($HPAMPostImplementationServicesHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $HPAMPostImplementationServicesHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $HPAMPostImplementationServicesHours, 2 ) . '</td>
             <td>Review system logging facilities for the purposes of troubleshooting, ensure system health and identify potential issues.</td>
         </tr>
 
         <tr>
             <td>Prod. Migration</td>
-            <td>' . '$' . number_format(($HPAMProductionMigrationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($HPAMProductionMigrationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $HPAMProductionMigrationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $HPAMProductionMigrationHours, 2 ) . '</td>
             <td>Migrate implemented solution into production</td>
         </tr>
 
         <tr>
             <td>Training</td>
-            <td>' . '$' . number_format(($HPAMUiTrainingHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($HPAMUiTrainingHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $HPAMUiTrainingHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $HPAMUiTrainingHours, 2 ) . '</td>
             <td>Self-Service UI training to ensure a complete understanding of UI elements and functionality.</td>
         </tr>
 
         <tr>
             <td>Solution Documentation</td>
-            <td>' . '$' . number_format(($HPAMSolutionDocumentationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($HPAMSolutionDocumentationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $HPAMSolutionDocumentationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $HPAMSolutionDocumentationHours, 2 ) . '</td>
             <td>Document Solution specific HPAM configurations</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . number_format(($HPAMProjectManagementHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($HPAMProjectManagementHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $HPAMProjectManagementHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $HPAMProjectManagementHours, 2 ) . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . number_format(($totalHPAMHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($totalHPAMHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $totalHPAMHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $totalHPAMHours, 2 ) . '</td>
             <td></td>
         </tr>
 
@@ -453,64 +477,64 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Workshop & Design Doc</td>
-            <td>' . '$' . number_format(($federationWorkshopAndDesignDocHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($federationWorkshopAndDesignDocHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $federationWorkshopAndDesignDocHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $federationWorkshopAndDesignDocHours, 2 ) . '</td>
             <td>All Federation Requirements will be defined and a design document will be generated.</td>
         </tr>
 
         <tr>
             <td>Federation Installations (IdPs, SPs & DS)</td>
-            <td>' . '$' . number_format(($federationInstallationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($federationInstallationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $federationInstallationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $federationInstallationHours, 2 ) . '</td>
             <td>Installation of Federation IdPs, Shibboleth SPs and Discovery Services</td>
         </tr>
 
         <tr>
             <td>Configuration</td>
-            <td>' . '$' . number_format(($federationTotalConfigurationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($federationTotalConfigurationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $federationTotalConfigurationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $federationTotalConfigurationHours, 2 ) . '</td>
             <td>Configure IdP, SP Metadata and Attribute Management Processes.</td>
         </tr>
 
         <tr>
             <td>Post Implementation Services</td>
-            <td>' . '$' . number_format(($federationPostImplementationServicesHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($federationPostImplementationServicesHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $federationPostImplementationServicesHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $federationPostImplementationServicesHours, 2 ) . '</td>
             <td>Review system logging facilities for the purposes of troubleshooting, ensure system health and identify potential issues.</td>
         </tr>
 
         <tr>
             <td>Prod. Migration</td>
-            <td>' . '$' . number_format(($federationProductionMigration * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($federationProductionMigration, 2) . '</td>
+            <td>' . '$' . number_format( ( $federationProductionMigration * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $federationProductionMigration, 2 ) . '</td>
             <td>Migrate implemented solution into production</td>
         </tr>
 
         <tr>
             <td>Configuration Overview</td>
-            <td>' . '$' . number_format(($federationConfigurationOverviewHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($federationConfigurationOverviewHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $federationConfigurationOverviewHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $federationConfigurationOverviewHours, 2 ) . '</td>
             <td>Implementation overview for the purposes of maintaining and administering solution.</td>
         </tr>
 
         <tr>
             <td>Solution Documentation</td>
-            <td>' . '$' . number_format($federationSolutionDocumentationHours * $servicesHourlyRate, 2) . '</td>
-            <td>' . number_format($federationSolutionDocumentationHours, 2) . '</td>
+            <td>' . '$' . number_format( $federationSolutionDocumentationHours * $servicesHourlyRate, 2 ) . '</td>
+            <td>' . number_format( $federationSolutionDocumentationHours, 2 ) . '</td>
             <td>Document Solution specific Federation configurations</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . number_format(($federationProjectManagementHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($federationProjectManagementHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $federationProjectManagementHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $federationProjectManagementHours, 2 ) . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . number_format(($totalFederationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($totalFederationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $totalFederationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $totalFederationHours, 2 ) . '</td>
             <td></td>
         </tr>
 
@@ -524,15 +548,15 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Basic Overview</td>
-            <td>' . '$' . number_format(($administrationBasicTrainingHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($administrationBasicTrainingHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $administrationBasicTrainingHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $administrationBasicTrainingHours, 2 ) . '</td>
             <td>Overview of the basic components and product functionality.</td>
         </tr>
 
         <tr>
             <td>Advanced Features and Concepts</td>
-            <td>' . '$' . number_format(($administrationAdvancedTrainingTrainingHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($administrationAdvancedTrainingTrainingHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $administrationAdvancedTrainingTrainingHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $administrationAdvancedTrainingTrainingHours, 2 ) . '</td>
             <td>Overview of the advanced features of the product suite, IE: Account Matching, HPAM, Workflow Design and Best Practices, etc..  Will be modified to meet the specific features that are utilized during the implementation of the above solution.</td>
         </tr>
 
@@ -545,36 +569,36 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Kiosk UI Training (Train the Trainer)</td>
-            <td>' . '$' . number_format(($administrationKioskTrainingHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($administrationKioskTrainingHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $administrationKioskTrainingHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $administrationKioskTrainingHours, 2 ) . '</td>
             <td></td>
         </tr>
 
         <tr>
             <td>Pin Reset UI Training (Train the Trainer)</td>
-            <td>' . '$' . number_format(($administrationPinTrainingTrainingHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($administrationPinTrainingTrainingHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $administrationPinTrainingTrainingHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $administrationPinTrainingTrainingHours, 2 ) . '</td>
             <td></td>
         </tr>
 
         <tr>
             <td>Help Desk UI Training (Train the Trainer)</td>
-            <td>' . '$' . number_format(($administrationHelpDeskTrainingTrainingHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($administrationHelpDeskTrainingTrainingHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $administrationHelpDeskTrainingTrainingHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $administrationHelpDeskTrainingTrainingHours, 2 ) . '</td>
             <td></td>
         </tr>
 
         <tr>
             <td>Self Service Access Management UI Training (Train the Trainer)</td>
-            <td>' . '$' . number_format(($administrationSelectServiceTrainingTrainingHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($administrationSelectServiceTrainingTrainingHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $administrationSelectServiceTrainingTrainingHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $administrationSelectServiceTrainingTrainingHours, 2 ) . '</td>
             <td></td>
         </tr>
 
         <tr>
             <td>HPAM UI Training (Train the Trainer)</td>
-            <td>' . '$' . number_format(($administrationHPAMUiTrainingHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($administrationHPAMUiTrainingHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $administrationHPAMUiTrainingHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $administrationHPAMUiTrainingHours, 2 ) . '</td>
             <td></td>
         </tr>
 
@@ -587,8 +611,8 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Federation Configuration Training</td>
-            <td>' . '$' . number_format(($administrationFederationConfigTrainingHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($administrationFederationConfigTrainingHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $administrationFederationConfigTrainingHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $administrationFederationConfigTrainingHours, 2 ) . '</td>
             <td></td>
         </tr>
 
@@ -601,22 +625,22 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . number_format(($administrationProjectManagementHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($administrationProjectManagementHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $administrationProjectManagementHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $administrationProjectManagementHours, 2 ) . '</td>
             <td>Project Management Activities</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . number_format(($totalAdministrationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($totalAdministrationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $totalAdministrationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $totalAdministrationHours, 2 ) . '</td>
             <td></td>
         </tr>
 
         <tr>
             <th><b>* Total Estimated Effort</b></th>
-            <th>' . '$' . number_format(($totalAllHours * $servicesHourlyRate), 2) . '</th>
-            <th>' . number_format($totalAllHours, 2) . '</th>
+            <th>' . '$' . number_format( ( $totalAllHours * $servicesHourlyRate ), 2 ) . '</th>
+            <th>' . number_format( $totalAllHours, 2 ) . '</th>
             <th></th>
         </tr>
 
@@ -635,32 +659,32 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Assessment/Design (Workshop)</td>
-            <td>' . '$' . number_format(($phaseAssessmentDesignHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($phaseAssessmentDesignHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $phaseAssessmentDesignHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $phaseAssessmentDesignHours, 2 ) . '</td>
         </tr>
 
         <tr>
             <td>Installation</td>
-            <td>' . '$' . number_format(($phaseInstallationHours *$servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($phaseInstallationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $phaseInstallationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $phaseInstallationHours, 2 ) . '</td>
         </tr>
 
         <tr>
             <td>Implementation</td>
-            <td>' . '$' . number_format(($phaseImplementationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($phaseImplementationHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $phaseImplementationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $phaseImplementationHours, 2 ) . '</td>
         </tr>
 
         <tr>
             <td>Project Management</td>
-            <td>' . '$' . number_format(($phaseProjectManagementHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($phaseProjectManagementHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $phaseProjectManagementHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $phaseProjectManagementHours, 2 ) . '</td>
         </tr>
 
         <tr>
             <td>Training</td>
-            <td>' . '$' . number_format(($phaseTrainingHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . number_format($phaseTrainingHours, 2) . '</td>
+            <td>' . '$' . number_format( ( $phaseTrainingHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . number_format( $phaseTrainingHours, 2 ) . '</td>
         </tr>
 
     </table>
@@ -679,50 +703,50 @@ echo '<link rel="stylesheet" href="../assets/css/style.css">
 
         <tr>
             <td>Environment</td>
-            <td>' . '$' . number_format(($totalEnvironmentHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . (number_format(($totalEnvironmentHours / $totalAllHours), 2) * 100) . '%' . '</td>
+            <td>' . '$' . number_format( ( $totalEnvironmentHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . ( number_format( ( $totalEnvironmentHours / $totalAllHours ), 2 ) * 100 ) . '%' . '</td>
             <td>No Customization changes to Self-Service Uis.  Only configurable changes allowed.</td>
         </tr>
 
         <tr>
             <td>Password Management</td>
-            <td>' . '$' . number_format(($totalPasswordHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . (number_format(($totalPasswordHours / $totalAllHours), 2) * 100) . '%' . '</td>
+            <td>' . '$' . number_format( ( $totalPasswordHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . ( number_format( ( $totalPasswordHours / $totalAllHours ), 2 ) * 100 ) . '%' . '</td>
             <td>All Connectors available.  Does not accommodate for any necessary development time or effort.</td>
         </tr>
 
         <tr>
             <td>Provisioning</td>
-            <td>' . '$' . number_format(($totalProvisioningHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . (number_format(($totalProvisioningHours / $totalAllHours), 2) * 100) . '%' . '</td>
+            <td>' . '$' . number_format( ( $totalProvisioningHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . ( number_format( ( $totalProvisioningHours / $totalAllHours ), 2 ) * 100 ) . '%' . '</td>
             <td>Does not accommodate for any unforeseen issues or solution customizations not supported via the standard UIs or RDM workflows.</td>
         </tr>
 
         <tr>
             <td>HPAM</td>
-            <td>' . '$' . number_format(($totalHPAMHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . (number_format(($totalHPAMHours / $totalAllHours), 2) * 100) . '%' . '</td>
+            <td>' . '$' . number_format( ( $totalHPAMHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . ( number_format( ( $totalHPAMHours / $totalAllHours ), 2 ) * 100 ) . '%' . '</td>
             <td>All necessary policy / roles have been defined.</td>
         </tr>
 
         <tr>
             <td>Federation</td>
-            <td>' . '$' . number_format(($totalFederationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . (number_format(($totalFederationHours / $totalAllHours), 2) * 100) . '%' . '</td>
+            <td>' . '$' . number_format( ( $totalFederationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . ( number_format( ( $totalFederationHours / $totalAllHours ), 2 ) * 100 ) . '%' . '</td>
             <td>Will create standard application accounts.</td>
         </tr>
 
         <tr>
             <td>Training</td>
-            <td>' . '$' . number_format(($totalAdministrationHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . (number_format(($totalAdministrationHours / $totalAllHours), 2) * 100) . '%' . '</td>
+            <td>' . '$' . number_format( ( $totalAdministrationHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . ( number_format( ( $totalAdministrationHours / $totalAllHours ), 2 ) * 100 ) . '%' . '</td>
             <td>All Fischer Pre-Requisites have been satisfied prior to starting the implementation.</td>
         </tr>
 
         <tr>
             <td><b>Total</b></td>
-            <td>' . '$' . number_format(($totalAllHours * $servicesHourlyRate), 2) . '</td>
-            <td>' . (number_format(($totalAllHours / $totalAllHours), 2) * 100) . '%' . '</td>
+            <td>' . '$' . number_format( ( $totalAllHours * $servicesHourlyRate ), 2 ) . '</td>
+            <td>' . ( number_format( ( $totalAllHours / $totalAllHours ), 2 ) * 100 ) . '%' . '</td>
             <td>The effort required to load legacy account information is out of scope for this effort and will need to be estimated separately.</td>
         </tr>
 
