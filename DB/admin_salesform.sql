@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 25, 2016 at 10:53 PM
+-- Generation Time: Mar 26, 2016 at 12:30 PM
 -- Server version: 5.5.41
 -- PHP Version: 5.4.36
 
@@ -19,6 +19,24 @@ SET time_zone = "+00:00";
 --
 -- Database: `admin_salesform`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Pricing`
+--
+
+CREATE TABLE IF NOT EXISTS `Pricing` (
+  `id` int(11) NOT NULL DEFAULT '1',
+  `servicesHourlyRate` double NOT NULL DEFAULT '125'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Pricing`
+--
+
+INSERT INTO `Pricing` (`id`, `servicesHourlyRate`) VALUES
+  (1, 125);
 
 -- --------------------------------------------------------
 
@@ -123,6 +141,12 @@ INSERT INTO `users` (`username`, `pass`, `admin`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `Pricing`
+--
+ALTER TABLE `Pricing`
+ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Quotes`
