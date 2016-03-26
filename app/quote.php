@@ -11,8 +11,9 @@ if ( is_string( $_SESSION['form'] ) ) { // don't run if form data has already be
 }
 $username            = $_SESSION['username'];
 $unknownRequirements = $_SESSION['form']['unknownPercentage'] / 100; // Metrics.B64
-// Must read price from DB
-$servicesHourlyRate = 125.00;
+$result     = $mysqli->query( "SELECT * FROM Pricing WHERE id=1" ); // Must read price from DB
+$row        = mysqli_fetch_assoc( $result );
+$servicesHourlyRate = $row['servicesHourlyRate'];
 $clientName         = $_SESSION['form']['name'];
 $startDate          = $_SESSION['form']['startDate'];
 $completionDate     = $_SESSION['form']['completionDate'];
