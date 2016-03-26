@@ -15,16 +15,11 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             // State to select "Generate New Quote" or "View Existing Quotes"
             .state("home", {
                 url: "/home",
-                templateUrl: "view/quote-home.html"
+                templateUrl: "landing.php"
             })
             .state("portal",{
                 url: "/adminPortal",
                 templateUrl:"view/adminPortal.html"
-            })
-
-            .state("admin",{
-                url: "/adminLanding",
-                templateUrl: "view/adminLanding.html"
             })
 
 
