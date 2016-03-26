@@ -31,7 +31,5 @@ if ($mysqli->connect_errno) { // exit on connection failure
     printf("Connect failed: %s\n", $mysqli->connect_error);
     exit();
 }
-
-
 header( "location:index.php#/users" );
 
