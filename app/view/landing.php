@@ -1,11 +1,11 @@
 <?php
 session_start();
-if (!isset($_SESSION['username']))  { // make sure user is logged in
-	header("location:index.php");
+if ( ! isset( $_SESSION['username'] ) ) { // make sure user is logged in
+	header( "location:index.php" );
 }
 echo '
 <div align="right" class="btn-toolbar rightCornerButton">
-    <a ng-model="logoutButton" href="logout.php" class="btn btn-primary">Log Out</a>
+    <a ng-model="logoutButton" href="../logout.php" class="btn btn-primary">Log Out</a>
 </div>
 
 <div class="container">
