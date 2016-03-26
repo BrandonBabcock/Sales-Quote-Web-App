@@ -1,0 +1,38 @@
+<style>
+    .form-group{
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+</style>
+<form method="post" action="processUser.php" title="addUser" >
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">NEW USER GENERATION</div>
+            <div class="panel-body">
+
+
+<br/>
+<div class="form-group">
+<label>FIRST NAME</label>
+<input type="text" class="form-control" name="newUserName" ng-model="userData.newUserName" id="newname" placeholder="first name" >
+<label>LAST NAME</label>
+    <input type="text" class="form-control" name="newlastName" ng-model="userData.newlastName" id="newlastname" placeholder="last name" >
+  </div>  <div class="form-group">
+    <label>USERNAME</label>
+<input type="text" class="form-control" name="newusername" ng-model="userData.newusername" id="newusername" placeholder="username" >
+
+    <label>PASSWORD</label>
+<input type="text" class="form-control" name="newuserpass" ng-model="userData.newuserpass" id="newuserpass" placeholder="password"  >
+</div>
+                <br/>
+
+<input type="checkbox" align="left" name="newuseradmin" ng-model="userData.newuseradmin" id="newuseradmin" style="margin-left: 25%">
+IS THIS USER AN ADMIN?
+<br/>
+<br/>
+
+</div></div></div>
+
+<input type="submit" class="btn btn-block btn-primary" value="ADD NEW USER" style="width:25%;margin-left: 37%" span class="glyphicon glyphicon-circle-arrow-right">
+</form>
