@@ -76,6 +76,11 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
                 templateUrl:"view/modifyPrice.php"
             })
 
+            .state("userResults",{
+                url:"/userResults",
+                templateUrl:"view/userResults.php"
+            })
+
         ;
 
 

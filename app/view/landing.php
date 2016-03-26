@@ -1,7 +1,7 @@
 <?php
 session_start();
-if ( ! isset( $_SESSION['username'] ) ) { // make sure user is logged in
-	header( "location:index.php" );
+if ( !isset( $_SESSION['username'] ) ) { // make sure user is logged in
+	header( "location:../index.php" );
 }
 echo '
 <div align="right" class="btn-toolbar rightCornerButton">
