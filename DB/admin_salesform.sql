@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 04, 2016 at 09:05 PM
+-- Generation Time: Mar 25, 2016 at 10:53 PM
 -- Server version: 5.5.41
 -- PHP Version: 5.4.36
 
@@ -23,6 +23,87 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Quotes`
+--
+
+CREATE TABLE IF NOT EXISTS `Quotes` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `clientName` varchar(255) DEFAULT NULL,
+  `startDate` varchar(255) DEFAULT NULL,
+  `completionDate` varchar(255) DEFAULT NULL,
+  `servicesHourlyRate` double DEFAULT NULL,
+  `environmentTotalPlatformInstallHours` double DEFAULT NULL,
+  `environmentOrganizationConfigurationHours` double DEFAULT NULL,
+  `environmentConnectedSystemDefinitionsHours` double DEFAULT NULL,
+  `environmentDocumentConfigurationsHours` double DEFAULT NULL,
+  `environmentProjectManagementHours` double DEFAULT NULL,
+  `totalEnvironmentHours` double DEFAULT NULL,
+  `passwordWorkshopAndDesignDocHours` double DEFAULT NULL,
+  `passwordConfigurationHours` double DEFAULT NULL,
+  `passwordPostImplementationServicesHours` double DEFAULT NULL,
+  `passwordProductionMigrationHours` double DEFAULT NULL,
+  `passwordUiTrainingHours` double DEFAULT NULL,
+  `passwordSolutionDocumentationHours` double DEFAULT NULL,
+  `passwordProjectManagementHours` double DEFAULT NULL,
+  `totalPasswordHours` double DEFAULT NULL,
+  `provisioningWorkshopAndDesignDocHours` double DEFAULT NULL,
+  `provisioningConfiguration` double DEFAULT NULL,
+  `provisioningPostImplementationServicesHours` double DEFAULT NULL,
+  `provisioningProductionMigrationHours` double DEFAULT NULL,
+  `provisioningUiTrainingHours` double DEFAULT NULL,
+  `provisioningSolutionDocumentationHours` double DEFAULT NULL,
+  `provisioningProjectManagementHours` double DEFAULT NULL,
+  `totalProvisioningHours` double DEFAULT NULL,
+  `HPAMWorkshopAndDesignDocHours` double DEFAULT NULL,
+  `HPAMOrgConfigurationHours` double DEFAULT NULL,
+  `HPAMPostImplementationServicesHours` double DEFAULT NULL,
+  `HPAMProductionMigrationHours` double DEFAULT NULL,
+  `HPAMUiTrainingHours` double DEFAULT NULL,
+  `HPAMSolutionDocumentationHours` double DEFAULT NULL,
+  `HPAMProjectManagementHours` double DEFAULT NULL,
+  `totalHPAMHours` double DEFAULT NULL,
+  `federationWorkshopAndDesignDocHours` double DEFAULT NULL,
+  `federationInstallationHours` double DEFAULT NULL,
+  `federationTotalConfigurationHours` double DEFAULT NULL,
+  `federationPostImplementationServicesHours` double DEFAULT NULL,
+  `federationProductionMigration` double DEFAULT NULL,
+  `federationConfigurationOverviewHours` double DEFAULT NULL,
+  `federationSolutionDocumentationHours` double DEFAULT NULL,
+  `federationProjectManagementHours` double DEFAULT NULL,
+  `totalFederationHours` double DEFAULT NULL,
+  `administrationBasicTrainingHours` double DEFAULT NULL,
+  `administrationAdvancedTrainingTrainingHours` double DEFAULT NULL,
+  `administrationKioskTrainingHours` double DEFAULT NULL,
+  `administrationPinTrainingTrainingHours` double DEFAULT NULL,
+  `administrationHelpDeskTrainingTrainingHours` double DEFAULT NULL,
+  `administrationSelectServiceTrainingTrainingHours` double DEFAULT NULL,
+  `administrationHPAMUiTrainingHours` double DEFAULT NULL,
+  `administrationFederationConfigTrainingHours` double DEFAULT NULL,
+  `administrationProjectManagementHours` double DEFAULT NULL,
+  `totalAdministrationHours` double DEFAULT NULL,
+  `totalAllHours` double DEFAULT NULL,
+  `phaseAssessmentDesignHours` double DEFAULT NULL,
+  `phaseInstallationHours` double DEFAULT NULL,
+  `phaseImplementationHours` double DEFAULT NULL,
+  `phaseProjectManagementHours` double DEFAULT NULL,
+  `phaseTrainingHours` double DEFAULT NULL,
+  `modulesPasswordManagement` varchar(3) DEFAULT NULL,
+  `modulesProvisioning` varchar(3) DEFAULT NULL,
+  `modulesHPAM` varchar(3) DEFAULT NULL,
+  `modulesFederation` varchar(3) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Quotes`
+--
+
+INSERT INTO `Quotes` (`id`, `username`, `clientName`, `startDate`, `completionDate`, `servicesHourlyRate`, `environmentTotalPlatformInstallHours`, `environmentOrganizationConfigurationHours`, `environmentConnectedSystemDefinitionsHours`, `environmentDocumentConfigurationsHours`, `environmentProjectManagementHours`, `totalEnvironmentHours`, `passwordWorkshopAndDesignDocHours`, `passwordConfigurationHours`, `passwordPostImplementationServicesHours`, `passwordProductionMigrationHours`, `passwordUiTrainingHours`, `passwordSolutionDocumentationHours`, `passwordProjectManagementHours`, `totalPasswordHours`, `provisioningWorkshopAndDesignDocHours`, `provisioningConfiguration`, `provisioningPostImplementationServicesHours`, `provisioningProductionMigrationHours`, `provisioningUiTrainingHours`, `provisioningSolutionDocumentationHours`, `provisioningProjectManagementHours`, `totalProvisioningHours`, `HPAMWorkshopAndDesignDocHours`, `HPAMOrgConfigurationHours`, `HPAMPostImplementationServicesHours`, `HPAMProductionMigrationHours`, `HPAMUiTrainingHours`, `HPAMSolutionDocumentationHours`, `HPAMProjectManagementHours`, `totalHPAMHours`, `federationWorkshopAndDesignDocHours`, `federationInstallationHours`, `federationTotalConfigurationHours`, `federationPostImplementationServicesHours`, `federationProductionMigration`, `federationConfigurationOverviewHours`, `federationSolutionDocumentationHours`, `federationProjectManagementHours`, `totalFederationHours`, `administrationBasicTrainingHours`, `administrationAdvancedTrainingTrainingHours`, `administrationKioskTrainingHours`, `administrationPinTrainingTrainingHours`, `administrationHelpDeskTrainingTrainingHours`, `administrationSelectServiceTrainingTrainingHours`, `administrationHPAMUiTrainingHours`, `administrationFederationConfigTrainingHours`, `administrationProjectManagementHours`, `totalAdministrationHours`, `totalAllHours`, `phaseAssessmentDesignHours`, `phaseInstallationHours`, `phaseImplementationHours`, `phaseProjectManagementHours`, `phaseTrainingHours`, `modulesPasswordManagement`, `modulesProvisioning`, `modulesHPAM`, `modulesFederation`) VALUES
+  (1, 'test', 'testing', '', '03/25/2016', 125, 0, 1.1, 0, 0, 0.11, 1.21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4.4, 0, 0, 0, 0, 0.44, 4.84, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6.05, 0, 1.1, 4.4, 0.55, 0, 'NO', 'NO', 'NO', 'NO');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -37,85 +118,33 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`username`, `pass`, `admin`) VALUES
-('test', 'test', 'true');
+  ('test', 'test', 'true');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `Quotes`
+--
+ALTER TABLE `Quotes`
+ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`username`);
+ADD PRIMARY KEY (`username`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Quotes`
+--
+ALTER TABLE `Quotes`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-CREATE TABLE `admin_salesform`.`Quotes` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(255) NOT NULL,
-  `clientName` VARCHAR(255) NULL,
-  `completionDate` DATE NULL,
-  `servicesHourlyRate` DOUBLE NULL,
-  `environmentTotalPlatformInstallHours` DOUBLE NULL,
-  `environmentOrganizationConfigurationHours` DOUBLE NULL,
-  `environmentConnectedSystemDefinitionsHours` DOUBLE NULL,
-  `environmentDocumentConfigurationsHours` DOUBLE NULL,
-  `environmentProjectManagementHours` DOUBLE NULL,
-  `totalEnvironmentHours` DOUBLE NULL,
-  `passwordWorkshopAndDesignDocHours` DOUBLE NULL,
-  `passwordConfigurationHours` DOUBLE NULL,
-  `passwordPostImplementationServicesHours` DOUBLE NULL,
-  `passwordProductionMigrationHours` DOUBLE NULL,
-  `passwordUiTrainingHours` DOUBLE NULL,
-  `passwordSolutionDocumentationHours` DOUBLE NULL,
-  `passwordProjectManagementHours` DOUBLE NULL,
-  `totalPasswordHours` DOUBLE NULL,
-  `provisioningWorkshopAndDesignDocHours` DOUBLE NULL,
-  `provisioningConfiguration` DOUBLE NULL,
-  `provisioningPostImplementationServicesHours` DOUBLE NULL,
-  `provisioningProductionMigrationHours` DOUBLE NULL,
-  `provisioningUiTrainingHours` DOUBLE NULL,
-  `provisioningSolutionDocumentationHours` DOUBLE NULL,
-  `provisioningProjectManagementHours` DOUBLE NULL,
-  `totalProvisioningHours` DOUBLE NULL,
-  `HPAMWorkshopAndDesignDocHours` DOUBLE NULL,
-  `HPAMOrgConfigurationHours` DOUBLE NULL,
-  `HPAMPostImplementationServicesHours` DOUBLE NULL,
-  `HPAMProductionMigrationHours` DOUBLE NULL,
-  `HPAMUiTrainingHours` DOUBLE NULL,
-  `HPAMSolutionDocumentationHours` DOUBLE NULL,
-  `HPAMProjectManagementHours` DOUBLE NULL,
-  `totalHPAMHours` DOUBLE NULL,
-  `federationWorkshopAndDesignDocHours` DOUBLE NULL,
-  `federationInstallationHours` DOUBLE NULL,
-  `federationTotalConfigurationHours` DOUBLE NULL,
-  `federationPostImplementationServicesHours` DOUBLE NULL,
-  `federationProductionMigration` DOUBLE NULL,
-  `federationConfigurationOverviewHours` DOUBLE NULL,
-  `federationSolutionDocumentationHours` DOUBLE NULL,
-  `federationProjectManagementHours` DOUBLE NULL,
-  `totalFederationHours` DOUBLE NULL,
-  `administrationBasicTrainingHours` DOUBLE NULL,
-  `administrationAdvancedTrainingTrainingHours` DOUBLE NULL,
-  `administrationKioskTrainingHours` DOUBLE NULL,
-  `administrationPinTrainingTrainingHours` DOUBLE NULL,
-  `administrationHelpDeskTrainingTrainingHours` DOUBLE NULL,
-  `administrationSelectServiceTrainingTrainingHours` DOUBLE NULL,
-  `administrationHPAMUiTrainingHours` DOUBLE NULL,
-  `administrationFederationConfigTrainingHours` DOUBLE NULL,
-  `administrationProjectManagementHours` DOUBLE NULL,
-  `totalAdministrationHours` DOUBLE NULL,
-  `totalAllHours` DOUBLE NULL,
-  `phaseAssessmentDesignHours` DOUBLE NULL,
-  `phaseInstallationHours` DOUBLE NULL,
-  `phaseImplementationHours` DOUBLE NULL,
-  `phaseProjectManagementHours` DOUBLE NULL,
-  `phaseTrainingHours` DOUBLE NULL,
-  `modulesPasswordManagement` VARCHAR(3) NULL,
-  `modulesProvisioning` VARCHAR(3) NULL,
-  `modulesHPAM` VARCHAR(3) NULL,
-  `modulesFederation` VARCHAR(3) NULL,
-  PRIMARY KEY (`id`));
