@@ -8,7 +8,9 @@
         <div class="panel-heading text-center">MODIFY PRICING</div>
         <div class="panel-body">
             <form name="modifyPricingForm" method="post" action="modifyPricing.php">
-                <div class="form-group-single">
+                <div class="form-group">
+                    <label>CURRENT SERVICES HOURLY RATE</label>
+                    <input type="text" class="form-control" name="currentServicesHourlyRate" ng-model="currentServicesHourlyRate" id="currentServicesHourlyRate">
                     <label>NEW DESIRED SERVICES HOURLY RATE</label>
                     <input type="text" class="form-control" name="newServicesHourlyRate" ng-model="newServicesHourlyRate" id="newServicesHourlyRate">
                 </div>
