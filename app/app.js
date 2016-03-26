@@ -17,6 +17,17 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
                 url: "/home",
                 templateUrl: "view/quote-home.html"
             })
+            .state("portal",{
+                url: "/adminPortal",
+                templateUrl:"view/adminPortal.html"
+            })
+
+            .state("admin",{
+                url: "/adminLanding",
+                templateUrl: "view/adminLanding.html"
+            })
+
+
 
             // Wizard Base State
             .state("quote", {
@@ -53,7 +64,24 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             .state("final-quote",{
                 url:"/final-quote",
                 templateUrl:"view/final-quote.html"
-        });
+            })
+
+            .state("users",{
+                url:"/users",
+                templateUrl:"users.php"
+            })
+
+            .state("addUser",{
+                url:"/addUser",
+                templateUrl:"view/addUser.html"
+            })
+
+            .state("modifyPrice",{
+                url:"/modifyPrice",
+                templateUrl:"modifyPrice.php"
+            })
+
+        ;
 
 
 
@@ -64,7 +92,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
     // Form controller
     .controller("quoteController", function($scope, $http, $window) {
         // Returns the current date in the MM/DD/YYYY format (used for Quote Completion Date)
-        $scope.getCurrentDate = function() {
+        $scope.getCurrentDate = function () {
             var currentDate = new Date();
             var day = currentDate.getDate();
             var month = currentDate.getMonth() + 1;
@@ -74,12 +102,20 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
                 day = '0' + day
             }
 
-            if(month < 10) {
+            if (month < 10) {
                 month = '0' + month
             }
 
             currentDate = month + '/' + day + '/' + year;
             return currentDate;
+        };
+
+        $scope.userData = {
+            newUserName: "",
+            newlastName: "",
+            newusername: "",
+            newpassword: "",
+            newuseradmin: ""
         };
 
         // All form data is stored in this object
@@ -148,7 +184,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
         };
 
         // Sets proper field values when Password Management is changed
-        $scope.passwordManagementChange = function(option) {
+        $scope.passwordManagementChange = function (option) {
             if (option == "YES") {
                 $scope.formData.passwordManagementWorkshop = "YES";
                 $scope.formData.passTargets = 1;
@@ -172,13 +208,13 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             }
         };
 
-        $scope.provisioningChange = function(option) {
+        $scope.provisioningChange = function (option) {
             if (option == "YES") {
                 $scope.formData.provWorkshop = "YES";
                 $scope.formData.numberOfAdminProvisioningTargets = 1;
                 $scope.formData.numberOfAdministrativeProvisionWorkflowsPerTarget = 1;
                 $scope.formData.numberOfAutomatedProvisioningTargets = 1;
-                $scope.formData.numberOfAutomatedProvisiongWorkflowsPerTarget  = 3;
+                $scope.formData.numberOfAutomatedProvisiongWorkflowsPerTarget = 3;
                 $scope.formData.approvalConfiguration = 1;
                 $scope.formData.selectableResource = 5;
                 $scope.formData.resourceGroupConfigs = 1;
@@ -196,7 +232,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
                 $scope.formData.numberOfAdminProvisioningTargets = 0;
                 $scope.formData.numberOfAdministrativeProvisionWorkflowsPerTarget = 0;
                 $scope.formData.numberOfAutomatedProvisioningTargets = 0;
-                $scope.formData.numberOfAutomatedProvisiongWorkflowsPerTarget  = 0;
+                $scope.formData.numberOfAutomatedProvisiongWorkflowsPerTarget = 0;
                 $scope.formData.approvalConfiguration = 0;
                 $scope.formData.selectableResource = 0;
                 $scope.formData.resourceGroupConfigs = 0;
@@ -210,7 +246,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             }
         };
 
-        $scope.hpamChange = function(option) {
+        $scope.hpamChange = function (option) {
             if (option == "YES") {
                 $scope.formData.hpamWorkshop = "YES";
                 $scope.formData.hpamAccountTypes = 1;
@@ -220,7 +256,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             }
         };
 
-        $scope.federationChange = function(option) {
+        $scope.federationChange = function (option) {
             if (option == "YES") {
                 $scope.formData.federationWorkshop = "YES";
                 $scope.formData.idpOrIaas = "IaaS";
@@ -251,7 +287,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
         };
 
         // Changes the Number of Environments and Additional HA Servers based on Model and Additional Development Environment
-        $scope.changeNumOfEnvironAndHA = function() {
+        $scope.changeNumOfEnvironAndHA = function () {
             if ($scope.formData.model == "IaaS") {
                 $scope.formData.numberOfEnvironments = 0;
                 $scope.formData.haServers = 0;
@@ -267,7 +303,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             }
         };
 
-        $scope.idpOrIaasChange = function(option) {
+        $scope.idpOrIaasChange = function (option) {
             if (option == "IaaS") {
                 $scope.formData.attManProccess = 1;
             } else {
@@ -276,15 +312,36 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
         };
 
         // Function to process the form (used for testing)
-        $scope.processForm = function() {
+        $scope.processForm = function () {
             $http({
                 method: 'POST',
                 url: 'process.php',
-                data: $scope.formData
+                data:$scope.formData
             }).then(
-                function(result){
+                function (result) {
                     console.log(result);
-                    $window.location.href = "quote.php"},
-                function(error){console.log(error)});
+                    $window.location.href = "quote.php"
+                },
+                function (error) {
+                    console.log(error)
+                });
         };
+
+        $scope.processNewUser = function () {
+
+            $http({
+                method: 'POST',
+                url: 'processUser.php',
+                data: $scope.userData
+            }).then(
+                function (result) {
+                    console.log(result);
+                    $window.location.href = "users.php"
+                },
+                function (error) {
+                    console.log(error)
+                }
+            );
+        };
+
     });
