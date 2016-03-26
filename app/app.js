@@ -324,7 +324,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
 
             $http({
                 method: 'POST',
-                url: 'processUser.php',
+                url: 'processuser.php',
                 data: $scope.userData
             }).then(
                 function (result) {
