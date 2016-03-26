@@ -63,7 +63,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
 
             .state("users",{
                 url:"/users",
-                templateUrl:"users.php"
+                templateUrl:"view/manageUsers.php"
             })
 
             .state("addUser",{
@@ -329,7 +329,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             }).then(
                 function (result) {
                     console.log(result);
-                    $window.location.href = "users.php"
+                    $window.location.href = "view/manageUsers.php"
                 },
                 function (error) {
                     console.log(error)
