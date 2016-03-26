@@ -334,7 +334,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             }).then(
                 function (result) {
                     console.log(result);
-                    $window.location.sref = "users.php"
+                    $window.location.href = "users.php"
                 },
                 function (error) {
                     console.log(error)

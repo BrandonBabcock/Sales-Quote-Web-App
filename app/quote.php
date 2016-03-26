@@ -223,7 +223,7 @@ Values('$username' , '$clientName', '$startDate', '$completionDate', $servicesHo
 }
 echo '<link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
-<div><h4>Client Name: ' . $clientName . '</h4>
+<div class="left-right-margin"><h4>Client Name: ' . $clientName . '</h4>
     <h4>' . $completionDate . '</h4>
     <table class="table table-bordered table-hover">
         <!----------ENVIRONMENT TASKS---------->

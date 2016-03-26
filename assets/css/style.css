@@ -54,6 +54,11 @@
     margin-right: 30px;
 }
 
+.left-right-margin {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
 /* Table design */
 .table {
     width: 100%;
