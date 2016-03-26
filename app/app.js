@@ -126,9 +126,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             completionDate: $scope.getCurrentDate(),
             model: "IaaS",
             additionalEnvironment: "NO",
-            discountHourly: "Price from Database here",
-            salesDiscount: "",
-            servicesHourlyRate: "",
+            newServicesHourlyRate: "",
 
             // Step 2
             numberOfEnvironments: 0,
@@ -336,7 +334,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             }).then(
                 function (result) {
                     console.log(result);
-                    $window.location.href = "users.php"
+                    $window.location.sref = "users.php"
                 },
                 function (error) {
                     console.log(error)

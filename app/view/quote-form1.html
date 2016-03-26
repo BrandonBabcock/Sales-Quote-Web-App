@@ -20,22 +20,16 @@
             <option>On-Premise</option>
         </select>
     </div>
-    <div class="form-group">
+    <div>
         <label>Additional Development Environment</label>
         <select name="additionalEnvironment" ng-model="formData.additionalEnvironment" class="select-box" id="additionalEnvironment" title="Enter Yes / No" ng-change="changeNumOfEnvironAndHA()">
             <option>YES</option>
             <option>NO</option>
         </select>
-        <label>Discounted Hourly Rate</label>
-        <input type="text" class="form-control" name="discountHourly" ng-model="formData.discountHourly" id="discountedHourly" title="Auto calculated" ng-disabled="true">
-    </div>
-    <div class="form-group">
-        <label>Sales Discount</label>
-        <input type="text" class="form-control" name="salesDiscount" ng-model="formData.salesDiscount" id="salesDiscount" placeholder="Sales Discount" title="Enter Sales Discount">
-        <label>Services Hourly Rate</label>
-        <input type="text" class="form-control" name="servicesHourlyRate" ng-model="formData.servicesHourlyRate" id="servicesHourlyRate" placeholder="Services Hourly Rate" title="Enter Hourly Services Rate">
     </div>
 </form>
+
+<br />
 
 <a ui-sref="quote.form2" class="btn btn-block btn-primary">
     NEXT <span class="glyphicon glyphicon-circle-arrow-right"></span>
