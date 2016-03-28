@@ -10,9 +10,6 @@ $tbl_name = 'users';
 $myusername = $_POST['inputUsername'];
 $mypassword = $_POST['inputPassword'];
 
-$myusername = stripslashes( $myusername ); // Stripslashes function prevents SQL injections
-$mypassword = stripslashes( $mypassword );
-
 $myusername = mysqli_real_escape_string( $mysqli, $myusername );
 $mypassword = mysqli_real_escape_string( $mysqli, $mypassword );
 $mypassword = hash('sha512', $mypassword);
