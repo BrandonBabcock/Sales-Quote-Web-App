@@ -8,6 +8,5 @@ if ($_SESSION['admin'] != 'true') {
 $data = array();
 parse_str( file_get_contents( 'php://input' ), $data );
 $_POST = array_merge( $data, $_POST ); // merge parsed login data with _POST session values
-var_dump($GLOBALS);
 $_SESSION['lastsearch'] = mysqli_real_escape_string($mysqli, $_POST['searchUsers']);
-header("location:index.php#/userResults");
+header("location:view/userResults.php");
