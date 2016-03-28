@@ -14,6 +14,6 @@ $newHourlyServiceRate = floatval($newHourlyServiceRate);
 $newHourlyServiceRate = mysqli_real_escape_string( $mysqli, $newHourlyServiceRate );
 
 if (is_numeric($newHourlyServiceRate)) { // only perform query with numeric data
-	$mysqli->query( "UPDATE Pricing SET servicesHourlyRate = '$newHourlyServiceRate' WHERE id=1" );
+	$mysqli->query( "UPDATE Pricing SET servicesHourlyRate = '$newHourlyServiceRate' WHERE id=1" ); // update DB pricing
 }
 header('location:index.php#/home');

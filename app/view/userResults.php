@@ -1,6 +1,10 @@
 <?php
 require( '../db.php' );
 session_start();
+if ($_SESSION['admin'] != 'true') { // non-administrator tried to access page
+	header('location:index.php');
+	exit(5);
+}
 echo
 '
     <head>
@@ -13,8 +17,8 @@ echo
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
      </head>
 <div align="right" class="btn-toolbar rightCornerButton">
-    <a ng-model="homeButton" href="../app/index.php#/home" class="btn btn-primary">Home</a>
-    <a ng-model="logoutButton" href="../app/logout.php" class="btn btn-primary">Log Out</a>
+    <a ng-model="homeButton" href="../index.php#/home" class="btn btn-primary">Home</a>
+    <a ng-model="logoutButton" href="../logout.php" class="btn btn-primary">Log Out</a>
 </div>';
 $searchValue = $_SESSION['lastsearch'];
 

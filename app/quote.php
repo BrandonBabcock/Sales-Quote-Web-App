@@ -1,6 +1,10 @@
 <?php
 require( 'db.php' );
 session_start();
+if ( !isset( $_SESSION['username'] ) ) { // make sure user is logged in
+    header( "location:index.php" );
+    exit(6);
+}
 $data = array();
 parse_str( file_get_contents( 'php://input' ), $data );
 $_POST = array_merge( $data, $_POST ); // merge parsed form data with _POST session values
