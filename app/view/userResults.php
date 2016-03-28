@@ -90,12 +90,11 @@ try {
 		// Define how we want to fetch the results
 		$stmt->setFetchMode( PDO::FETCH_ASSOC );
 		$iterator = new IteratorIterator( $stmt );
-
 		// Display the results
 		foreach ( $iterator as $row ) {
 			echo '<tr>';
-			echo '<th>Username: ', $row['username'], '</th>';
-			echo '<th>Administrator: ', $row['admin'], '</th>';
+            echo '<th ng-model="' . $row['username'] . '">Username: ' . $row['username'] . '</th>' ;
+            echo '<th>Administrator: ', $row['admin'], '</th>';
 			echo '</tr>';
 		}
 		echo '       </div>
@@ -105,9 +104,7 @@ try {
 	} else {
 		echo '<p>No results matched your search query.</p>';
 	}
-
 } catch ( Exception $e ) {
 	echo '<p>', $e->getMessage(), '</p>';
 }
-
 ?>
