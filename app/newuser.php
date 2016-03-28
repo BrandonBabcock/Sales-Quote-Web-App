@@ -1,12 +1,16 @@
 <?php
 require('db.php');
 session_start();
+if ($_SESSION['admin'] != 'true') { // non-administrator tried to access page
+    header('location:index.php');
+    exit(5);
+}
 $data = array();
 parse_str(file_get_contents('php://input'), $data);
 $_POST = array_merge($data, $_POST); // merge parsed login data with _POST session values
 // testing data
-$_POST['newusername'] = "test32";
-$_POST['newpassword'] = "pass";
+$_POST['newusername'] = "test323";
+$_POST['newpassword'] = "test";
 $_POST['newadmin'] = "true";
 $newusername = mysqli_real_escape_string($mysqli, $_POST['newusername']);
 $newpassword = mysqli_real_escape_string($mysqli, $_POST['newpassword']);

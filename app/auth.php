@@ -15,6 +15,7 @@ $mypassword = stripslashes( $mypassword );
 
 $myusername = mysqli_real_escape_string( $mysqli, $myusername );
 $mypassword = mysqli_real_escape_string( $mysqli, $mypassword );
+$mypassword = hash('sha512', $mypassword);
 $result     = $mysqli->query( "SELECT * FROM $tbl_name WHERE username='$myusername' and pass='$mypassword'" );
 
 if ( $mysqli->connect_errno ) { // exit on connection failure
