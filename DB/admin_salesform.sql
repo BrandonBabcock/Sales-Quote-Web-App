@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 26, 2016 at 12:30 PM
+-- Generation Time: Mar 27, 2016 at 07:32 PM
 -- Server version: 5.5.41
 -- PHP Version: 5.4.36
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `Pricing` (
 --
 
 INSERT INTO `Pricing` (`id`, `servicesHourlyRate`) VALUES
-  (1, 125);
+  (1, 456);
 
 -- --------------------------------------------------------
 
@@ -110,14 +110,16 @@ CREATE TABLE IF NOT EXISTS `Quotes` (
   `modulesProvisioning` varchar(3) DEFAULT NULL,
   `modulesHPAM` varchar(3) DEFAULT NULL,
   `modulesFederation` varchar(3) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Quotes`
 --
 
 INSERT INTO `Quotes` (`id`, `username`, `clientName`, `startDate`, `completionDate`, `servicesHourlyRate`, `environmentTotalPlatformInstallHours`, `environmentOrganizationConfigurationHours`, `environmentConnectedSystemDefinitionsHours`, `environmentDocumentConfigurationsHours`, `environmentProjectManagementHours`, `totalEnvironmentHours`, `passwordWorkshopAndDesignDocHours`, `passwordConfigurationHours`, `passwordPostImplementationServicesHours`, `passwordProductionMigrationHours`, `passwordUiTrainingHours`, `passwordSolutionDocumentationHours`, `passwordProjectManagementHours`, `totalPasswordHours`, `provisioningWorkshopAndDesignDocHours`, `provisioningConfiguration`, `provisioningPostImplementationServicesHours`, `provisioningProductionMigrationHours`, `provisioningUiTrainingHours`, `provisioningSolutionDocumentationHours`, `provisioningProjectManagementHours`, `totalProvisioningHours`, `HPAMWorkshopAndDesignDocHours`, `HPAMOrgConfigurationHours`, `HPAMPostImplementationServicesHours`, `HPAMProductionMigrationHours`, `HPAMUiTrainingHours`, `HPAMSolutionDocumentationHours`, `HPAMProjectManagementHours`, `totalHPAMHours`, `federationWorkshopAndDesignDocHours`, `federationInstallationHours`, `federationTotalConfigurationHours`, `federationPostImplementationServicesHours`, `federationProductionMigration`, `federationConfigurationOverviewHours`, `federationSolutionDocumentationHours`, `federationProjectManagementHours`, `totalFederationHours`, `administrationBasicTrainingHours`, `administrationAdvancedTrainingTrainingHours`, `administrationKioskTrainingHours`, `administrationPinTrainingTrainingHours`, `administrationHelpDeskTrainingTrainingHours`, `administrationSelectServiceTrainingTrainingHours`, `administrationHPAMUiTrainingHours`, `administrationFederationConfigTrainingHours`, `administrationProjectManagementHours`, `totalAdministrationHours`, `totalAllHours`, `phaseAssessmentDesignHours`, `phaseInstallationHours`, `phaseImplementationHours`, `phaseProjectManagementHours`, `phaseTrainingHours`, `modulesPasswordManagement`, `modulesProvisioning`, `modulesHPAM`, `modulesFederation`) VALUES
-  (1, 'test', 'testing', '', '03/25/2016', 125, 0, 1.1, 0, 0, 0.11, 1.21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4.4, 0, 0, 0, 0, 0.44, 4.84, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6.05, 0, 1.1, 4.4, 0.55, 0, 'NO', 'NO', 'NO', 'NO');
+  (1, 'test', 'testing', '', '03/25/2016', 125, 0, 1.1, 0, 0, 0.11, 1.21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4.4, 0, 0, 0, 0, 0.44, 4.84, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6.05, 0, 1.1, 4.4, 0.55, 0, 'NO', 'NO', 'NO', 'NO'),
+  (2, 'test', 'test', '', '03/26/2016', 125, 73.575, 1.1, 0.825, 1.05, 7.655, 84.205, 4.2, 2.2, 2.2, 1.2, 0, 1.2, 1.1, 12.1, 4.95, 35.383333333333, 4.95, 4.95, 2.2, 4.95, 5.7383333333333, 63.121666666667, 1.65, 0.275, 1.1, 1.1, 1.1, 0.55, 0.605, 6.655, 31.9, 13.2, 40.8, 2.2, 27.5, 2.2, 3.3, 12.11, 133.21, 40, 40, 4, 0, 4, 8, 4, 4, 10.4, 114.4, 413.69166666667, 42.7, 76.55, 140.45833333333, 37.608333333333, 104, 'YES', 'YES', 'YES', 'YES'),
+  (3, 'test', '', '', '03/27/2016', 456, 0, 1.1, 0, 0, 0.11, 1.21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4.4, 0, 0, 0, 0, 0.44, 4.84, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6.05, 0, 1.1, 4.4, 0.55, 0, 'NO', 'NO', 'NO', 'NO');
 
 -- --------------------------------------------------------
 
@@ -136,7 +138,17 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`username`, `pass`, `admin`) VALUES
-  ('test', 'test', 'true');
+  ('test', 'test', 'true'),
+  ('test1', 'test1', 'false'),
+  ('test10', 'test10', 'false'),
+  ('test2', 'test2', 'false'),
+  ('test3', 'test3', 'false'),
+  ('test4', 'test4', 'false'),
+  ('test5', 'test5', 'false'),
+  ('test6', 'test6', 'false'),
+  ('test7', 'test7', 'false'),
+  ('test8', 'test8', 'false'),
+  ('test9', 'test9', 'false');
 
 --
 -- Indexes for dumped tables
@@ -168,7 +180,7 @@ ADD PRIMARY KEY (`username`);
 -- AUTO_INCREMENT for table `Quotes`
 --
 ALTER TABLE `Quotes`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
