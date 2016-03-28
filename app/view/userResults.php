@@ -13,7 +13,7 @@ echo
 
         <!-- Link stylesheets -->
         <!-- Documentation for second style sheet: https://bootswatch.com/darkly/ -->
-	    <link rel="stylesheet" href="../assets/css/style.css">
+	    <link rel="stylesheet" href="../../assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
      </head>
 <div align="right" class="btn-toolbar rightCornerButton">
@@ -62,7 +62,8 @@ try {
         <div class="panel-heading text-center">Manage Users</div>
         <div class="panel-body">
 
-            <table class="table table-bordered table-hover">';
+            <table class="table table-bordered table-hover">
+            <tr><th>Username</th><th>Administrator Status</th><th>Enabled/Disabled</th></tr>';
 
 	// Prepare the paged query
 	$stmt = $dbh->prepare( "
@@ -93,8 +94,8 @@ try {
 		// Display the results
 		foreach ( $iterator as $row ) {
 			echo '<tr>';
-            echo '<th ng-model="' . $row['username'] . '">Username: ' . $row['username'] . '</th>' ;
-            echo '<th>Administrator: ', $row['admin'], '</th>';
+            echo '<td ng-model="' . $row['username'] . '">' . $row['username'] . '</td>' ;
+            echo '<td>', $row['admin'], '</td>';
 			echo '</tr>';
 		}
 		echo '       </div>
