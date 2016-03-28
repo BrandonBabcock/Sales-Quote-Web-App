@@ -63,7 +63,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
 
             .state("users",{
                 url:"/users",
-                templateUrl:"view/manageUsers.php"
+                templateUrl:"view/manageusers.php"
             })
 
             .state("addUser",{
@@ -73,12 +73,12 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
 
             .state("modifyPrice",{
                 url:"/modifyPrice",
-                templateUrl:"view/modifyPrice.php"
+                templateUrl:"view/modifyprice.php"
             })
 
             .state("userResults",{
                 url:"/userResults",
-                templateUrl:"view/userResults.php"
+                templateUrl:"view/userresults.php"
             })
 
         ;
@@ -334,7 +334,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             }).then(
                 function (result) {
                     console.log(result);
-                    $window.location.href = "view/manageUsers.php"
+                    $window.location.href = "view/manageusers.php"
                 },
                 function (error) {
                     console.log(error)
