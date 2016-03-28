@@ -57,7 +57,7 @@ try {
 	$nextlink = ( $page < $pages ) ? '<a href="?page=' . ( $page + 1 ) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
 
 	// Display the paging information
-	echo '<div id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div><div class="container">
+	echo '</div><div class="container">
     <div class="panel panel-default">
         <div class="panel-heading text-center">Manage Users</div>
         <div class="panel-body">
@@ -98,9 +98,10 @@ try {
             echo '<td>', $row['admin'], '</td>';
 			echo '</tr>';
 		}
-		echo '       </div>
+		echo '
+  </div>
     </div>
-</div>';
+</div><div align="center" id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p>';
 
 	} else {
 		echo '<p>No results matched your search query.</p>';
