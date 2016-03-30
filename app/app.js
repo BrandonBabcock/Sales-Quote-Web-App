@@ -1,7 +1,7 @@
 // app.js
 
 // Create angular app and inject ngAnimate and ui-router
-angular.module("quoteApp", ["ngAnimate", "ui.router"])
+angular.module("salesQuoteApp", ["ngAnimate", "ui.router"])
 
     // Route configuration
     .config(function($stateProvider, $urlRouterProvider) {
@@ -9,7 +9,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             // Initial state for logging in
             .state("login", {
                 url: "/login",
-                templateUrl: "view/quote-login.html"
+                templateUrl: "view/quote-login.php"
             })
 
             // State to select "Generate New Quote" or "View Existing Quotes"
@@ -19,7 +19,7 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             })
             .state("portal",{
                 url: "/adminPortal",
-                templateUrl:"view/adminPortal.html"
+                templateUrl:"view/admin-portal.php"
             })
 
 
@@ -27,58 +27,58 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             // Wizard Base State
             .state("quote", {
                 url: "/quote",
-                templateUrl: "view/quote.html",
+                templateUrl: "view/quote.php",
                 controller: "quoteController"
             })
 
             // Wizard Step 1 State
             .state("quote.form1", {
                 url: "/form1",
-                templateUrl: "view/quote-form1.html"
+                templateUrl: "view/quote-form1.php"
             })
 
             // Wizard Step 2 State
             .state("quote.form2", {
                 url: "/form2",
-                templateUrl: "view/quote-form2.html"
+                templateUrl: "view/quote-form2.php"
             })
 
             // Wizard Step 3 State
             .state("quote.form3", {
                 url: "/form3",
-                templateUrl: "view/quote-form3.html"
+                templateUrl: "view/quote-form3.php"
             })
 
             // Wizard Step 4 State
             .state("quote.form4",{
                 url:"/form4",
-                templateUrl:"view/quote-form4.html"
+                templateUrl:"view/quote-form4.php"
             })
 
             // Final Quote
             .state("final-quote",{
                 url:"/final-quote",
-                templateUrl:"view/final-quote.html"
+                templateUrl:"view/final-quote.php"
             })
 
             .state("users",{
                 url:"/users",
-                templateUrl:"view/manageusers.php"
+                templateUrl:"view/manage-users.php"
             })
 
             .state("addUser",{
                 url:"/addUser",
-                templateUrl:"view/addUser.html"
+                templateUrl:"view/add-user.php"
             })
 
             .state("modifyPrice",{
                 url:"/modifyPrice",
-                templateUrl:"view/modifyprice.php"
+                templateUrl:"view/modify-price.php"
             })
 
             .state("userResults",{
                 url:"/userResults",
-                templateUrl:"view/userresults.php"
+                templateUrl:"view/user-results.php"
             })
 
         ;
@@ -180,6 +180,9 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             hpamTraining: "NO",
             federationConfigTraining: "NO"
         };
+
+        $scope.viewingQuoteId = "";
+        $scope.viewingUsername = "";
 
         // Sets proper field values when Password Management is changed
         $scope.passwordManagementChange = function (option) {
@@ -334,12 +337,20 @@ angular.module("quoteApp", ["ngAnimate", "ui.router"])
             }).then(
                 function (result) {
                     console.log(result);
-                    $window.location.href = "view/manageusers.php"
+                    $window.location.href = "view/manage-users.php"
                 },
                 function (error) {
                     console.log(error)
                 }
             );
         };
+
+        $scope.setViewingQuoteId = function (quoteId) {
+            $scope.viewingQuoteId = quoteId;
+        };
+
+        $scope.setViewingUsername = function (username) {
+            $scope.viewingUserName = username;
+        }
 
     });

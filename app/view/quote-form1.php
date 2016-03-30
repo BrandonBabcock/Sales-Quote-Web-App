@@ -1,5 +1,5 @@
-<!-- quote-form1.html -->
-
+<?php
+echo '
 <label class="large-label">Discovery</label>
 <br /> <br />
 
@@ -12,7 +12,7 @@
      </div>
     <div class="form-group">
         <label>Quote Completion Date</label>
-        <input type="text" class="form-control" name="completionDate" ng-model="formData.completionDate" id="todayDate" title="Today's Date" ng-disabled="true">
+        <input type="text" class="form-control" name="completionDate" ng-model="formData.completionDate" id="todayDate" title="Today\'s Date" ng-disabled="true">
 
         <label>Model</label><br>
         <select name="model" ng-model="formData.model" class="select-box" title="Enter IaaS / On-Premise" ng-change="changeNumOfEnvironAndHA()">
@@ -34,3 +34,5 @@
 <a ui-sref="quote.form2" class="btn btn-block btn-primary">
     NEXT <span class="glyphicon glyphicon-circle-arrow-right"></span>
 </a>
+';
+?>

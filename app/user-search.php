@@ -9,4 +9,4 @@ $data = array();
 parse_str( file_get_contents( 'php://input' ), $data );
 $_POST = array_merge( $data, $_POST ); // merge parsed login data with _POST session values
 $_SESSION['lastsearch'] = mysqli_real_escape_string($mysqli, $_POST['searchUsers']);
-header("location:view/userresults.php");
+header("location:view/user-results.php");

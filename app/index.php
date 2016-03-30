@@ -6,7 +6,7 @@ echo '
 
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
         <title>Sales Quote</title>
         <meta charset="UTF-8">
 
@@ -24,7 +24,7 @@ echo '
         <script src="app.js"></script>
     </head>
 
-    <body ng-app="quoteApp">
+    <body ng-app="salesQuoteApp">
         <div ng-cloak="">
             <!-- Views will be injected here -->
             <div ui-view></div>

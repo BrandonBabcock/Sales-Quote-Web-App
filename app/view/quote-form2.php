@@ -1,5 +1,5 @@
-<!--quote-form2.html-->
-
+<?php
+echo '
 <label class="large-label">Solution Requirements</label>
 <br /> <br />
 
@@ -47,13 +47,13 @@
 
     <div class="form-group">
         <label>Password Management Workshop</label>
-        <select name="passwordManagementWorkshop" ng-model="formData.passwordManagementWorkshop" class="select-box" title="" ng-disabled="formData.passwordManagement == 'NO'">
+        <select name="passwordManagementWorkshop" ng-model="formData.passwordManagementWorkshop" class="select-box" title="" ng-disabled="formData.passwordManagement == \'NO\'">
             <option>YES</option>
             <option>NO</option>
         </select>
         <label>Provisioning Workshop</label>
         <br>
-        <select name="provWorkshop" ng-model="formData.provWorkshop" class="select-box" title="" ng-disabled="formData.provisioning == 'NO'">
+        <select name="provWorkshop" ng-model="formData.provWorkshop" class="select-box" title="" ng-disabled="formData.provisioning == \'NO\'">
             <option>YES</option>
             <option>NO</option>
         </select>
@@ -62,12 +62,12 @@
     <div class="form-group">
         <label>HPAM Workshop</label>
         <br>
-        <select name="hpamWorkshop" ng-model="formData.hpamWorkshop" class="select-box" title="" ng-disabled="formData.hpam == 'NO'">
+        <select name="hpamWorkshop" ng-model="formData.hpamWorkshop" class="select-box" title="" ng-disabled="formData.hpam == \'NO\'">
             <option>YES</option>
             <option>NO</option>
         </select>
         <label>Federation Workshop</label>
-        <select name="federationWorkshop" ng-model="formData.federationWorkshop" class="select-box" title="" ng-disabled="formData.federation == 'NO'">
+        <select name="federationWorkshop" ng-model="formData.federationWorkshop" class="select-box" title="" ng-disabled="formData.federation == \'NO\'">
             <option>YES</option>
             <option>NO</option>
         </select>
@@ -77,3 +77,5 @@
 <a ui-sref="quote.form3" class="btn btn-block btn-primary">
     NEXT <span class="glyphicon glyphicon-circle-arrow-right"></span>
 </a>
+';
+?>
