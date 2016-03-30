@@ -1,6 +1,6 @@
 <?php
 // MySQL Connection Settings
-$host     = "localhost"; // Host name
+$host     = "caseybaer.com"; // Host name
 $username = "admin_salesform"; // Mysql username
 $password = "mqJoPHm9LEz"; // Mysql password
 $db_name  = "admin_salesform"; // Database name

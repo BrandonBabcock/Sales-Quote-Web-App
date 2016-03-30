@@ -15,7 +15,7 @@ echo
         <div class="panel-heading text-center">Manage Users</div>
         <div class="panel-body">
             <div class="col-sm-8 col-sm-offset-2">
-                <form name="searchUsersForm" method="post" action="usersearch.php">
+                <form name="searchUsersForm" method="post" action="user-search.php">
                     <div class="form-group">
                         <input type="text" class="form-control" name="searchUsers" ng-model="searchUsers" id="searchUsers" placeholder="Username" title="Enter a username to search for">
                         <input type="submit" class="btn btn-block btn-primary" Value="Search for Users">

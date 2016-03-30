@@ -1,4 +1,6 @@
-<div ng-app="quoteApp" ng-controller="quoteController" class="final-div">
+<?php
+echo '
+<div ng-app="salesQuoteApp" ng-controller="quoteController" class="final-div">
 
     <h4>Client Name: Client Name Auto Inputs Here {{formData.name}}</h4>
     <h4>{{formData.completionDate}}</h4>
@@ -571,5 +573,5 @@
     </table>
 
 </div>
-
-
+';
+?>

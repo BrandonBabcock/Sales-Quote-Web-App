@@ -1,5 +1,5 @@
-<!--quote-login.html-->
-
+<?php
+echo '
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading text-center"><h4>SALES QUOTE WEB APPLICATION</h4></div>
@@ -28,3 +28,5 @@
             </div>
     </div>
 </div>
+';
+?>
