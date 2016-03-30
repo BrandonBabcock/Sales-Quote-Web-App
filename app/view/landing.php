@@ -2,6 +2,7 @@
 session_start();
 if ( !isset( $_SESSION['username'] ) ) { // make sure user is logged in
 	header( "location:../index.php" );
+	exit(5);
 }
 echo '
 <div align="right" class="btn-toolbar rightCornerButton">

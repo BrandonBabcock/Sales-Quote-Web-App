@@ -55,12 +55,6 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router"])
                 templateUrl:"view/quote-form4.php"
             })
 
-            // Final Quote
-            .state("final-quote",{
-                url:"/final-quote",
-                templateUrl:"view/final-quote.php"
-            })
-
             .state("users",{
                 url:"/users",
                 templateUrl:"view/manage-users.php"
