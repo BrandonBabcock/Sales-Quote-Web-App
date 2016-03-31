@@ -25,7 +25,7 @@ echo '<div align="right" class="btn-toolbar rightCornerButton">
                     <input type="text" class="form-control" name="newServicesHourlyRate" ng-model="newServicesHourlyRate" id="newServicesHourlyRate">
                 </div>
                 <div align="center">
-                <input type="submit" class="btn btn-block btn-primary" style="width: 25%;" Value="Update Pricing">
+                    <input type="submit" class="btn btn-block btn-primary" style="width: 25%;" Value="Update Pricing">
                 </div>
             </form>
         </div>

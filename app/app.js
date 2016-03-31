@@ -175,9 +175,6 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router"])
             federationConfigTraining: "NO"
         };
 
-        $scope.viewingQuoteId = "";
-        $scope.viewingUsername = "";
-
         // Sets proper field values when Password Management is changed
         $scope.passwordManagementChange = function (option) {
             if (option == "YES") {
@@ -338,13 +335,4 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router"])
                 }
             );
         };
-
-        $scope.setViewingQuoteId = function (quoteId) {
-            $scope.viewingQuoteId = quoteId;
-        };
-
-        $scope.setViewingUsername = function (username) {
-            $scope.viewingUserName = username;
-        }
-
     });
