@@ -15,7 +15,15 @@ echo
         <!-- Documentation for second style sheet: https://bootswatch.com/darkly/ -->
 	    <link rel="stylesheet" href="../../assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
-     </head>
+-
+        <!-- Load in Global Dependencies -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.min.js"></script>
+
+        <!-- Load in main application -->
+        <script src="../app.js"></script>
+    </head> <body ng-app="salesQuoteApp" ng-controller="quoteController">
 <div align="right" class="btn-toolbar rightCornerButton">
     <a ng-model="homeButton" href="../index.php#/home" class="btn btn-primary">Home</a>
     <a ng-model="logoutButton" href="../logout.php" class="btn btn-primary">Log Out</a>
@@ -57,13 +65,18 @@ try {
 	$nextlink = ( $page < $pages ) ? '<a href="?page=' . ( $page + 1 ) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
 
 	// Display the paging information
-	echo '</div><div class="container">
-    <div class="panel panel-default">
+	echo '<div class="container">
+    	<div class="panel panel-default">
         <div class="panel-heading text-center">Manage Users</div>
         <div class="panel-body">
 
+			<p align="center">Click on a Username to edit the user.</p>
             <table class="table table-bordered table-hover">
-            <tr><th>Username</th><th>Administrator Status</th><th>Enabled/Disabled</th></tr>';
+            <tr>
+            	<th>Username</th>
+            	<th>Administrator Status</th>
+            	<th>Enabled/Disabled</th>
+            </tr>';
 
 	// Prepare the paged query
 	$stmt = $dbh->prepare( "
@@ -94,19 +107,26 @@ try {
 		// Display the results
 		foreach ( $iterator as $row ) {
 			echo '<tr>';
-            echo '<td ng-model="' . $row['username'] . '">' . $row['username'] . '</td>' ;
+            echo '<td><a href="edit-user.php">' . $row['username'] . '</a></td>' ;
             echo '<td>', $row['admin'], '</td>';
+            echo '<td></td>';
 			echo '</tr>';
 		}
+		echo '</table>';
 		echo '
-  </div>
-    </div>
-</div><div align="center" id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p>';
+			<div align="center" id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
 
-	} else {
+	}
+	else {
 		echo '<p>No results matched your search query.</p>';
 	}
 } catch ( Exception $e ) {
 	echo '<p>', $e->getMessage(), '</p>';
 }
+
+echo '
+</div>
+</div>
+</body>
+';
 ?>

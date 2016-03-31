@@ -70,9 +70,14 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router"])
                 templateUrl:"view/modify-price.php"
             })
 
-            .state("userResults",{
-                url:"/userResults",
-                templateUrl:"view/user-results.php"
+            //.state("userResults",{
+            //    url:"/userResults",
+            //    templateUrl:"view/user-results.php"
+            //})
+
+            .state("searchQuote", {
+                url:"/search-quote",
+                templateUrl:"view/view-existing-quotes.php"
             })
 
         ;
@@ -174,9 +179,6 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router"])
             hpamTraining: "NO",
             federationConfigTraining: "NO"
         };
-
-        $scope.viewingQuoteId = "";
-        $scope.viewingUsername = "";
 
         // Sets proper field values when Password Management is changed
         $scope.passwordManagementChange = function (option) {
@@ -338,13 +340,4 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router"])
                 }
             );
         };
-
-        $scope.setViewingQuoteId = function (quoteId) {
-            $scope.viewingQuoteId = quoteId;
-        };
-
-        $scope.setViewingUsername = function (username) {
-            $scope.viewingUserName = username;
-        }
-
     });
