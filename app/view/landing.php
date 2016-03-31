@@ -18,7 +18,7 @@ echo '
                                                Generate New Quote <span class="glyphicon glyphicon-circle-arrow-right"></span>
                 </a>
                 <br />
-                <a class="btn btn-block btn-primary">
+                <a ui-sref="searchQuote" class="btn btn-block btn-primary">
                          View Existing Quotes <span class="glyphicon glyphicon-circle-arrow-right"></span>
                 </a>
                 <br />';

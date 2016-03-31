@@ -1,4 +1,10 @@
 <?php
+require( '../db.php' );
+session_start();
+if ($_SESSION['admin'] != 'true') { // non-administrator tried to access page
+    header('location:index.php');
+    exit(5);
+}
 echo '
 <!-- Link stylesheets -->
 <!-- Documentation for second style sheet: https://bootswatch.com/darkly/ -->

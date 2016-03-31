@@ -70,9 +70,14 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router"])
                 templateUrl:"view/modify-price.php"
             })
 
-            .state("userResults",{
-                url:"/userResults",
-                templateUrl:"view/user-results.php"
+            //.state("userResults",{
+            //    url:"/userResults",
+            //    templateUrl:"view/user-results.php"
+            //})
+
+            .state("searchQuote", {
+                url:"/search-quote",
+                templateUrl:"view/view-existing-quotes.php"
             })
 
         ;
