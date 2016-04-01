@@ -107,7 +107,7 @@ try {
 		// Display the results
 		foreach ( $iterator as $row ) {
 			echo '<tr>';
-            echo '<td><a href="edit-user.php">' . $row['username'] . '</a></td>' ;
+            echo '<td><a href="edit-user.php?user=' . $row['username'] . '">' . $row['username'] . '</a></td>' ;
             echo '<td>', $row['admin'], '</td>';
             echo '<td></td>';
 			echo '</tr>';
