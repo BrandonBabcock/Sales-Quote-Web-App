@@ -1,10 +1,13 @@
 <?php
-require( '../db.php' );
+require('../db.php');
 session_start();
 if ($_SESSION['admin'] != 'true') { // non-administrator tried to access page
     header('location:index.php');
     exit(5);
 }
+$user = filter_input(INPUT_GET, 'user', FILTER_SANITIZE_STRING);
+$user = mysqli_real_escape_string($mysqli, $user);
+var_dump($GLOBALS);
 echo '
 <!-- Link stylesheets -->
 <!-- Documentation for second style sheet: https://bootswatch.com/darkly/ -->
@@ -22,10 +25,11 @@ echo '
         <div class="panel-body">
             <div class="row col-lg-4 col-lg-offset-4">
 
-                <form name="userUserForm">
+                <form name="userUserForm" method="post" action="../edit-user-process.php">
+                <fieldset>
                     <div class="form-group-single">
                         <label>ENABLED STATUS</label>
-                        <select class="select-box" title="Enabled grants the user access to the application" ng-value="">
+                        <select name="enabled" class="select-box" title="Enabled grants the user access to the application" ng-value="">
                             <option>ENABLED</option>
                             <option>DISABLED</option>
                         </select>
@@ -35,7 +39,7 @@ echo '
 
                     <div class="form-group-single">
                         <label>ADMIN STATUS</label>
-                        <select class="select-box" title="Enabled grants the user admin privileges" ng-value="">
+                        <select name="adminStatus" class="select-box" title="Enabled grants the user admin privileges" ng-value="">
                             <option>ENABLED</option>
                             <option>DISABLED</option>
                         </select>
@@ -45,12 +49,11 @@ echo '
 
                     <div class="form-group-single">
                         <label>CHANGE PASSWORD</label>
-                        <input type="text" class="form-control" title="Enter a new password for the user">
+                        <input type="text" name="newPassword" class="form-control" title="Enter a new password for the user">
                     </div>
-
+                    </fieldset>
+                 <input type="submit" class="btn btn-primary col-lg-4 col-lg-offset-4" Value="Modify User">
                 </form>
-
-
             </div>
         </div>
     </div>
