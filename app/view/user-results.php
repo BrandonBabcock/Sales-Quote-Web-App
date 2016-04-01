@@ -2,7 +2,7 @@
 require( '../db.php' );
 session_start();
 if ($_SESSION['admin'] != 'true') { // non-administrator tried to access page
-	header('location:index.php');
+	header('location:../index.php');
 	exit(5);
 }
 echo
@@ -15,7 +15,7 @@ echo
         <!-- Documentation for second style sheet: https://bootswatch.com/darkly/ -->
 	    <link rel="stylesheet" href="../../assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
--
+
         <!-- Load in Global Dependencies -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
