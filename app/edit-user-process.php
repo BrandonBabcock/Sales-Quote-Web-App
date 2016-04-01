@@ -14,16 +14,27 @@ $modifyPassword = mysqli_real_escape_string($mysqli, $_POST['newPassword']);
 $modifyPassword = hash('sha512', $modifyPassword);
 $modifyAdminStatus = mysqli_real_escape_string($mysqli, $_POST['adminStatus']);
 $modifyEnabledStatus = mysqli_real_escape_string($mysqli, $_POST['enabled']);
-$sql = "UPDATE users SET pass = '$modifyPassword', admin = '$modifyAdminStatus' WHERE username = '$modifyUsername'"; // update user in DB
-$results = $mysqli->query($sql);
-if ($results) {
-    echo '<script type="text/javascript">
+$sql = "SELECT count(*) num from users where username = '$modifyUsername'";
+$result = $mysqli->query($sql);
+$row = mysqli_fetch_assoc($result);
+if ($row['num'] == 1) {
+    $sql = "UPDATE users SET pass = '$modifyPassword', admin = '$modifyAdminStatus' WHERE username = '$modifyUsername'"; // update user in DB
+    $results = $mysqli->query($sql);
+    if ($results) {
+        echo '<script type="text/javascript">
         alert ("' . $modifyUsername . ' modified successfully");
         window.location.href="view/user-results.php";
 </script>';
+    } else {
+        echo '<script type="text/javascript">
+        alert ("' . $modifyUsername . ' modification failed");
+        window.location.href="view/user-results.php";
+</script>';
+    }
 } else {
     echo '<script type="text/javascript">
         alert ("' . $modifyUsername . ' modification failed");
         window.location.href="view/user-results.php";
 </script>';
 }
+
