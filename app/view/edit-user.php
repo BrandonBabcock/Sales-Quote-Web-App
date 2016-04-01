@@ -7,7 +7,7 @@ if ($_SESSION['admin'] != 'true') { // non-administrator tried to access page
 }
 $user = filter_input(INPUT_GET, 'user', FILTER_SANITIZE_STRING);
 $user = mysqli_real_escape_string($mysqli, $user);
-var_dump($GLOBALS);
+$_SESSION['userToModify'] = $user;
 echo '
 <!-- Link stylesheets -->
 <!-- Documentation for second style sheet: https://bootswatch.com/darkly/ -->
@@ -29,9 +29,9 @@ echo '
                 <fieldset>
                     <div class="form-group-single">
                         <label>ENABLED STATUS</label>
-                        <select name="enabled" class="select-box" title="Enabled grants the user access to the application" ng-value="">
-                            <option>ENABLED</option>
-                            <option>DISABLED</option>
+                        <select name="enabled" class="select-box" title="true grants the user access to the application" ng-value="">
+                            <option>true</option>
+                            <option>false</option>
                         </select>
                     </div>
 
@@ -39,9 +39,9 @@ echo '
 
                     <div class="form-group-single">
                         <label>ADMIN STATUS</label>
-                        <select name="adminStatus" class="select-box" title="Enabled grants the user admin privileges" ng-value="">
-                            <option>ENABLED</option>
-                            <option>DISABLED</option>
+                        <select name="adminStatus" class="select-box" title="true grants the user admin privileges" ng-value="">
+                            <option>true</option>
+                            <option>false</option>
                         </select>
                     </div>
 
