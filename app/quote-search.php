@@ -2,7 +2,7 @@
 require( 'db.php' );
 session_start();
 if ( !isset( $_SESSION['username'] ) ) { // make sure user is logged in
-    header( "location:../index.php" );
+    header( "location:index.php" );
     exit(5);
 }
 echo
@@ -25,22 +25,21 @@ echo
         <script src="../app.js"></script>
     </head> <body ng-app="salesQuoteApp" ng-controller="quoteController">
 <div align="right" class="btn-toolbar rightCornerButton">
-    <a ng-model="homeButton" href="../index.php#/home" class="btn btn-primary">Home</a>
-    <a ng-model="logoutButton" href="../logout.php" class="btn btn-primary">Log Out</a>
+    <a ng-model="homeButton" href="index.php#/home" class="btn btn-primary">Home</a>
+    <a ng-model="logoutButton" href="logout.php" class="btn btn-primary">Log Out</a>
 </div>';
 $searchValue = mysqli_real_escape_string($mysqli, $_GET['searchQuotes']);
-var_dump($GLOBALS);
 try {
 
     // Find out how many items are in the table
     $total = 0;
     if ($_SESSION['admin'] != 'true') { // limit non-administrators to only being able to search their quotes
         $total = $dbh->query("
-        SELECT count(*) FROM Quotes WHERE clientname LIKE '%$searchValue%' AND username = {$_SESSION['username']}
+        SELECT count(id) FROM Quotes WHERE clientName LIKE '%$searchValue%' AND username = {$_SESSION['username']}
     ")->fetchColumn();
     } else {
         $total = $dbh->query("
-        SELECT count(*) FROM Quotes WHERE clientname LIKE '%$searchValue%'}
+        SELECT count(id) FROM Quotes WHERE clientName LIKE '%$searchValue%'}
     ")->fetchColumn();
     }
 
@@ -80,19 +79,22 @@ try {
 			<p align="center">Click on a Username to edit the user.</p>
             <table class="table table-bordered table-hover">
             <tr>
-            	<th>Username</th>
-            	<th>Administrator Status</th>
-            	<th>Enabled/Disabled</th>
+            	<th>Quote ID</th>
+            	<th>Client Name</th>
+            	<th>Completion Date</th>
             </tr>';
 
     // Prepare the paged query
-    $stmt = $dbh->prepare( "
+    $stmt;
+    if ($_SESSION['admin'] != 'true'){
+    $stmt = $dbh->prepare(  "
         SELECT
-            username, admin
-         FROM
-            users
+            *
+        FROM
+            Quotes
         WHERE
-            username LIKE '%$searchValue%'
+            clientName LIKE '%$searchValue%'
+            AND username = {$_SESSION['username']}
         ORDER BY
             username
         LIMIT
@@ -100,6 +102,23 @@ try {
         OFFSET
             :offset
     " );
+} else {
+        $stmt = $dbh->prepare(  "
+        SELECT
+            *
+         FROM
+            Quotes
+        WHERE
+            clientName LIKE '%$searchValue%'
+        ORDER BY
+            username
+        LIMIT
+            :limit
+        OFFSET
+            :offset
+    " );
+    }
+    var_dump($GLOBALS);
 
     // Bind the query params
     $stmt->bindParam( ':limit', $limit, PDO::PARAM_INT );
@@ -114,9 +133,9 @@ try {
         // Display the results
         foreach ( $iterator as $row ) {
             echo '<tr>';
-            echo '<td><a href="edit-user.php?user=' . $row['username'] . '">' . $row['username'] . '</a></td>' ;
-            echo '<td>', $row['admin'], '</td>';
-            echo '<td></td>';
+            echo '<td><a href="view-quote.php?user=' . $row['id'] . '">' . $row['id'] . '</a></td>' ;
+            echo '<td>' . $row['clientName'] . '</td>';
+            echo '<td>' . $row['completionDate'] . '</td>';
             echo '</tr>';
         }
         echo '</table>';
