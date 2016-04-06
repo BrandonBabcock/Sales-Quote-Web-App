@@ -25,7 +25,7 @@ if ($_SESSION['admin'] == 'true') { // user accessing page is admin, has access 
         WHERE
               id = :id
         AND
-              clientName = '{$_SESSION['username']}'
+              username = '{$_SESSION['username']}'
         ");
 }
 $sql->bindParam(':id', $quoteId); // bind :id to ID provided in GET
@@ -606,5 +606,10 @@ if ($sql->rowCount() > 0) { // Check that a row was returned that matched GET re
 
 </div>';
     }
+} else {
+            echo '<script type="text/javascript">
+        alert ("Invalid QuoteID specified");
+        window.location.href="index.php#/search-quote";
+</script>';
 }
 ?>
