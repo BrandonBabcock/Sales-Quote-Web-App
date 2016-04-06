@@ -141,7 +141,7 @@ try {
         // Display the results
         foreach ($iterator as $row) {
             echo '<tr>';
-            echo '<td><a href="view - quote . php ? user = ' . $row['id'] . '">' . $row['id'] . '</a></td>';
+            echo '<td><a href="view-quote.php?user=' . $row['id'] . '">' . $row['id'] . '</a></td>';
             echo '<td>' . $row['clientName'] . '</td>';
             echo '<td>' . $row['completionDate'] . '</td>';
             echo '</tr>';
