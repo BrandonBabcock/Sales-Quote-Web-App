@@ -28,7 +28,10 @@ echo
     <a ng-model="homeButton" href="../index.php#/home" class="btn btn-primary">Home</a>
     <a ng-model="logoutButton" href="../logout.php" class="btn btn-primary">Log Out</a>
 </div>';
-$searchValue = mysqli_real_escape_string($mysqli, $_GET['searchQuotes']);
+if (isset($_GET['searchQuotes'])) { // record quote search for access on other paginated pages
+    $_SESSION['searchExistingQuotes'] = mysqli_real_escape_string($mysqli, $_GET['searchQuotes']);
+}
+$searchValue = $_SESSION['searchExistingQuotes'];
 try {
     $user = $_SESSION['username'];
     // Find out how many items are in the table
@@ -72,19 +75,19 @@ try {
     $end = min(($offset + $limit), $total);
 
     // The "back" link
-    $prevlink = ($page > 1) ? '<a href=" ? page = 1" title="First page">&laquo;</a> <a href=" ? page = ' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
+    $prevlink = ($page > 1) ? '<a href="?page=1" title="First page">&laquo;</a> <a href="?page=' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
 
     // The "forward" link
-    $nextlink = ($page < $pages) ? '<a href=" ? page = ' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href=" ? page = ' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
+    $nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
 
     // Display the paging information
     echo '<div class="container">
-    	<div class="panel panel -default">
-        <div class="panel - heading text - center">View Existing Quotes</div>
-        <div class="panel - body">
+    	<div class="panel panel-default">
+        <div class="panel-heading text-center">View Existing Quotes</div>
+        <div class="panel-body">
 
 			<p align="center">Click on a Quote ID to view the quote.</p>
-            <table class="table table - bordered table - hover">
+            <table class="table table-bordered table-hover">
             <tr>
             	<th>Quote ID</th>
             	<th>Client Name</th>
