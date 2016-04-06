@@ -1,8 +1,11 @@
 <?php
 session_start();
-if ( !isset( $_SESSION['username'] ) ) { // make sure user is logged in
-	header( "location:../index.php" );
-	exit(5);
+if (!isset($_SESSION['username'])) { // make sure user is logged in
+    echo '<script type="text/javascript">
+        alert ("Access Denied");
+        window.location.href="index.php";
+        </script>';
+    exit(5);
 }
 echo '
 <div align="right" class="btn-toolbar rightCornerButton">
@@ -22,8 +25,8 @@ echo '
                          View Existing Quotes <span class="glyphicon glyphicon-circle-arrow-right"></span>
                 </a>
                 <br />';
-if ( $_SESSION['admin'] == 'true' ) { // make sure user is admin
-	echo '<a ui-sref="portal" class="btn btn-block btn-primary">
+if ($_SESSION['admin'] == 'true') { // make sure user is admin
+    echo '<a ui-sref="portal" class="btn btn-block btn-primary">
 	     Admin Portal <span class="glyphicon glyphicon-circle-arrow-right"></span>
                 </a>';
 }

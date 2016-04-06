@@ -1,5 +1,5 @@
 <?php
-require('db.php');
+require('../db.php');
 session_start();
 if (!isset($_SESSION['username'])) { // make sure user is logged in
     header("location:index.php");
@@ -13,7 +13,7 @@ echo
 
         <!-- Link stylesheets -->
         <!-- Documentation for second style sheet: https://bootswatch.com/darkly/ -->
-	    <link rel="stylesheet" href="../assets/css/style.css">
+	    <link rel="stylesheet" href="../../assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
 
         <!-- Load in Global Dependencies -->
@@ -25,11 +25,10 @@ echo
         <script src="../app.js"></script>
     </head> <body ng-app="salesQuoteApp" ng-controller="quoteController">
 <div align="right" class="btn-toolbar rightCornerButton">
-    <a ng-model="homeButton" href="index.php#/home" class="btn btn-primary">Home</a>
-    <a ng-model="logoutButton" href="logout.php" class="btn btn-primary">Log Out</a>
+    <a ng-model="homeButton" href="../index.php#/home" class="btn btn-primary">Home</a>
+    <a ng-model="logoutButton" href="../logout.php" class="btn btn-primary">Log Out</a>
 </div>';
 $searchValue = mysqli_real_escape_string($mysqli, $_GET['searchQuotes']);
-var_dump($GLOBALS);
 try {
     $user = $_SESSION['username'];
     // Find out how many items are in the table
@@ -149,14 +148,12 @@ try {
         echo '</table>';
         echo '
 			<div align="center" id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
-
     } else {
         echo '<p>No results matched your search query.</p>';
     }
 } catch (Exception $e) {
     echo '<p>', $e->getMessage(), '</p>';
 }
-
 echo '
 </div>
 </div>

@@ -13,6 +13,10 @@ if ( is_string( $_SESSION['form'] ) ) { // don't run if form data has already be
 	$_SESSION['form'] = json_decode( $_SESSION['form'], true ); // decodes JSON data sent by angularJS frontend and converts to PHP associative array
 	$newQuote         = true;
 }
+if ( !isset($_SESSION['form']['numberOfEnvironments'])) { // make sure user submitted form data prior to accessing page
+    header( "location:index.php#/home" );
+    exit(6);
+}
 $username            = $_SESSION['username'];
 $unknownRequirements = $_SESSION['form']['unknownPercentage'] / 100; // Metrics.B64
 $result     = $mysqli->query( "SELECT * FROM Pricing WHERE id=1" ); // Must read price from DB

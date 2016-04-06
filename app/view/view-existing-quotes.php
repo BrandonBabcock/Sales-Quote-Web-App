@@ -16,7 +16,7 @@ echo '
         <div class="panel-heading text-center">View Existing Quotes</div>
         <div class="panel-body">
             <div class="col-sm-8 col-sm-offset-2">
-                <form name="searchQuotesForm" method=POST" action="quote-search.php">
+                <form name="searchQuotesForm" method=POST" action="view/quote-results.php">
                     <div class="form-group">
                         <input type="text" class="form-control" name="searchQuotes" ng-model="searchQuotes" id="searchQuotes" placeholder="Client Name" title="Enter a client name to search for quotes for that client">
                         <input type="submit" class="btn btn-block btn-primary" Value="Search for Quotes">

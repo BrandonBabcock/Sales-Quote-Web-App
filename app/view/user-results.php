@@ -29,7 +29,6 @@ echo
     <a ng-model="logoutButton" href="../logout.php" class="btn btn-primary">Log Out</a>
 </div>';
 $searchValue = $_SESSION['lastsearch'];
-
 try {
 
 	// Find out how many items are in the table
