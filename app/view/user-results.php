@@ -114,7 +114,6 @@ try {
 		echo '</table>';
 		echo '
 			<div align="center" id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
-
 	}
 	else {
 		echo '<p>No results matched your search query.</p>';
