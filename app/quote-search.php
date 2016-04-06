@@ -37,9 +37,10 @@ try {
         $total = $dbh->query("
         SELECT count(id) FROM Quotes WHERE clientName LIKE '%$searchValue%' AND username = {$_SESSION['username']}
     ")->fetchColumn();
+
     } else {
         $total = $dbh->query("
-        SELECT count(id) FROM Quotes WHERE clientName LIKE '%$searchValue%'}
+        SELECT count(*) FROM Quotes WHERE clientname LIKE '%$searchValue%'
     ")->fetchColumn();
     }
 
@@ -73,10 +74,10 @@ try {
     // Display the paging information
     echo '<div class="container">
     	<div class="panel panel-default">
-        <div class="panel-heading text-center">Manage Users</div>
+        <div class="panel-heading text-center">View Existing Quotes</div>
         <div class="panel-body">
 
-			<p align="center">Click on a Username to edit the user.</p>
+			<p align="center">Click on a Quote ID to view the quote.</p>
             <table class="table table-bordered table-hover">
             <tr>
             	<th>Quote ID</th>
@@ -118,7 +119,6 @@ try {
             :offset
     " );
     }
-    var_dump($GLOBALS);
 
     // Bind the query params
     $stmt->bindParam( ':limit', $limit, PDO::PARAM_INT );
