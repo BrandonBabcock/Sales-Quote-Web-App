@@ -49,10 +49,11 @@ echo '
 
                     <div class="form-group-single">
                         <label>CHANGE PASSWORD</label>
-                        <input type="text" name="newPassword" class="form-control" title="Enter a new password for the user">
+                        <input type="text" name="newPassword" class="form-control" title="Enter a new password for the user" placeholder="New Password">
                     </div>
                     </fieldset>
-                 <input type="submit" class="btn btn-primary col-lg-4 col-lg-offset-4" Value="Modify User">
+                    <br />
+                 <input type="submit" class="btn btn-block btn-primary" value="Update User">
                 </form>
             </div>
         </div>

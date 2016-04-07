@@ -20,12 +20,12 @@ echo '<div align="right" class="btn-toolbar rightCornerButton">
             <form name="modifyPricingForm" method="post" action="modifypricing.php">
                 <div class="form-group">
                     <label>CURRENT SERVICES HOURLY RATE</label>
-                    <input type="text" class="form-control" name="currentServicesHourlyRate" ng-disabled="true" ng-value="' . $servicesHourlyRate . '" id="currentServicesHourlyRate">
+                    <input type="text" class="form-control" name="currentServicesHourlyRate" ng-disabled="true" ng-value="' . $servicesHourlyRate . '" id="currentServicesHourlyRate" title="The current services hourly rate">
                     <label>NEW DESIRED SERVICES HOURLY RATE</label>
-                    <input type="text" class="form-control" name="newServicesHourlyRate" ng-model="newServicesHourlyRate" id="newServicesHourlyRate">
+                    <input type="text" class="form-control" name="newServicesHourlyRate" ng-model="newServicesHourlyRate" id="newServicesHourlyRate" title="Enter the new services hourly rate" placeholder="New Services Hourly Rate">
                 </div>
                 <div align="center">
-                    <input type="submit" class="btn btn-block btn-primary" style="width: 25%;" Value="Update Pricing">
+                    <input type="submit" class="btn btn-block btn-primary" value="Update Pricing">
                 </div>
             </form>
         </div>
