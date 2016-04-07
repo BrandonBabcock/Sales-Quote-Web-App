@@ -34,7 +34,7 @@ if ($sql->rowCount() > 0) { // Check that a row was returned that matched GET re
     $sql->setFetchMode(PDO::FETCH_ASSOC);
     $iterator = new IteratorIterator($sql);
     foreach ($iterator as $existingQuoteData) {
-        echo "<link rel=\"stylesheet\" href=\"../assets/css/style.css\">
+        echo "<link rel=\"stylesheet\" href=\"../../assets/css/style.css\">
 <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css\">
 <div class=\"left-right-margin\"><h4>Client Name: " . $existingQuoteData['clientName'] . '</h4>
     <h4>' . $existingQuoteData['completionDate'] . '</h4>
