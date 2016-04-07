@@ -4,8 +4,8 @@ if ($_SESSION['admin'] != 'true') {
 	echo '<H1>Access Denied</H1>';
 	exit(2);
 }
-echo
-'<div align="right" class="btn-toolbar rightCornerButton">
+echo '
+<div align="right" class="btn-toolbar rightCornerButton">
     <a ng-model="homeButton" href="../app/index.php#/home" class="btn btn-primary">Home</a>
     <a ng-model="logoutButton" href="../app/logout.php" class="btn btn-primary">Log Out</a>
 </div>
@@ -21,8 +21,12 @@ echo
                         <input type="submit" class="btn btn-block btn-primary" Value="Search for Users">
                     </div>
                 </form>
+				<a ui-sref="addNewUser" class="btn btn-block btn-primary">
+					Add New User</span>
+				</a>
             </div>
         </div>
     </div>
-</div>';
+</div>
+';
 ?>
