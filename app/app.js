@@ -80,6 +80,11 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router"])
                 templateUrl:"view/view-existing-quotes.php"
             })
 
+            .state("addNewUser", {
+                url:"/add-new-user",
+                templateUrl:"view/add-new-user.php"
+            })
+
         ;
 
 
