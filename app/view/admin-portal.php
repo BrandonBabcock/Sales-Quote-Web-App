@@ -1,4 +1,13 @@
 <?php
+session_start();
+if (!isset($_SESSION['username'])) { // make sure user is logged in
+    header("location:index.php");
+    exit(6);
+}
+if ($_SESSION['admin'] != 'true') { // non-administrator tried to access page
+    header('location:index.php');
+    exit(5);
+}
 echo '
 <div align="right" class="btn-toolbar rightCornerButton">
     <a ng-model="homeButton" href="../app/index.php#/home" class="btn btn-primary">Home</a>

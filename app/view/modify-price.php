@@ -2,7 +2,7 @@
 require("../db.php");
 session_start();
 if ($_SESSION['admin'] != 'true') { // non-administrator tried to access page
-    header('location:index.php');
+    header("location:index.php");
     exit(5);
 }
 $result     = $mysqli->query( "SELECT * FROM Pricing WHERE id=1" ); // Must read price from DB

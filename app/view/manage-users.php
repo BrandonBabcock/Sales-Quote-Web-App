@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['admin'] != 'true') {
-	echo '<H1>Access Denied</H1>';
+    header("location:index.php");
 	exit(2);
 }
 echo '

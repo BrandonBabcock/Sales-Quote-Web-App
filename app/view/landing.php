@@ -1,10 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) { // make sure user is logged in
-    echo '<script type="text/javascript">
-        alert ("Access Denied");
-        window.location.href="index.php";
-        </script>';
+    header("location:index.php");
     exit(5);
 }
 echo '
