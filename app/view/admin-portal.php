@@ -26,7 +26,6 @@ echo '
                 <a ui-sref="users" class="btn btn-block btn-primary">
                    Manage Users  <span class="glyphicon glyphicon-circle-arrow-right"></span>
                 </a>
-
             </div>
         </div>
     </div>

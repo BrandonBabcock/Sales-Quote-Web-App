@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['username'])) { // make sure user is logged in
+    header("location:index.php");
+    exit(6);
+}
 if ($_SESSION['admin'] != 'true') { // non-administrator tried to access page
     header("location:index.php");
     exit(5);
@@ -22,6 +26,14 @@ echo '
                         <label>New User Password</label>
                         <input type="password" class="form-control" name="newUserPassword" ng-model="newUserPassword" id="newUserPassword" placeholder="New User Password" title="Enter a password for the new user">
                     </div>
+                    <div class="form-group-single">
+                     <label>New User Administrator Status</label>
+                        <select name="adminStatus" class="select-box" title="true grants the user admin privileges" ng-value="">
+                            <option>true</option>
+                            <option>false</option>
+                        </select>
+                        </div>
+                        <br>
                     <input type="submit" class="btn btn-block btn-primary" Value="Add User">
                 </form>
             </div>

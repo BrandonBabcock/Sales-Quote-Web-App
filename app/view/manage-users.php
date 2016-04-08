@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['username'])) { // make sure user is logged in
+    header("location:index.php");
+    exit(6);
+}
 if ($_SESSION['admin'] != 'true') {
     header("location:index.php");
 	exit(2);

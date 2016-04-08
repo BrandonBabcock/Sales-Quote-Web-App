@@ -1,7 +1,7 @@
 <?php
 require('db.php');
 session_start();
-if ($_SESSION['admin'] != 'true') { // non-administrator tried to access page
+if (!isset($_SESSION['username']) || $_SESSION['admin'] != 'true') { // non-administrator tried to access page
     header('location:index.php');
     exit(5);
 }

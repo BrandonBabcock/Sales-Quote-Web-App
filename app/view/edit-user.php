@@ -1,6 +1,10 @@
 <?php
 require('../db.php');
 session_start();
+if (!isset($_SESSION['username'])) { // make sure user is logged in
+    header("location:index.php");
+    exit(6);
+}
 if ($_SESSION['admin'] != 'true') { // non-administrator tried to access page
     header("location:index.php");
     exit(5);
