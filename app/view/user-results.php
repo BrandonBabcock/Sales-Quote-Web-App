@@ -84,7 +84,7 @@ try {
 	// Prepare the paged query
 	$stmt = $dbh->prepare( "
         SELECT 
-            username, admin 
+            username, admin, enabled 
          FROM 
             users 
         WHERE 
@@ -111,8 +111,8 @@ try {
 		foreach ( $iterator as $row ) {
 			echo '<tr>';
             echo '<td><a href="edit-user.php?user=' . $row['username'] . '">' . $row['username'] . '</a></td>' ;
-            echo '<td>', $row['admin'], '</td>';
-            echo '<td></td>';
+            echo '<td>'. $row['admin']. '</td>';
+            echo '<td>' . $row['enabled'] . '</td>';
 			echo '</tr>';
 		}
 		echo '</table>';

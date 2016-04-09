@@ -18,7 +18,7 @@ $sql = "SELECT count(*) num from users where username = '$modifyUsername'";
 $result = $mysqli->query($sql);
 $row = mysqli_fetch_assoc($result);
 if ($row['num'] == 1) {
-    $sql = "UPDATE users SET pass = '$modifyPassword', admin = '$modifyAdminStatus' WHERE username = '$modifyUsername'"; // update user in DB
+    $sql = "UPDATE users SET pass = '$modifyPassword', admin = '$modifyAdminStatus', enabled = '$modifyEnabledStatus' WHERE username = '$modifyUsername'"; // update user in DB
     $results = $mysqli->query($sql);
     if ($results) {
         echo '<script type="text/javascript">
