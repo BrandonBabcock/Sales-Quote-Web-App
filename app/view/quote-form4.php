@@ -68,7 +68,7 @@ echo '
     </div>
 </form>
 
-<a class="btn btn-block btn-primary" ng-click="processForm()">
+<a class="btn btn-block btn-primary" ng-click="processForm()" ng-disabled="theForm.$invalid">
     SUBMIT<span class="glyphicon glyphicon-circle-arrow-right"></span>
 </a>
 ';
