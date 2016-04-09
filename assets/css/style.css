@@ -54,6 +54,14 @@
     margin-right: 30px;
 }
 
+input.ng-invalid {
+    border: 1px solid #FF0000;
+}
+
+.error-text {
+    color: #FF0000;
+}
+
 .left-right-margin {
     margin-left: 25px;
     margin-right: 25px;

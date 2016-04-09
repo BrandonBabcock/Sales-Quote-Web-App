@@ -11,16 +11,32 @@ echo '
 <form name="quoteForm2">
     <div class="form-group">
         <label>Number of Environments</label>
-        <input type="text" class="form-control" name="numberOfEnvironments" ng-model="formData.numberOfEnvironments" ng-disabled="true" title="Auto populated based on Model & Additional Development Environment entered on Step 1">
+        <input type="number" class="form-control" name="numberOfEnvironments" ng-model="formData.numberOfEnvironments" ng-disabled="true" title="Auto populated based on Model & Additional Development Environment entered on Step 1" required>
+        <div ng-messages="theForm.numberOfEnvironments.$error">
+            <div ng-message="required" class="error-text">Required</div>
+            <div ng-message="number" class="error-text">Number Required</div>
+        </div>
         <label>Additional HA Servers</label>
-        <input type="text" class="form-control" name="haServers" ng-model="formData.haServers" title="How many additional HA Servers are required? 0 if IaaS">
+        <input type="number" class="form-control" name="haServers" ng-model="formData.haServers" title="How many additional HA Servers are required? 0 if IaaS" required>
+        <div ng-messages="theForm.haServers.$error">
+            <div ng-message="required" class="error-text">Required</div>
+            <div ng-message="number" class="error-text">Number Required</div>
+        </div>
     </div>
 
     <div class="form-group">
         <label>Number of Global Identity Gateways</label>
-        <input type="text" class="form-control" name="globalIdentityGateways" ng-model="formData.globalIdentityGateways" title="Required if IaaS. Recommend minimum of 2 (1 for test, 1 for production)">
+        <input type="number" class="form-control" name="globalIdentityGateways" ng-model="formData.globalIdentityGateways" title="Required if IaaS. Recommend minimum of 2 (1 for test, 1 for production)" required>
+        <div ng-messages="theForm.globalIdentityGateways.$error">
+            <div ng-message="required" class="error-text">Required</div>
+            <div ng-message="number" class="error-text">Number Required</div>
+        </div>
         <label>Number of MS Password Filters</label>
-        <input type="text" class="form-control" name="passwordFilters" ng-model="formData.passwordFilters" title="MS Password Filter per AD Domain Controller. Enter the number of domain controllers the password will be reset on">
+        <input type="number" class="form-control" name="passwordFilters" ng-model="formData.passwordFilters" title="MS Password Filter per AD Domain Controller. Enter the number of domain controllers the password will be reset on" required>
+        <div ng-messages="theForm.passwordFilters.$error">
+            <div ng-message="required" class="error-text">Required</div>
+            <div ng-message="number" class="error-text">Number Required</div>
+        </div>
     </div>
 
     <div class="form-group">

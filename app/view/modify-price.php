@@ -21,15 +21,18 @@ echo '<div align="right" class="btn-toolbar rightCornerButton">
     <div class="panel panel-default">
         <div class="panel-heading text-center">MODIFY PRICING</div>
         <div class="panel-body">
-            <form name="modifyPricingForm" method="post" action="modifypricing.php">
+            <form name="modifyPricingForm" method="post" action="modifypricing.php" novalidate>
                 <div class="form-group">
                     <label>CURRENT SERVICES HOURLY RATE</label>
                     <input type="text" class="form-control" name="currentServicesHourlyRate" ng-disabled="true" ng-value="' . $servicesHourlyRate . '" id="currentServicesHourlyRate" title="The current services hourly rate">
                     <label>NEW DESIRED SERVICES HOURLY RATE</label>
-                    <input type="text" class="form-control" name="newServicesHourlyRate" ng-model="newServicesHourlyRate" id="newServicesHourlyRate" title="Enter the new services hourly rate" placeholder="New Services Hourly Rate">
+                    <input type="number" class="form-control" name="newServicesHourlyRate" ng-model="newServicesHourlyRate" id="newServicesHourlyRate" title="Enter the new services hourly rate" placeholder="New Services Hourly Rate" required>
+                    <div ng-messages="modifyPricingForm.newServicesHourlyRate.$error">
+                        <div ng-message="required" class="error-text">Required</div>
+                    </div>
                 </div>
                 <div align="center">
-                    <input type="submit" class="btn btn-block btn-primary" value="Update Pricing">
+                    <input type="submit" class="btn btn-block btn-primary" value="Update Pricing" ng-disabled="modifyPricingForm.$invalid">
                 </div>
             </form>
         </div>

@@ -27,7 +27,7 @@ echo '
                 </div>
 
                 <!-- Use ng-submit to catch the form submission and use our Angular function -->
-                <form id="signup-form" ng-submit="processForm()">
+                <form name="theForm" id="signup-form" ng-submit="processForm()">
                     <!-- Our nested state views will be injected here -->
                     <div id="form-views" ui-view></div>
                 </form>
