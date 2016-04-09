@@ -25,12 +25,10 @@ echo '<div align="right" class="btn-toolbar rightCornerButton">
                 <div class="form-group">
                     <label>CURRENT SERVICES HOURLY RATE</label>
                     <input type="text" class="form-control" name="currentServicesHourlyRate" ng-disabled="true" ng-value="' . $servicesHourlyRate . '" id="currentServicesHourlyRate" title="The current services hourly rate">
-                    <div ng-class="{ \'has-error\' : modifyPricingForm.newServicesHourlyRate.$invalid && !modifyPricingForm.newServicesHourlyRate.$pristine }">
                     <label>NEW DESIRED SERVICES HOURLY RATE</label>
                     <input type="number" class="form-control" name="newServicesHourlyRate" ng-model="newServicesHourlyRate" id="newServicesHourlyRate" title="Enter the new services hourly rate" placeholder="New Services Hourly Rate" required>
                     <div ng-messages="modifyPricingForm.newServicesHourlyRate.$error">
                         <div ng-message="required" class="error-text">Required</div>
-                    </div>
                     </div>
                 </div>
                 <div align="center">
