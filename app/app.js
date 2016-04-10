@@ -4,9 +4,9 @@
 angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
 
     // Route configuration
-    .config(function($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
-            // Initial state for logging in
+        // Initial state for logging in
             .state("login", {
                 url: "/login",
                 templateUrl: "view/quote-login.php"
@@ -17,9 +17,9 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
                 url: "/home",
                 templateUrl: "view/landing.php"
             })
-            .state("portal",{
+            .state("portal", {
                 url: "/adminPortal",
-                templateUrl:"view/admin-portal.php"
+                templateUrl: "view/admin-portal.php"
             })
 
 
@@ -50,24 +50,24 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
             })
 
             // Wizard Step 4 State
-            .state("quote.form4",{
-                url:"/form4",
-                templateUrl:"view/quote-form4.php"
+            .state("quote.form4", {
+                url: "/form4",
+                templateUrl: "view/quote-form4.php"
             })
 
-            .state("users",{
-                url:"/users",
-                templateUrl:"view/manage-users.php"
+            .state("users", {
+                url: "/users",
+                templateUrl: "view/manage-users.php"
             })
 
-            .state("addUser",{
-                url:"/addUser",
-                templateUrl:"view/add-user.php"
+            .state("addUser", {
+                url: "/addUser",
+                templateUrl: "view/add-user.php"
             })
 
-            .state("modifyPrice",{
-                url:"/modifyPrice",
-                templateUrl:"view/modify-price.php"
+            .state("modifyPrice", {
+                url: "/modifyPrice",
+                templateUrl: "view/modify-price.php"
             })
 
             //.state("userResults",{
@@ -76,17 +76,16 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
             //})
 
             .state("searchQuote", {
-                url:"/search-quote",
-                templateUrl:"view/view-existing-quotes.php"
+                url: "/search-quote",
+                templateUrl: "view/view-existing-quotes.php"
             })
 
             .state("addNewUser", {
-                url:"/add-new-user",
-                templateUrl:"view/add-new-user.php"
+                url: "/add-new-user",
+                templateUrl: "view/add-new-user.php"
             })
 
         ;
-
 
 
         // Catch all route; sends users to the initial state
@@ -94,7 +93,7 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
     })
 
     // Form controller
-    .controller("quoteController", function($scope, $http, $window) {
+    .controller("quoteController", function ($scope, $http, $window) {
         // Returns the current date in the MM/DD/YYYY format (used for Quote Completion Date)
         $scope.getCurrentDate = function () {
             var currentDate = new Date();
@@ -315,17 +314,22 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
         // Function to process the form (used for testing)
         $scope.processForm = function () {
             var key;
-            for(key in $scope.formData) {
+            for (key in $scope.formData) {
                 if ($scope.formData[key] === "") {
                     alert("One or more required fields have been left empty and must be filled out!");
                     return;
                 }
             }
+            var regEx = /^\d{2}\/\d{2}\/\d{4}$/; // check data syntax
+            if (!regEx.test($scope.formData.startDate)) {
+                alert("Desired completion date format is invalid!!");
+                return;
+            }
 
             $http({
                 method: 'POST',
                 url: 'process.php',
-                data:$scope.formData
+                data: $scope.formData
             }).then(
                 function (result) {
                     console.log(result);
