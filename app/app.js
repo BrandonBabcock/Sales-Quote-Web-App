@@ -130,7 +130,6 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
             completionDate: $scope.getCurrentDate(),
             model: "IaaS",
             additionalEnvironment: "NO",
-            newServicesHourlyRate: "",
 
             // Step 2
             numberOfEnvironments: 0,
