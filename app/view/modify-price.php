@@ -21,7 +21,7 @@ echo '<div align="right" class="btn-toolbar rightCornerButton">
     <div class="panel panel-default">
         <div class="panel-heading text-center">MODIFY PRICING</div>
         <div class="panel-body">
-            <form name="modifyPricingForm" method="post" action="modify-pricing.php">
+            <form name="modifyPricingForm" method="post" action="modifypricing.php">
                 <div class="form-group">
                     <label>CURRENT SERVICES HOURLY RATE</label>
                     <input type="text" class="form-control" name="currentServicesHourlyRate" ng-disabled="true" ng-value="' . $servicesHourlyRate . '" id="currentServicesHourlyRate" title="The current services hourly rate">
