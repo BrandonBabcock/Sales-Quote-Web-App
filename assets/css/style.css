@@ -31,6 +31,11 @@
 
 .select-box[disabled] {
     cursor: not-allowed;
+    opacity: .65;
+}
+
+input[type="number"][disabled], input[type="text"][disabled] {
+    opacity: .65;
 }
 
 /* Larger label */

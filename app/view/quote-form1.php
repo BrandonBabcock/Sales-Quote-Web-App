@@ -25,7 +25,7 @@ echo '
 
     <div class="form-group">
         <label>Quote Completion Date</label>
-        <input type="text" class="form-control" name="completionDate" ng-model="formData.completionDate" id="todayDate" title="Today\'s Date" ng-disabled="true">
+        <input type="text" class="form-control" name="completionDate" ng-model="formData.completionDate" id="todayDate" title="Today\'s Date" disabled>
 
         <label>Model</label><br>
         <select name="model" ng-model="formData.model" class="select-box" title="Enter IaaS / On-Premise" ng-change="changeNumOfEnvironAndHA()">
