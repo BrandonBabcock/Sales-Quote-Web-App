@@ -1,7 +1,7 @@
 // app.js
 
 // Create angular app and inject ngAnimate and ui-router
-angular.module("salesQuoteApp", ["ngAnimate", "ui.router"])
+angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
 
     // Route configuration
     .config(function($stateProvider, $urlRouterProvider) {
@@ -171,7 +171,7 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router"])
             onGoingAttManProccess: 0,
             postImpServices: "YES",
             userAccountLoad: "Custom",
-            unknownPercentage: "10.00%",
+            unknownPercentage: 10.00,
 
             // Step 4
             training: "NO",
@@ -315,6 +315,14 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router"])
 
         // Function to process the form (used for testing)
         $scope.processForm = function () {
+            var key;
+            for(key in $scope.formData) {
+                if ($scope.formData[key] === "") {
+                    alert("One or more required fields have been left empty and must be filled out!");
+                    return;
+                }
+            }
+
             $http({
                 method: 'POST',
                 url: 'process.php',

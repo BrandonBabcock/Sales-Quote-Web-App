@@ -22,9 +22,15 @@ echo '
                 <form name="addNewUserForm" method="post" action="new-user.php">
                     <div class="form-group">
                         <label>New User Username</label>
-                        <input type="text" class="form-control" name="newUserUsername" ng-model="newUserUsername" id="newUserUsername" placeholder="New User Username" title="Enter a username for the new user">
+                        <input type="text" class="form-control" name="newUserUsername" ng-model="newUserUsername" id="newUserUsername" placeholder="New User Username" title="Enter a username for the new user" required>
+                        <div ng-messages="addNewUserForm.newUserUsername.$error">
+                            <div ng-message="required" class="error-text">Required</div>
+                        </div>
                         <label>New User Password</label>
-                        <input type="password" class="form-control" name="newUserPassword" ng-model="newUserPassword" id="newUserPassword" placeholder="New User Password" title="Enter a password for the new user">
+                        <input type="password" class="form-control" name="newUserPassword" ng-model="newUserPassword" id="newUserPassword" placeholder="New User Password" title="Enter a password for the new user" required>
+                        <div ng-messages="addNewUserForm.newUserPassword.$error">
+                            <div ng-message="required" class="error-text">Required</div>
+                        </div>
                     </div>
                     <div class="form-group-single">
                      <label>New User Administrator Status</label>
@@ -34,7 +40,7 @@ echo '
                         </select>
                         </div>
                         <br>
-                    <input type="submit" class="btn btn-block btn-primary" Value="Add User">
+                    <input type="submit" class="btn btn-block btn-primary" Value="Add User" ng-disabled="addNewUserForm.$invalid">
                 </form>
             </div>
         </div>

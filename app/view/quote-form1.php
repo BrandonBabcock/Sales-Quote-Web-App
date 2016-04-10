@@ -11,10 +11,18 @@ echo '
 <form name="quoteForm1">
     <div class="form-group">
        <label>Name</label>
-        <input type="text" class="form-control" name="name" ng-model="formData.name" id="clientName" placeholder="Client Name" title="Enter Client Name">
+        <input type="text" class="form-control" name="name" ng-model="formData.name" id="clientName" placeholder="Client Name" title="Enter Client Name" required>
+        <div ng-messages="theForm.name.$error">
+            <div ng-message="required" class="error-text">Field Required</div>
+        </div>
         <label>Desired Start Date</label>
-        <input type="text" class="form-control" name="startDate" ng-model="formData.startDate" id="desiredStartDate" placeholder="Desired Start Date: MM/DD/YYY" title="Enter Start Date">
+        <input type="text" class="form-control" name="startDate" ng-model="formData.startDate" id="desiredStartDate" placeholder="Desired Start Date: MM/DD/YYYY" title="Enter Start Date" required pattern="[0-9]{2}[/][0-9]{2}[/][0-9]{4}$">
+        <div ng-messages="theForm.startDate.$error">
+            <div ng-message="required" class="error-text">Field Required</div>
+            <div ng-message="pattern" class="error-text">Invalid Date Format: Use MM/DD/YYYY</div>
+        </div>
      </div>
+
     <div class="form-group">
         <label>Quote Completion Date</label>
         <input type="text" class="form-control" name="completionDate" ng-model="formData.completionDate" id="todayDate" title="Today\'s Date" ng-disabled="true">
@@ -25,6 +33,7 @@ echo '
             <option>On-Premise</option>
         </select>
     </div>
+
     <div>
         <label>Additional Development Environment</label>
         <select name="additionalEnvironment" ng-model="formData.additionalEnvironment" class="select-box" id="additionalEnvironment" title="Enter Yes / No" ng-change="changeNumOfEnvironAndHA()">
