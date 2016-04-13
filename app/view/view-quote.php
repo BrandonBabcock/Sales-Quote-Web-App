@@ -16,7 +16,7 @@ if ($_SESSION['admin'] == 'true') { // user accessing page is admin, has access 
         WHERE
                id = :id
          ");
-} else { // user accessing page is admin, must have made quote to have access
+} else { // user accessing page is not admin, must have made quote to have access
     $sql = $dbh->prepare("
         SELECT
               *
@@ -31,9 +31,7 @@ if ($_SESSION['admin'] == 'true') { // user accessing page is admin, has access 
 $sql->bindParam(':id', $quoteId); // bind :id to ID provided in GET
 $sql->execute();
 if ($sql->rowCount() > 0) { // Check that a row was returned that matched GET request and user has permissions to access quote
-    $sql->setFetchMode(PDO::FETCH_ASSOC);
-    $iterator = new IteratorIterator($sql);
-    foreach ($iterator as $existingQuoteData) {
+   $existingQuoteData = $sql->fetch(PDO::FETCH_ASSOC);
         echo "<link rel=\"stylesheet\" href=\"../../assets/css/style.css\">
 <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css\">
 <div class=\"left-right-margin\"><h4>Client Name: " . $existingQuoteData['clientName'] . '</h4>
@@ -605,7 +603,6 @@ if ($sql->rowCount() > 0) { // Check that a row was returned that matched GET re
     </table>
 
 </div>';
-    }
 } else {
             echo '<script type="text/javascript">
         alert ("Invalid QuoteID specified");

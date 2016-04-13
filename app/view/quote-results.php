@@ -107,7 +107,7 @@ try {
         AND
             username='{$_SESSION['username']}'
         ORDER BY
-            username
+            id
         LIMIT
         :limit
         OFFSET
@@ -122,7 +122,7 @@ try {
         WHERE
             clientName LIKE '%$searchValue%'
         ORDER BY
-            username
+            id
         LIMIT
         :limit
         OFFSET
