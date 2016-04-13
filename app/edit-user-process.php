@@ -44,4 +44,3 @@ if ($row['num'] == 1) {
         window.location.href="view/user-results.php";
 </script>';
 }
-
