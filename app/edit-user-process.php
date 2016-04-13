@@ -10,15 +10,22 @@ $data = array();
 parse_str(file_get_contents('php://input'), $data);
 $_POST = array_merge($data, $_POST); // merge parsed modify user data with _POST session values
 $modifyUsername = $_SESSION['userToModify'];
-$modifyPassword = mysqli_real_escape_string($mysqli, $_POST['newPassword']);
-$modifyPassword = hash('sha512', $modifyPassword);
+$modifyPassword;
+if (!empty($_POST['newPassword'])) {
+    $modifyPassword = mysqli_real_escape_string($mysqli, $_POST['newPassword']);
+    $modifyPassword = hash('sha512', $modifyPassword);
+}
 $modifyAdminStatus = mysqli_real_escape_string($mysqli, $_POST['adminStatus']);
 $modifyEnabledStatus = mysqli_real_escape_string($mysqli, $_POST['enabled']);
 $sql = "SELECT count(*) num from users where username = '$modifyUsername'";
 $result = $mysqli->query($sql);
 $row = mysqli_fetch_assoc($result);
 if ($row['num'] == 1) {
-    $sql = "UPDATE users SET pass = '$modifyPassword', admin = '$modifyAdminStatus', enabled = '$modifyEnabledStatus' WHERE username = '$modifyUsername'"; // update user in DB
+    if (!empty($modifyPassword)) {
+        $sql = "UPDATE users SET pass = '$modifyPassword', admin = '$modifyAdminStatus', enabled = '$modifyEnabledStatus' WHERE username = '$modifyUsername'"; // update user in DB
+    } else {
+        $sql = "UPDATE users SET admin = '$modifyAdminStatus', enabled = '$modifyEnabledStatus' WHERE username = '$modifyUsername'"; // update user in DB
+    }
     $results = $mysqli->query($sql);
     if ($results) {
         echo '<script type="text/javascript">
