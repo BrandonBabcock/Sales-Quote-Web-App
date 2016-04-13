@@ -1,6 +1,15 @@
 <?php
 require('db.php');
 session_start();
+if (!isset($_SESSION['username'])) {
+    header('location:index.php');
+    exit(5);
+}
+require("status.php");
+if ($_SESSION['enabled'] != 'true') { // non-enabled account tried to access page
+    header('location:index.php');
+    exit(5);
+}
 if ($_SESSION['admin'] != 'true') {
 	echo '<H1>Access Denied</H1>';
 	exit(2);

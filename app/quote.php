@@ -6,6 +6,11 @@ if (!isset($_SESSION['username'])) { // make sure user is logged in
     header("location:index.php");
     exit(6);
 }
+require("status.php");
+if ($_SESSION['enabled'] != 'true') { // non-enabled account tried to access page
+    header('location:index.php');
+    exit(5);
+}
 $data = array();
 parse_str(file_get_contents('php://input'), $data);
 $_POST = array_merge($data, $_POST); // merge parsed form data with _POST session values

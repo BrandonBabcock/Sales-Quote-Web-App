@@ -5,6 +5,11 @@ if (!isset($_SESSION['username']) || $_SESSION['admin'] != 'true') { // non-admi
     header('location:index.php');
     exit(5);
 }
+require("status.php");
+if ($_SESSION['enabled'] != 'true') { // non-enabled account tried to access page
+    header('location:index.php');
+    exit(5);
+}
 ob_start();
 $data = array();
 parse_str(file_get_contents('php://input'), $data);

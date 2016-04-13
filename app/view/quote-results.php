@@ -5,6 +5,11 @@ if (!isset($_SESSION['username'])) { // make sure user is logged in
     header("location:index.php");
     exit(5);
 }
+require("../status.php");
+if ($_SESSION['enabled'] != 'true') { // non-enabled account tried to access page
+    header('location:index.php');
+    exit(5);
+}
 echo
 '
     <head>

@@ -5,6 +5,11 @@ if (!isset($_SESSION['username']) || !isset($_GET['quoteId'])) { // make sure us
     header("location:index.php");
     exit(6);
 }
+require("../status.php");
+if ($_SESSION['enabled'] != 'true') { // non-enabled account tried to access page
+    header('location:index.php');
+    exit(5);
+}
 $quoteId = mysqli_real_escape_string($mysqli, $_GET['quoteId']);
 $sql;
 if ($_SESSION['admin'] == 'true') { // user accessing page is admin, has access to all quotes
