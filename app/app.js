@@ -315,7 +315,7 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
         $scope.processForm = function () {
             var key;
             for (key in $scope.formData) {
-                if ($scope.formData[key] === "") {
+                if ($scope.formData[key] === "" || $scope.formData[key] == null) {
                     alert("One or more required fields have been left empty and must be filled out!");
                     return;
                 }
