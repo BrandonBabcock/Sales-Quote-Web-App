@@ -76,20 +76,19 @@ echo '
                 <form name="userUserForm" method="post" action="../edit-user-process.php">
                 <fieldset>
                     <div class="form-group-single">
-                        <label>ENABLED STATUS</label>
-                        <select name="enabled" class="select-box" title="true grants the user access to the application">
-                            <option ' . $accountEnabled . '>true</option>
-                            <option ' . $accountDisabled . '>false</option>
-                        </select>
-                    </div>
-
-                    <br/>
-
-                    <div class="form-group-single">
                         <label>ADMIN STATUS</label>
                         <select name="adminStatus" class="select-box" title="true grants the user admin privileges">
                             <option ' . $adminEnabled . '>true</option>
                             <option ' . $adminDisabled . '>false</option>
+                        </select>
+                    </div>
+
+                    <br/>
+                    <div class="form-group-single">
+                        <label>ENABLED STATUS</label>
+                        <select name="enabled" class="select-box" title="true grants the user access to the application">
+                            <option ' . $accountEnabled . '>true</option>
+                            <option ' . $accountDisabled . '>false</option>
                         </select>
                     </div>
 
