@@ -37,20 +37,20 @@ $results = $sql->fetch(PDO::FETCH_ASSOC);
 $accountEnabled;
 $accountDisabled;
 if ($results['enabled'] == 'true') {
-    $accountEnabled = 'true';
-    $accountDisabled = 'false';
+    $accountEnabled = 'selected';
+    $accountDisabled = '';
 } else {
-    $accountEnabled = 'false';
-    $accountDisabled = 'true';
+    $accountEnabled = '';
+    $accountDisabled = 'selected';
 }
 $adminEnabled;
 $adminDisabled;
 if ($results['admin'] == 'true') {
-    $adminEnabled = 'true';
-    $adminDisabled = 'false';
+    $adminEnabled = 'selected';
+    $adminDisabled = '';
 } else {
-    $adminEnabled = 'false';
-    $adminDisabled = 'true';
+    $adminEnabled = '';
+    $adminDisabled = 'selected';
 }
 echo '
 <!-- Link stylesheets -->
@@ -78,8 +78,8 @@ echo '
                     <div class="form-group-single">
                         <label>ENABLED STATUS</label>
                         <select name="enabled" class="select-box" title="true grants the user access to the application">
-                            <option ng-selected="' . $accountEnabled . '">true</option>
-                            <option ng-selected="' . $accountDisabled . '">false</option>
+                            <option ' . $accountEnabled . '>true</option>
+                            <option ' . $accountDisabled . '>false</option>
                         </select>
                     </div>
 
@@ -88,8 +88,8 @@ echo '
                     <div class="form-group-single">
                         <label>ADMIN STATUS</label>
                         <select name="adminStatus" class="select-box" title="true grants the user admin privileges">
-                            <option ng-selected="' .  $adminEnabled . '">true</option>
-                            <option ng-selected="' .  $adminDisabled . '">false</option>
+                            <option ' . $adminEnabled . '>true</option>
+                            <option ' . $adminDisabled . '>false</option>
                         </select>
                     </div>
 
