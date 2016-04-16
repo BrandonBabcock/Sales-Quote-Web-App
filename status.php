@@ -1,6 +1,6 @@
 <?php
 // This file updates a user's session with whether or not they still have admin privileges and if their account is enabled
-require_once("db.php");
+require_once( "db.php" );
 $stmt = $dbh->prepare( "
         SELECT
             admin, enabled

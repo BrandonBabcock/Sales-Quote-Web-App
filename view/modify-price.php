@@ -1,11 +1,11 @@
 <?php
-require("../db.php");
+require( "../db.php" );
 session_start();
 if (!isset($_SESSION['username'])) { // make sure user is logged in
     header("location:index.php");
     exit(6);
 }
-require("../status.php");
+require( "../status.php" );
 if ($_SESSION['enabled'] != 'true') { // non-enabled account tried to access page
     header('location:index.php');
     exit(5);
@@ -18,7 +18,7 @@ $result     = $mysqli->query( "SELECT * FROM Pricing WHERE id=1" ); // Must read
 $row        = mysqli_fetch_assoc( $result );
 $servicesHourlyRate = $row['servicesHourlyRate'];
 echo '<div align="right" class="btn-toolbar rightCornerButton">
-    <a ng-model="homeButton" href="../app/index.php#/home" class="btn btn-primary">Home</a>
+    <a ng-model="homeButton" href="../index.php#/home" class="btn btn-primary">Home</a>
         <a ng-model="logoutButton" href="../logout.php" class="btn btn-primary">Log Out</a>
 </div>
 

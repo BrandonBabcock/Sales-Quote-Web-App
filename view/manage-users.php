@@ -4,7 +4,7 @@ if (!isset($_SESSION['username'])) { // make sure user is logged in
     header("location:index.php");
     exit(6);
 }
-require("../status.php");
+require( "../status.php" );
 if ($_SESSION['enabled'] != 'true') { // non-enabled account tried to access page
     header('location:index.php');
     exit(5);
@@ -15,8 +15,8 @@ if ($_SESSION['admin'] != 'true') {
 }
 echo '
 <div align="right" class="btn-toolbar rightCornerButton">
-    <a ng-model="homeButton" href="../app/index.php#/home" class="btn btn-primary">Home</a>
-    <a ng-model="logoutButton" href="../app/logout.php" class="btn btn-primary">Log Out</a>
+    <a ng-model="homeButton" href="../index.php#/home" class="btn btn-primary">Home</a>
+    <a ng-model="logoutButton" href="../logout.php" class="btn btn-primary">Log Out</a>
 </div>
 
 <div class="container">

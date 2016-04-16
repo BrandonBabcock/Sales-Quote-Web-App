@@ -1,11 +1,11 @@
 <?php // this page displays an existing quote in the database
-require('../db.php');
+require( '../db.php' );
 session_start();
 if (!isset($_SESSION['username']) || !isset($_GET['quoteId'])) { // make sure user is logged in
     header("location:index.php");
     exit(6);
 }
-require("../status.php");
+require( "../status.php" );
 if ($_SESSION['enabled'] != 'true') { // non-enabled account tried to access page
     header('location:index.php');
     exit(5);

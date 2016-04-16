@@ -11,7 +11,7 @@ echo '
 
         <!-- Link stylesheets -->
         <!-- Documentation for second style sheet: https://bootswatch.com/darkly/ -->
-	    <link rel="stylesheet" href="../assets/css/style.css">
+	    <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/darkly/bootstrap.css">
 
         <!-- Load in Global Dependencies -->
