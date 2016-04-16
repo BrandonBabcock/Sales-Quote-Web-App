@@ -1,16 +1,25 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) { // make sure user is logged in
-    header("location:index.php");
+    echo '<script type="text/javascript">
+        alert ("Access Denied");
+        window.location = "index.php/#login";
+        </script>';
     exit(6);
 }
 require( "../status.php" );
 if ($_SESSION['enabled'] != 'true') { // non-enabled account tried to access page
-    header('location:index.php');
+    echo '<script type="text/javascript">
+        alert ("Access Denied");
+        window.location = "index.php/#login";
+        </script>';
     exit(5);
 }
 if ($_SESSION['admin'] != 'true') { // non-administrator tried to access page
-    header("location:index.php");
+    echo '<script type="text/javascript">
+        alert ("Access Denied");
+        window.location = "index.php/#login";
+        </script>';
     exit(5);
 }
 echo '
