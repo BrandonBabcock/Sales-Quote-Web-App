@@ -41,7 +41,9 @@ if ( $stmt->rowCount() == 1 ) {
 	$_SESSION['admin']    = $result['admin']; // store admin status, will be 'true' if user is admin
 		header( "location:index.php#/home" );
 } else { // invalid login
-	header( "location:index.php" );
-}
+	echo '<script type="text/javascript">
+        alert ("An invalid username or password was entered");
+        window.location.href = "index.php";
+        </script>';}
 ob_end_flush();
 ?>
