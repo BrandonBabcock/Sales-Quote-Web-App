@@ -28,4 +28,9 @@ if (is_numeric($newHourlyServiceRate)) { // only perform query with numeric data
         alert ("Pricing modified successfully");
         window.location = "index.php#/home";
         </script>';
+} else {
+	echo '<script type="text/javascript">
+        alert ("Pricing modification failed");
+        window.location = "index.php#/home";
+        </script>';
 }
