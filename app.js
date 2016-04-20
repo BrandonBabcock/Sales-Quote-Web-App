@@ -239,7 +239,7 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
                 $scope.formData.provisioningNumberOfPolicies = 0;
 
                 if ($scope.formData.passwordManagement == "YES") {
-                    $scope.formData.uniqueDefinitions = 1;
+                    $scope.formData.uniqueDefinitions = $scope.formData.passTargets + $scope.formData.numberOfAdminProvisioningTargets + $scope.formData.numberOfAutomatedProvisioningTargets;
                 } else {
                     $scope.formData.uniqueDefinitions = 0;
                 }
@@ -302,6 +302,12 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
                 $scope.formData.numOfIdp = 1;
             }
         };
+
+        // updates Unique Connected System Definitions when one of the influencing values is modified
+        $scope.updateUniqueConnectedSystemsDefinitions = function() {
+                $scope.formData.uniqueDefinitions = $scope.formData.passTargets + $scope.formData.numberOfAdminProvisioningTargets
+                    + $scope.formData.numberOfAutomatedProvisioningTargets;
+        }
 
         $scope.idpOrIaasChange = function (option) {
             if (option == "IaaS") {

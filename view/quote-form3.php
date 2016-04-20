@@ -28,7 +28,7 @@ echo '
             <div ng-message="number" class="error-text">Number Required</div>
         </div>
         <label>Number of Password Management Targets</label>
-        <input type="number" class="form-control" name="passTargets" ng-model="formData.passTargets" title="Enter the number of Password Management Targets" ng-disabled="formData.passwordManagement == \'NO\'" required>
+        <input type="number" class="form-control" ng-change="updateUniqueConnectedSystemsDefinitions()" name="passTargets" ng-model="formData.passTargets" title="Enter the number of Password Management Targets" ng-disabled="formData.passwordManagement == \'NO\'" required>
         <div ng-messages="theForm.passTargets.$error">
             <div ng-message="required" class="error-text">Required</div>
             <div ng-message="number" class="error-text">Number Required</div>
@@ -37,7 +37,7 @@ echo '
 
     <div class="form-group">
         <label>Number of Admin Provisioning Targets</label>
-        <input type="number" class="form-control" name="numberOfAdminProvisioningTargets" ng-model="formData.numberOfAdminProvisioningTargets" title="Enter the number of Admin Provisioning Targets" ng-disabled="formData.provisioning == \'NO\'" required>
+        <input type="number" class="form-control" ng-change="updateUniqueConnectedSystemsDefinitions()" name="numberOfAdminProvisioningTargets" ng-model="formData.numberOfAdminProvisioningTargets" title="Enter the number of Admin Provisioning Targets" ng-disabled="formData.provisioning == \'NO\'" required>
         <div ng-messages="theForm.numberOfAdminProvisioningTargets.$error">
             <div ng-message="required" class="error-text">Required</div>
             <div ng-message="number" class="error-text">Number Required</div>
@@ -52,7 +52,7 @@ echo '
 
     <div class="form-group">
         <label>Number of Automated Provisioning Targets</label>
-        <input type="number" class="form-control" name="numberOfAutomatedProvisioningTargets" ng-model="formData.numberOfAutomatedProvisioningTargets" title="Enter the number of Auto Provisioning Targets" ng-disabled="formData.provisioning == \'NO\'" required>
+        <input type="number" class="form-control" ng-change="updateUniqueConnectedSystemsDefinitions()" name="numberOfAutomatedProvisioningTargets" ng-model="formData.numberOfAutomatedProvisioningTargets" title="Enter the number of Auto Provisioning Targets" ng-disabled="formData.provisioning == \'NO\'" required>
         <div ng-messages="theForm.numberOfAutomatedProvisioningTargets.$error">
             <div ng-message="required" class="error-text">Required</div>
             <div ng-message="number" class="error-text">Number Required</div>
@@ -73,7 +73,7 @@ echo '
             <div ng-message="number" class="error-text">Number Required</div>
         </div>
         <label>Unique Connected System Definitions (total)</label>
-        <input type="number" class="form-control" name="uniqueDefinitions" ng-model="formData.uniqueDefinitions" title="Enter the number of connected system definitions necessary to meet solution requirements. Assumes all target systems must be counted" ng-disabled="formData.passwordManagement == \'NO\' && formData.provisioning == \'NO\'" required>
+        <input type="number" class="form-control" name="uniqueDefinitions" ng-model="formData.uniqueDefinitions" title="Enter the number of connected system definitions necessary to meet solution requirements. Assumes all target systems must be counted" ng-disabled="true" required>
         <div ng-messages="theForm.uniqueDefinitions.$error">
             <div ng-message="required" class="error-text">Required</div>
             <div ng-message="number" class="error-text">Number Required</div>

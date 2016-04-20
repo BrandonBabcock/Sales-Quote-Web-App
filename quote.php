@@ -1,12 +1,12 @@
 <?php
 // view and insert new quote
-require( 'db.php' );
+require('db.php');
 session_start();
 if (!isset($_SESSION['username'])) { // make sure user is logged in
     header("location:index.php");
     exit(6);
 }
-require( "status.php" );
+require("status.php");
 if ($_SESSION['enabled'] != 'true') { // non-enabled account tried to access page
     header('location:index.php');
     exit(5);
@@ -32,29 +32,29 @@ $clientName = $_SESSION['form']['name'];
 $startDate = $_SESSION['form']['startDate'];
 $completionDate = $_SESSION['form']['completionDate'];
 // Environment Specifics
-$environmentPlatformInstallHours = (($_SESSION['form']['numberOfEnvironments'] * 2) * $_SESSION['form']['unknownPercentage']) + ($_SESSION['form']['numberOfEnvironments'] * 2); // =((+$Metrics.B15*2)*$Metrics.B64)+(+$Metrics.B15*2)
-$haServerHours = ($_SESSION['form']['haServers'] * $unknownRequirements) + $_SESSION['form']['numberOfEnvironments']; // =((+$Metrics.B16*1)*$Metrics.B64)+(+$Metrics.B16*1)
+$environmentPlatformInstallHours = (($_SESSION['form']['numberOfEnvironments'] * 2) * $unknownRequirements) + ($_SESSION['form']['numberOfEnvironments'] * 2); // =((+$Metrics.B15*2)*$Metrics.B64)+(+$Metrics.B15*2)
+$haServerHours = ($_SESSION['form']['haServers'] * $unknownRequirements) + $_SESSION['form']['haServers']; // =((+$Metrics.B16*1)*$Metrics.B64)+(+$Metrics.B16*1)
 $gigInstallHours = ((($_SESSION['form']['globalIdentityGateways'] * .5) * $unknownRequirements) + ($_SESSION['form']['globalIdentityGateways'] * .5));
 $msPasswordFilterHours = (($_SESSION['form']['passwordFilters'] * .25) * $unknownRequirements) + ($_SESSION['form']['passwordFilters'] * .25); // =((+$Metrics.B18*15)/60*+$Metrics.B64)+((+$Metrics.B18*15)/60)
 $environmentOrganizationConfigurationHours = $_SESSION['form']['organizations'] * $unknownRequirements + $_SESSION['form']['organizations']; // =(+$Metrics.B42*+$Metrics.B64)+(+$Metrics.B42)
 $environmentConnectedSystemDefinitionsHours = ($_SESSION['form']['uniqueDefinitions'] * .25 * $unknownRequirements) + ($_SESSION['form']['uniqueDefinitions'] * .25);
-$environmentDocumentConfigurationsHours = ($_SESSION['form']['numberOfEnvironments'] * $unknownRequirements) + ($_SESSION['form']['numberOfEnvironments'] * .25); // =((($Metrics.B15*15)/60)*$Metrics.B64)+(($Metrics.B15*15)/60) conflict between formula and comments
-$environmentImplementationEffortHours = $environmentDocumentConfigurationsHours + $environmentConnectedSystemDefinitionsHours + $environmentOrganizationConfigurationHours + $environmentPlatformInstallHours + $haServerHours + $haServerHours + $msPasswordFilterHours;
+$environmentDocumentConfigurationsHours = ($_SESSION['form']['numberOfEnvironments'] * .25 * $unknownRequirements) + ($_SESSION['form']['numberOfEnvironments'] * .25); // =((($Metrics.B15*15)/60)*$Metrics.B64)+(($Metrics.B15*15)/60) conflict between formula and comments
+$environmentImplementationEffortHours = $environmentDocumentConfigurationsHours + $environmentConnectedSystemDefinitionsHours + $environmentOrganizationConfigurationHours + $environmentPlatformInstallHours + $haServerHours + $gigInstallHours + $msPasswordFilterHours;
 $environmentProjectManagementHours = $environmentImplementationEffortHours * .1;
-$environmentTotalPlatformInstallHours = $environmentPlatformInstallHours + $haServerHours + $haServerHours + $msPasswordFilterHours;
+$environmentTotalPlatformInstallHours = $environmentPlatformInstallHours + $haServerHours + $gigInstallHours + $msPasswordFilterHours;
 $totalEnvironmentHours = $environmentProjectManagementHours + $environmentImplementationEffortHours;
 // Pasword Management Effort
-$passwordWorkshopAndDesignDocHours = ($_SESSION['form']['passTargets'] * 2 * $unknownRequirements) + ($_SESSION['form']['passTargets'] * 2) * 2;
+$passwordWorkshopAndDesignDocHours = (($_SESSION['form']['passTargets'] * 2 * $unknownRequirements) + ($_SESSION['form']['passTargets'] * 2)) * 2;
 $passwordConfigurationHours = ($_SESSION['form']['passTargets'] * 2 * $unknownRequirements) + ($_SESSION['form']['passTargets'] * 2);
-$passwordProductionMigrationHours = ($_SESSION['form']['passTargets'] * 2 * $unknownRequirements) + ($_SESSION['form']['passTargets']);
+$passwordProductionMigrationHours = ($_SESSION['form']['passTargets'] * 1 * $unknownRequirements) + ($_SESSION['form']['passTargets']);
 $passwordPostImplementationServicesHours = ($_SESSION['form']['passTargets'] * 2 * $unknownRequirements) + ($_SESSION['form']['passTargets'] * 2);
 $passwordUiTrainingHours = 0;
-if ($_SESSION['form']['kioskTraining'] == 'yes') {
+if ($_SESSION['form']['kioskTraining'] == 'YES') {
     $passwordUiTrainingHours = 1 * $unknownRequirements + 1;
 } else {
     $passwordUiTrainingHours = 0;
 }
-$passwordSolutionDocumentationHours = ($_SESSION['form']['passTargets'] * 2 * $unknownRequirements) + ($_SESSION['form']['passTargets']);
+$passwordSolutionDocumentationHours = ($_SESSION['form']['passTargets'] * 2 * $unknownRequirements) + ($_SESSION['form']['passTargets'] * 2);
 $passwordImplmentationServiceHours = $passwordSolutionDocumentationHours + $passwordUiTrainingHours + $passwordProductionMigrationHours + $passwordPostImplementationServicesHours + $passwordConfigurationHours + $passwordWorkshopAndDesignDocHours;
 $passwordProjectManagementHours = $passwordImplmentationServiceHours * .1;
 $totalPasswordHours = $passwordProjectManagementHours + $passwordImplmentationServiceHours;
@@ -64,7 +64,7 @@ $numberOfAutomatedProvisioningWorkflowsPerTarget = $_SESSION['form']['numberOfAu
 $numberOfAdminProvisioningTargets = $_SESSION['form']['numberOfAdminProvisioningTargets'];
 $numberOfAdministrativeProvisioningWorkflowsPerTarget = $_SESSION['form']['numberOfAdministrativeProvisionWorkflowsPerTarget'];
 $numberOfSourceOfAuthorities = $_SESSION['form']['initiationPoints'];
-$provisioningWorkshopAndDesignDocHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminProvisioningTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminProvisioningTargets * .5);
+$provisioningWorkshopAndDesignDocHours = (($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminProvisioningTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminProvisioningTargets * .5)) * 2;
 $provisioningPostImplementationServicesHours = 0;
 if ($_SESSION['form']['postImpServices'] == 'YES') {
     $provisioningPostImplementationServicesHours = ($numberOfAutomatedProvisioningTargets * 4 * $unknownRequirements) + ($numberOfAdminProvisioningTargets * .5 * $unknownRequirements) + ($numberOfAutomatedProvisioningTargets * 4) + ($numberOfAdminProvisioningTargets * .5);
@@ -88,8 +88,8 @@ $provisioningAdministrativeProvisioningWorkflowHours = ($numberOfAdministrativeP
 $provisioningUserAccountLoadHours = 0;
 if ($_SESSION['form']['userAccountLoad'] == 'Custom') {
     $provisioningUserAccountLoadHours = ($_SESSION['form']['uniqueDefinitions'] * 4 * $unknownRequirements) + ($_SESSION['form']['uniqueDefinitions'] * 4);
-} else {
-    $provisioningUserAccountLoadHours = 4 * $unknownRequirements + 12;
+} else if ($_SESSION['form']['userAccountLoad'] == 'Simple') {
+    $provisioningUserAccountLoadHours = 4 * $unknownRequirements + 4;
 }
 $provisioningConfiguration = $provisioningUserAccountLoadHours + $provisioningAdministrativeProvisioningWorkflowHours + $provisioningStudioTimeHours + $provisioningApprovalsHours + $provisioningUSSPHours + $provisioningResourcesHours + $provisioningPolicyHours;
 $provisioningImplementationEffortHours = $provisioningSolutionDocumentationHours + $provisioningUiTrainingHours + $provisioningProductionMigrationHours + $provisioningPostImplementationServicesHours + $provisioningConfiguration + $provisioningWorkshopAndDesignDocHours;
@@ -135,21 +135,26 @@ if ($_SESSION['form']['hpamTraining'] == 'YES') {
 }
 $HPAMWorkshopAndDesignDocHours = $HPAMAnalysisWorkshopHours + $HPAMDesignDocumentHours;
 $HPAMSolutionDocumentationHours = ($_SESSION['form']['passTargets'] * $unknownRequirements * .5) + ($_SESSION['form']['passTargets'] * .5);
-$HPAMImplementationEffortHours = $HPAMSolutionDocumentationHours + $HPAMUiTrainingHours + $HPAMPostImplementationServicesHours + $HPAMProductionMigrationHours + $HPAMApprovalsHours + $HPAMOrgConfigurationHours + $HPAMDesignDocumentHours + $HPAMAnalysisWorkshopHours;
-$HPAMProjectManagementHours = $HPAMImplementationEffortHours * .1;
+$HPAMImplementationEffortHours = $HPAMSolutionDocumentationHours + $HPAMUiTrainingHours + $HPAMPostImplementationServicesHours + $HPAMProductionMigrationHours + $HPAMOrgConfigurationHours + $HPAMDesignDocumentHours + $HPAMAnalysisWorkshopHours; // $HPAMApprovalsHours is never used, issue in spreadsheet
+$HPAMProjectManagementHours = ($HPAMApprovalsHours + $HPAMImplementationEffortHours) * .1;
 $totalHPAMHours = $HPAMProjectManagementHours + $HPAMImplementationEffortHours;
 // Federation Effort
-$federationAnalysisWorkshopHours = (($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']) * $unknownRequirements) + ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']);
+$federationAnalysisWorkshopHours = 0;
+if ($_SESSION['form']['federationWorkshop'] == 'YES') {
+    $federationAnalysisWorkshopHours = ((($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess'])) * $unknownRequirements)
+        + ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']);
+}
 $federationDesignDocumentHours = (($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']) * $unknownRequirements) + ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']);
 $federationWorkshopAndDesignDocHours = $federationAnalysisWorkshopHours + $federationDesignDocumentHours;
-$federationStudioTimeHours = ($_SESSION['form']['attManProccess'] * 8) + ($_SESSION['form']['onGoingAttManProccess'] * 4 * $unknownRequirements) + ($_SESSION['form']['attManProccess'] * 8) + ($_SESSION['form']['onGoingAttManProccess'] * 4);
+$federationStudioTimeHours = ((($_SESSION['form']['attManProccess'] * 8) + ($_SESSION['form']['onGoingAttManProccess'] * 4)) * $unknownRequirements) + ($_SESSION['form']['attManProccess'] * 8) + ($_SESSION['form']['onGoingAttManProccess'] * 4);
 $federationInstallationidPsHours = ($_SESSION['form']['numOfIdp'] * 4 * $unknownRequirements) + ($_SESSION['form']['numOfIdp'] * 4);
 $federationInstallationSPsHours = ($_SESSION['form']['shibboleth'] * 4 * $unknownRequirements) + ($_SESSION['form']['shibboleth'] * 4);
 $federationInstallationDSHours = ($_SESSION['form']['discoveryServ'] * 4 * $unknownRequirements) + ($_SESSION['form']['discoveryServ'] * 4);
 $federationInstallationHours = $federationInstallationDSHours + $federationInstallationidPsHours + $federationInstallationSPsHours;
-$federationConfigurationHours = ($_SESSION['form']['fedTargets'] * 4) + ($_SESSION['form']['verifiedSfl'] * 4) + ($_SESSION['form']['nonVerifiedSfl'] * 8) + (($_SESSION['form']['fedTargets'] * 4) + ($_SESSION['form']['verifiedSfl'] * 4) + ($_SESSION['form']['nonVerifiedSfl'] * 8) * $unknownRequirements); // formula does not match comment
+$federationConfigurationHours = ((($_SESSION['form']['fedTargets'] * 4) + ($_SESSION['form']['verifiedSfl'] * 4) + ($_SESSION['form']['nonVerifiedSfl'] * 8)) * $unknownRequirements) +
+    (($_SESSION['form']['fedTargets'] * 4) + ($_SESSION['form']['verifiedSfl'] * 4) + ($_SESSION['form']['nonVerifiedSfl'] * 4)); // formula does not match comment =(((+$Metrics.B47*4)+(+$Metrics.B48*4)+(+$Metrics.B49*8))*+$Metrics.B64)+((+$Metrics.B47*4)+(+$Metrics.B48*4)+(+$Metrics.B49*4)), B49 * 4 at end is WRONG
 $federationTotalConfigurationHours = $federationConfigurationHours + $federationStudioTimeHours;
-$federationProductionMigration = $federationAnalysisWorkshopHours = (($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']) * $unknownRequirements) + ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + $_SESSION['form']['verifiedSfl'] + ($_SESSION['form']['nonVerifiedSfl'] * 20) + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']);
+$federationProductionMigration = (($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']) * $unknownRequirements) + (($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets'] + ($_SESSION['form']['attManProccess'] * 2) + $_SESSION['form']['onGoingAttManProccess']));
 $federationPostImplementationServicesHours = ($_SESSION['form']['numOfIdp'] + ($_SESSION['form']['fedTargets']) + ($_SESSION['form']['numOfIdp'] + $_SESSION['form']['fedTargets']) * $unknownRequirements);
 $federationConfigurationOverviewHours;
 if ($_SESSION['form']['federation'] == 'YES') {
@@ -231,9 +236,10 @@ $modulesPasswordManagement = $_SESSION['form']['passwordManagement'];
 $modulesProvisioning = $_SESSION['form']['provisioning'];
 $modulesHPAM = $_SESSION['form']['hpam'];
 $modulesFederation = $_SESSION['form']['federation'];
+var_dump($GLOBALS);
 if ($newQuote == true) { // only insert on new quote, prevents page refresh from inserting quote again
     $sql = $dbh->prepare("INSERT INTO Quotes (username, clientName, startDate, completionDate, servicesHourlyRate, environmentTotalPlatformInstallHours, environmentOrganizationConfigurationHours, environmentConnectedSystemDefinitionsHours, environmentDocumentConfigurationsHours, environmentProjectManagementHours, totalEnvironmentHours, passwordWorkshopAndDesignDocHours, passwordConfigurationHours, passwordPostImplementationServicesHours, passwordProductionMigrationHours, passwordUiTrainingHours,  passwordSolutionDocumentationHours, passwordProjectManagementHours, totalPasswordHours, provisioningWorkshopAndDesignDocHours, provisioningConfiguration,  provisioningPostImplementationServicesHours, provisioningProductionMigrationHours, provisioningUiTrainingHours, provisioningSolutionDocumentationHours, provisioningProjectManagementHours, totalProvisioningHours, HPAMWorkshopAndDesignDocHours, HPAMOrgConfigurationHours, HPAMPostImplementationServicesHours, HPAMProductionMigrationHours, HPAMUiTrainingHours, HPAMSolutionDocumentationHours, HPAMProjectManagementHours, totalHPAMHours, federationWorkshopAndDesignDocHours, federationInstallationHours, federationTotalConfigurationHours, federationPostImplementationServicesHours, federationProductionMigration, federationConfigurationOverviewHours, federationSolutionDocumentationHours, federationProjectManagementHours, totalFederationHours, administrationBasicTrainingHours, administrationAdvancedTrainingTrainingHours, administrationKioskTrainingHours, administrationPinTrainingTrainingHours, administrationHelpDeskTrainingTrainingHours, administrationSelectServiceTrainingTrainingHours, administrationHPAMUiTrainingHours, administrationFederationConfigTrainingHours, administrationProjectManagementHours, totalAdministrationHours, totalAllHours, phaseAssessmentDesignHours, phaseInstallationHours, phaseImplementationHours, phaseProjectManagementHours, phaseTrainingHours, modulesPasswordManagement, modulesProvisioning, modulesHPAM, modulesFederation)
-    Values(:username, :clientName, :startDate, :completionDate, :servicesHourlyRate, :environmentTotalPlatformInstallHours, :environmentOrganizationConfigurationHours, :environmentConnectedSystemDefinitionsHours, :environmentDocumentConfigurationsHours, :environmentProjectManagementHours, :totalEnvironmentHours, :passwordWorkshopAndDesignDocHours, :passwordConfigurationHours, :passwordPostImplementationServicesHours, :passwordProductionMigrationHours, :passwordUiTrainingHours,  :passwordSolutionDocumentationHours, :passwordProjectManagementHours, :totalPasswordHours, :provisioningWorkshopAndDesignDocHours, :provisioningConfiguration,  :provisioningPostImplementationServicesHours, :provisioningProductionMigrationHours, :provisioningUiTrainingHours, :provisioningSolutionDocumentationHours, :provisioningProjectManagementHours, :totalProvisioningHours, :HPAMWorkshopAndDesignDocHours, :HPAMOrgConfigurationHours, :HPAMPostImplementationServicesHours, :HPAMProductionMigrationHours, :HPAMUiTrainingHours, :HPAMSolutionDocumentationHours, :HPAMProjectManagementHours, :totalHPAMHours, :federationWorkshopAndDesignDocHours, :federationInstallationHours, :federationTotalConfigurationHours, :federationPostImplementationServicesHours, :federationProductionMigration, :federationConfigurationOverviewHours, :federationSolutionDocumentationHours, :federationProjectManagementHours, :totalFederationHours, :administrationBasicTrainingHours, :administrationAdvancedTrainingTrainingHours, :administrationKioskTrainingHours, :administrationPinTrainingTrainingHours, :administrationHelpDeskTrainingTrainingHours, :administrationSelectServiceTrainingTrainingHours, :administrationHPAMUiTrainingHours, :administrationFederationConfigTrainingHours, :administrationProjectManagementHours, :totalAdministrationHours, :totalAllHours, :phaseAssessmentDesignHours, :phaseInstallationHours, :phaseImplementationHours, :phaseProjectManagementHours, :phaseTrainingHours, :modulesPasswordManagement, :modulesProvisioning, :modulesHPAM, :modulesFederation)"
+    VALUES(:username, :clientName, :startDate, :completionDate, :servicesHourlyRate, :environmentTotalPlatformInstallHours, :environmentOrganizationConfigurationHours, :environmentConnectedSystemDefinitionsHours, :environmentDocumentConfigurationsHours, :environmentProjectManagementHours, :totalEnvironmentHours, :passwordWorkshopAndDesignDocHours, :passwordConfigurationHours, :passwordPostImplementationServicesHours, :passwordProductionMigrationHours, :passwordUiTrainingHours,  :passwordSolutionDocumentationHours, :passwordProjectManagementHours, :totalPasswordHours, :provisioningWorkshopAndDesignDocHours, :provisioningConfiguration,  :provisioningPostImplementationServicesHours, :provisioningProductionMigrationHours, :provisioningUiTrainingHours, :provisioningSolutionDocumentationHours, :provisioningProjectManagementHours, :totalProvisioningHours, :HPAMWorkshopAndDesignDocHours, :HPAMOrgConfigurationHours, :HPAMPostImplementationServicesHours, :HPAMProductionMigrationHours, :HPAMUiTrainingHours, :HPAMSolutionDocumentationHours, :HPAMProjectManagementHours, :totalHPAMHours, :federationWorkshopAndDesignDocHours, :federationInstallationHours, :federationTotalConfigurationHours, :federationPostImplementationServicesHours, :federationProductionMigration, :federationConfigurationOverviewHours, :federationSolutionDocumentationHours, :federationProjectManagementHours, :totalFederationHours, :administrationBasicTrainingHours, :administrationAdvancedTrainingTrainingHours, :administrationKioskTrainingHours, :administrationPinTrainingTrainingHours, :administrationHelpDeskTrainingTrainingHours, :administrationSelectServiceTrainingTrainingHours, :administrationHPAMUiTrainingHours, :administrationFederationConfigTrainingHours, :administrationProjectManagementHours, :totalAdministrationHours, :totalAllHours, :phaseAssessmentDesignHours, :phaseInstallationHours, :phaseImplementationHours, :phaseProjectManagementHours, :phaseTrainingHours, :modulesPasswordManagement, :modulesProvisioning, :modulesHPAM, :modulesFederation)"
     );
     $sql->bindParam(":username", $username, PDO::PARAM_STR);
     $sql->bindParam(":clientName", $clientName, PDO::PARAM_STR);
