@@ -192,18 +192,22 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
                 // Total Number of Unique Connected System Definitions has dependent data on both Password Management
                 // and Provisioning, so the if statement is needed
                 if ($scope.formData.provisioning == "YES") {
-                    $scope.formData.uniqueDefinitions = 3;
+                    $scope.formData.uniqueDefinitions = $scope.formData.passTargets + $scope.formData.numberOfAdminProvisioningTargets
+                    + $scope.formData.numberOfAutomatedProvisioningTargets;
                 } else {
-                    $scope.formData.uniqueDefinitions = 1;
+                    $scope.formData.uniqueDefinitions = $scope.formData.passTargets + $scope.formData.numberOfAdminProvisioningTargets
+                    + $scope.formData.numberOfAutomatedProvisioningTargets;
                 }
             } else {
                 $scope.formData.passwordManagementWorkshop = "NO";
                 $scope.formData.passTargets = 0;
 
                 if ($scope.formData.provisioning == "YES") {
-                    $scope.formData.uniqueDefinitions = 2;
+                    $scope.formData.uniqueDefinitions = $scope.formData.passTargets + $scope.formData.numberOfAdminProvisioningTargets
+                    + $scope.formData.numberOfAutomatedProvisioningTargets;
                 } else {
-                    $scope.formData.uniqueDefinitions = 0;
+                    $scope.formData.uniqueDefinitions = $scope.formData.passTargets + $scope.formData.numberOfAdminProvisioningTargets
+                    + $scope.formData.numberOfAutomatedProvisioningTargets;
                 }
             }
         };
@@ -223,9 +227,11 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
                 // Total Number of Unique Connected System Definitions has dependent data on both Password Management
                 // and Provisioning, so the if statement is needed
                 if ($scope.formData.passwordManagement == "YES") {
-                    $scope.formData.uniqueDefinitions = 3;
+                    $scope.formData.uniqueDefinitions = $scope.formData.passTargets + $scope.formData.numberOfAdminProvisioningTargets
+                    + $scope.formData.numberOfAutomatedProvisioningTargets;
                 } else {
-                    $scope.formData.uniqueDefinitions = 2;
+                    $scope.formData.uniqueDefinitions = $scope.formData.passTargets + $scope.formData.numberOfAdminProvisioningTargets
+                    + $scope.formData.numberOfAutomatedProvisioningTargets;
                 }
             } else {
                 $scope.formData.provWorkshop = "NO";
@@ -241,7 +247,8 @@ angular.module("salesQuoteApp", ["ngAnimate", "ui.router", "ngMessages"])
                 if ($scope.formData.passwordManagement == "YES") {
                     $scope.formData.uniqueDefinitions = $scope.formData.passTargets + $scope.formData.numberOfAdminProvisioningTargets + $scope.formData.numberOfAutomatedProvisioningTargets;
                 } else {
-                    $scope.formData.uniqueDefinitions = 0;
+                    $scope.formData.uniqueDefinitions = $scope.formData.passTargets + $scope.formData.numberOfAdminProvisioningTargets
+                    + $scope.formData.numberOfAutomatedProvisioningTargets;
                 }
             }
         };
